@@ -24,7 +24,7 @@ def membersApi(request,id=0):
         member_data=JSONParser().parse(request)
         members=Members.objects.get(MemberId=member_data['MemberId'])
         members_serializer=MembersSerializer(members,data=member_data)
-        if members.is_valid():
+        if members_serializer.is_valid():
             members.save()
             return JsonResponse("Updated Successfully",safe=False)
         return JsonResponse("Failed to Update")
