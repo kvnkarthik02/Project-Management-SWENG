@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from unicodedata import name
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,8 +83,12 @@ WSGI_APPLICATION = 'ProjectAPI.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            "host":"mongodb+srv://admin:vGZL33etvNyiKSNb@cluster0.dszad.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+            ,"name":"testdb",
+            "authMechanism":"SCRAM-SHA-1"
+        }
     }
 }
 
