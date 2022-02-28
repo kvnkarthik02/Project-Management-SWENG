@@ -6,7 +6,36 @@ from django.http.response import JsonResponse
 from ProjectApp.models import Projects,Members
 from ProjectApp.serializers import ProjectsSerializer,MembersSerializer
 
-# Create your views here.
+
+# Projects view
+@csrf_exempt
+def projectsApi(request,id=0):
+    if request.method=='GET':
+        projects = Projects.objects.all()
+        projects_serializer=ProjectsSerializer(projects,many=True)
+        return JsonResponse( projects_serializer.data,safe=False)
+    elif request.method=='POST':
+        project_data=JSONParser().parse(request)
+        projects_serializer=ProjectsSerializer(data=project_data)
+        if  projects_serializer.is_valid():
+            projects_serializer.save()
+            return JsonResponse("Added Successfully",safe=False)
+        return JsonResponse("Failed to Add",safe=False)
+    elif request.method=='PUT':
+        project_data=JSONParser().parse(request)
+        projects=Projects.objects.get(ProjectsId=project_data['ProjectsId'])
+        projects_serializer=ProjectsSerializer(projects,data=project_data)
+        if projects_serializer.is_valid():
+            projects.save()
+            return JsonResponse("Updated Successfully",safe=False)
+        return JsonResponse("Failed to Update")
+    elif request.method=='DELETE':
+        projects=Projects.objects.get(ProjectId=id)
+        projects.delete()
+        return JsonResponse("Deleted Successfully",safe=False)
+
+
+# Members view
 @csrf_exempt
 def membersApi(request,id=0):
     if request.method=='GET':

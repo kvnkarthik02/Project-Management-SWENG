@@ -8,8 +8,15 @@ class Projects(models.Model):
     CreatedAt = models.DateField()
     HasDeadline = models.BooleanField()
     DeadlineDate = models.DateField()
+    Completed = models.BooleanField(default=False)
+
+    def _str_(self):
+        return self.title
 
 
 class Members(models.Model):
     MemberId = models.AutoField(primary_key=True)
     MemberName = models.CharField(max_length=500)
+
+    def _str_(self):
+        return self.title
