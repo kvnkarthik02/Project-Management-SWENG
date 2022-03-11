@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTE, USER_PROFILE_ROUTE } from './routing';
 import Login from './components/Login';
 import Home from './components/Home';
+import Project from './pages/Projects'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path={ROUTE.HOME} element={<Home />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
+        <Route path={ROUTE.PROJECTS} element={<Project />} />
         {/* <Route path={ROUTE.USERS} element={<Users />} />
         <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>
           <Route

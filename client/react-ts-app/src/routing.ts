@@ -1,6 +1,7 @@
 export enum ROUTE {
     HOME = '/',
     LOGIN = '/login/',
+    PROJECTS = '/projects/',
     USERS = '/users/',
     USER_PROFILE = '/users/:userId/',
     USER_ACTIVITY = `/users/:userId/activities/:activityId/`,
