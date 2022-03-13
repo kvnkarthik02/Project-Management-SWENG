@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { AppService } from '../services/app.services'; 
+
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -26,13 +29,44 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const Projects = () => {
+
+function Projects() {
     const classes = useStyles();
+    let [projects, setProjects] = useState<any[]>([]);;
+
+
+    useEffect(() => {
+        const getProjects = async () => {
+            try {
+                const response = await AppService.getProjects();
+                setProjects(response);
+                console.log(response);
+            } catch(err) {
+                console.log(err);
+            }
+        };
+
+        getProjects();
+      }, [])
 
     return (
+
+
         <Card className={classes.container}>
             <CardContent>
                 <h1>Projects</h1>
+                <ul>
+                    {projects?projects.map(projects => (
+                    <li key={projects.ProjectId}>
+                        <h1>{projects.ProjectName}</h1>
+                        <p>Created:  {projects.CreatedAt}</p>
+                        <p>Deadline: {projects.DeadlineDate}</p>
+
+                    </li>
+                ))
+                : <li>Loading...</li>
+                }
+                </ul>
             </CardContent>
             <CardActions>
                 <Button
@@ -48,4 +82,7 @@ const Projects = () => {
     )
 }
 
-export default Projects
+export default Projects;
+
+
+

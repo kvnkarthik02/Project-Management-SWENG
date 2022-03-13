@@ -1,5 +1,8 @@
+import axios from "axios";
+
 export class AppService {
-    public async getProjects(): Promise<any> {
-        const response = await fetch ('/rojects/')
+    static async getProjects(): Promise<any> {
+        const response = await axios.get('/projects');
+        return response.data;
     }
 }
