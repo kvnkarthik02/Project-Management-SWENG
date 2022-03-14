@@ -50,9 +50,8 @@ function Projects() {
       }, [])
 
     return (
-
-
         <Card className={classes.container}>
+
             <CardContent>
                 <h1>Projects</h1>
                 <ul>

@@ -2,9 +2,12 @@
 import * as React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTE, USER_PROFILE_ROUTE } from './routing';
+
 import Login from './components/Login';
 import Home from './components/Home';
-import Project from './pages/Projects'
+import Project from './pages/Projects';
+
+import ProjectsII from './pages/ProjectsII';
 
 function App() {
   return (
@@ -13,6 +16,7 @@ function App() {
         <Route path={ROUTE.HOME} element={<Home />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.PROJECTS} element={<Project />} />
+        <Route path={ROUTE.PROJECTSII} element={<ProjectsII />} />
         {/* <Route path={ROUTE.USERS} element={<Users />} />
         <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>
           <Route
@@ -21,7 +25,7 @@ function App() {
           />
         </Route> */}
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter> 
   );
 }
 
