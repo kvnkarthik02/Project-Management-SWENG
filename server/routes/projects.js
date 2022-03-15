@@ -39,4 +39,16 @@ router.delete('/:id', (req,res) => {
     res.send(`User with id ${id} deleted`)
 });
 
+// partial modification of project by id
+router.patch('/:id', (req,res) => {
+    const { id } = req.params;
+    const { ProjectName } = req.body;
+
+    const project = projects.find((project) => project.id === id);
+
+    if(ProjectName) project.ProjectName = ProjectName;
+
+    // add more values
+});
+
 export default router;
