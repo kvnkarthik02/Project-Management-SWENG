@@ -15,6 +15,7 @@ mongoose.connect('mongodb+srv://admin:vGZL33etvNyiKSNb@cluster0.dszad.mongodb.ne
 
 app.use(bodyParser.json());
 
+// middleware
 app.use('/projects', projectsRoutes);
 
 app.get('/', (req, res) => {res.send('Hello from homepage!')});
