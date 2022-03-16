@@ -4,8 +4,6 @@ import { getAllProjects, createProject, getProject, changeProject, deleteProject
 
 const router = express.Router();
 
-let projects = []
-
 
 
 // get all projects

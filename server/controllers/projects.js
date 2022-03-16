@@ -1,5 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
+let projects = [];
+
 // gets all projects
 export const getAllProjects = (req, res) => {
     console.log(projects);
