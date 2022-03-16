@@ -5,14 +5,12 @@ const container = {
   margin: "10px",
   padding: "16px",
 }
-
 const headerStyle = {
   display: "flex",
   justifyContent: 'center', 
   alignItems: 'center',
   marginBottom: "20px"
 }
-
 const headingStyle = {
   display: "inline-flex",
   fontSize: "24px",
@@ -21,7 +19,6 @@ const headingStyle = {
   height: "32px",
   alignItems: 'center',
 }
-
 const addStyle = {
   display: "inline-flex",
   borderRadius: "90px",
@@ -33,18 +30,15 @@ const addStyle = {
   justifyContent: 'center', 
   alignItems: 'center',
 }
-
 const bodyStyle = {
   boxShadow: "2px 2px 5px lightgrey",
   borderRadius: "10px",
   padding: "16px"
 }
-
 const projectStyle = {
   display: "inline-flex",
   width: "90%",
 }
-
 const viewStyle = {
   display: "inline-flex",
   width: "10%",
@@ -57,10 +51,7 @@ const viewStyle = {
   borderRadius: "90px"
 }
 
-
-
-
-function ProjectList() {
+function ListProjects() {
   return (
 
     <div style={container}>
@@ -105,4 +96,4 @@ function ProjectList() {
   )
 }
 
-export default ProjectList;
+export default ListProjects;
