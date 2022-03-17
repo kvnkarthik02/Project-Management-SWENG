@@ -23,5 +23,16 @@ const ProjectSchema = mongoose.Schema({
     tasks: [TaskSchema]
 });
 
+
+const MemberSchema = mongoose.Schema({
+    memberId : String,
+    firstName: String,
+    lastName: String,
+    projects: [ProjectSchema.projectId],
+    hoursAvailable: Number,
+    hoursAllocated: Number
+    
+})
+
 export const Project = mongoose.model('Project',ProjectSchema)
 // module.exports = mongoose.module('Projects', ProjectSchema);
