@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 
 // middleware
 app.use('/projects', projectsRoutes);
+//app.use('/members', membersRoutes);
 
 app.get('/', (req, res) => {res.send('Hello from homepage!')});
 

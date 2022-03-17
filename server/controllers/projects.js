@@ -15,7 +15,7 @@ export const createProject = (req,res) => {
 
     projects.push({ ...project, id: uuidv4()});
 
-    res.send(`Project ${project.ProjectName} added to db`);
+    res.send(`Project ${project.projectName} added to db`);
 }
 
 // get project by id
@@ -43,7 +43,7 @@ export const changeProject = (req,res) => {
 
     const project = projects.find((project) => project.id === id);
 
-    if(ProjectName) project.ProjectName = ProjectName;
-
+    if(ProjectName) project.projectName = ProjectName;
+    if(ProjectDescription) project.ProjectDescription = ProjectDescription;
     // add more values
 }
