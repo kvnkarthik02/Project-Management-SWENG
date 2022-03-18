@@ -2,7 +2,7 @@ export enum ROUTE {
     HOME = '/',
     LOGIN = '/login/',
     PROJECTS = '/projects/',
-    PROJECTSII = '/projectsII',
+    PLAYGROUND = '/playground',
     USERS = '/users/',
     USER_PROFILE = '/users/:userId/',
     USER_ACTIVITY = `/users/:userId/activities/:activityId/`,
@@ -16,7 +16,7 @@ export enum ROUTE {
     | { path: ROUTE.HOME }
     | { path: ROUTE.LOGIN }
     | { path: ROUTE.USERS }
-    | { path: ROUTE.PROJECTSII }
+    | { path: ROUTE.PLAYGROUND }
     | { path: ROUTE.USER_PROFILE; params: { userId: string } }
     | {
         path: ROUTE.USER_ACTIVITY;
