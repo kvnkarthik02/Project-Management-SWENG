@@ -37,7 +37,7 @@ export const deleteMemberById = (req,res) => {
 }
 
 // partial modification of project by id
-export const changeProjectById = (req,res) => {
+export const changeMemberById = (req,res) => {
     const { id } = req.params;
     const { FirstName } = req.body;
     const { LastName } = req.body;
@@ -48,3 +48,4 @@ export const changeProjectById = (req,res) => {
     if(LastName) member.lastName = LastName;
     // add more values
 }
+
