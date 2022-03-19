@@ -8,37 +8,54 @@ To run the node server
 
 - `npm start`
 
-
-
-
 # JSON format
 
-Project 
+## Project 
+```json
 {
-    "project_id": 4,
-    "project_name": "Frontend Redesign",
-    "created_at": "2022-02-14 23:33:49",
-    "has_deadline": true,
-    "deadline_date": "2022-04-14 23:53:59",
-    "tasks": {
-            "task1: {
-                "task_name": "Update landing page",
-                "created_at": "2022-02-15 14:26:29",
-                "deadline": true,
-                "deadline_date": "2022-03-28 23:53:59",
-                "required skills": {
-                    "react": {
-                        "level": "intermediate",
-                        "hours": 8
-                    },
-                    "nodejs": {
-                        "level": "beginner",
-                        "hours": 6
-                    }
-                }
+    "projectId": "123",
+    "projectName": "Fix",
+    "projectDescription": "Fix backend",
+    "tasks": [
+      {
+        "taskId": 456,
+        "taskName": "api CRUD",
+        "taskDescription": "node api build",
+        "requiredSkill": "Node",
+        "requiredSkillLevel": "Intermediate",
+        "allocatedTime": 2.5,
+        "hasDeadline": false,
+        "deadline": null,
+        "employeeIdAssigned": 101,
+        "is completed": true
+      },
+      {
+        "taskId": 789,
+        "taskName": "api connect",
+        "taskDescription": "node api connect",
+        "requiredSkill": "React",
+        "requiredSkillLevel": "Beginner",
+        "allocatedTime": 1.0,
+        "hasDeadline": true,
+        "deadline": "2022-10-10T13:45:00.000Z",
+        "employeeIdAssigned": null,
+        "is completed": false
+      }
+      ],
+      "hasDeadline": true,
+      "deadline": "2022-12-10T13:45:00.000Z",
+      "is completed": false
+  }
+```
 
-            }
-
-        }
-    
+## Member
+```json
+{
+    "memberId": 123,
+    "firstName": "Bob",
+    "lastName": "Baxter",
+    "projects":[123,456,789],
+    "hoursAvailable": 40.0,
+    "hoursAllocated": 0.0
 }
+ ```
