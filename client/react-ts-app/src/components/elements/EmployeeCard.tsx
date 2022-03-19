@@ -29,6 +29,7 @@ interface Employee {
   role: string;
   workload: number;
   capacity: number;
+  avatarColor: string;
 }
 
 
@@ -63,7 +64,7 @@ function EmployeeCard(employee: Employee) {
 
         <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }} spacing="sm">
           <Group>
-            <Avatar color={randomColor} size="lg" radius='xl'>{initial}</Avatar>
+            <Avatar color={employee.avatarColor} size="lg" radius='xl'>{initial}</Avatar>
             <div>
               <Text weight={500} size="lg">{employee.name}</Text>
               <Text size="md" style={{ color: "#4E4E4E", lineHeight: 1.5 }}>
