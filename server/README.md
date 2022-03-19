@@ -1,10 +1,14 @@
 # Backend
 
-pip install django
+To run the node server
+ 
+- `cd server`
 
-pip install djangorestframework
+- `npm install`
 
-pip install django-cors-headers
+- `npm start`
+
+
 
 
 # JSON format
