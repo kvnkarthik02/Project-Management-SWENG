@@ -58,7 +58,7 @@ function EmployeeCard(employee: Employee) {
   const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
   return (
-    <div style={{ width: 340, margin: 'auto' }}>
+    <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
       <Card shadow="sm" p="md" radius="lg" withBorder={true}>
         {/* top, right, left margins are negative – -1 * theme.spacing.xl */}
 

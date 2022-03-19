@@ -33,6 +33,8 @@ const addStyle = {
   alignItems: 'center',
 }
 
+const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
+
 function ListEmployees() {
   return (
 
@@ -47,9 +49,9 @@ function ListEmployees() {
         </div>
       </div>
 
-      <EmployeeCard name="Tim Kelly" role="Senior Developer" workload={10} capacity={16}></EmployeeCard>
-      <EmployeeCard name="Ben Vaughan" role="Senior Developer" workload={10} capacity={16}></EmployeeCard>
-      <EmployeeCard name="Johnny Shoe" role="Senior Developer" workload={10} capacity={16}></EmployeeCard>
+      <EmployeeCard name="Tim Kelly" role="Senior Developer" workload={6} capacity={16} avatarColor={AvatarColors[3]} />
+      <EmployeeCard name="Ben Vaughan" role="Senior Developer" workload={10} capacity={16} avatarColor={AvatarColors[8]} />
+      <EmployeeCard name="Johnny Shoe" role="Senior Developer" workload={13} capacity={16} avatarColor={AvatarColors[12]} />
 
     </div>
   )
