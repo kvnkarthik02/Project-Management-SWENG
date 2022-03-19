@@ -28,7 +28,7 @@ const MemberSchema = mongoose.Schema({
     memberId : String,
     firstName: String,
     lastName: String,
-    projects: [ProjectSchema.projectId],
+    projects: Array,
     hoursAvailable: Number,
     hoursAllocated: Number
     
