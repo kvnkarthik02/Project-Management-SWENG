@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 
 import projectsRoutes from './routes/projects.js';
+import membersRoutes from './routes/members.js';
 
 const app = express();
 const PORT = 8000;
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 
 // middleware
 app.use('/projects', projectsRoutes);
-//app.use('/members', membersRoutes);
+app.use('/members', membersRoutes);
 
 app.get('/', (req, res) => {res.send('Hello from homepage!')});
 
