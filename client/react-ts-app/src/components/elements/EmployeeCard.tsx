@@ -1,5 +1,6 @@
 import { Avatar, Card, RingProgress, Text, Group, useMantineTheme } from '@mantine/core';
 
+
 // const bodyStyle = {
 //   display: "inline-flex",
 //   width: "100%",
@@ -47,19 +48,22 @@ function getColor(value: number) {
   return '#' + ('000000' + h.toString(16)).slice(-6);
 }
 
-function EmployeeCard(employee: Employee) {
-  const theme = useMantineTheme();
-  let initial = employee.name.substr(0, 1)
 
+const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
+
+function EmployeeCard(employee: Employee) {
+
+  let initial = employee.name.substr(0, 1)
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
   return (
     <div style={{ width: 340, margin: 'auto' }}>
-      <Card shadow="sm" p="md" withBorder={true}>
+      <Card shadow="sm" p="md" radius="lg" withBorder={true}>
         {/* top, right, left margins are negative – -1 * theme.spacing.xl */}
 
         <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }} spacing="sm">
           <Group>
-            <Avatar color={getRandomColor()} size="lg" radius='xl'>{initial}</Avatar>
+            <Avatar color={randomColor} size="lg" radius='xl'>{initial}</Avatar>
             <div>
               <Text weight={500} size="lg">{employee.name}</Text>
               <Text size="md" style={{ color: "#4E4E4E", lineHeight: 1.5 }}>
@@ -86,13 +90,13 @@ function EmployeeCard(employee: Employee) {
 }
 
 
-function getRandomColor() {
-  var letters = '0123456789ABCDEF';
-  var color = '#';
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+// function getRandomColor() {
+//   var letters = '0123456789ABCDEF';
+//   var color = '#';
+//   for (var i = 0; i < 6; i++) {
+//     color += letters[Math.floor(Math.random() * 16)];
+//   }
+//   return color;
+// }
 
 export default EmployeeCard;
