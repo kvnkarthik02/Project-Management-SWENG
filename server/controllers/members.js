@@ -31,7 +31,7 @@ export const getMemberById = (req,res) => {
 export const deleteMemberById = (req,res) => {
     const { id } = req.params;
 
-    member = members.filter((member) => member.id !== id);
+    members = members.filter((member) => member.id !== id);
 
     res.send(`User with id ${id} deleted`)
 }
