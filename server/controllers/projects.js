@@ -1,7 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Project } from '../models/Project.js' 
-
-let projects = [];
+import { Project } from '../models/Project.js';
 
 // gets all projects
 export const getAllProjects = async (req, res) => {
