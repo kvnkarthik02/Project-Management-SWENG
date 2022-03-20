@@ -1,19 +1,18 @@
 import express from 'express';
-import { Member } from '../models/Member.js'
 import {
-    getMembers,
+    getAllMembers,
     getMemberById,
     createMember,
     editMemberById,
     deleteMemberById,
     getMembersAllocatedHours,
     getMembersOnProject,
-} from '../controllers/members.js'
+} from '../controllers/members.js';
 
 const router = express.Router();
 
 // get all Members
-router.get('/', getMembers);
+router.get('/', getAllMembers);
 
 // get member by id
 router.get('/:id', getMemberById);

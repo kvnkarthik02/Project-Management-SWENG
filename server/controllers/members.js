@@ -5,7 +5,7 @@ import { Member } from '../models/Member.js'
 let members = [];
 
 // gets all member
-export const getMembers = async (req, res) => {
+export const getAllMembers = async (req, res) => {
     try {
         const members = await Member.find();
         res.json(members)
@@ -59,7 +59,7 @@ export const editMemberById = async (req, res) => {
                     { memberId: req.params.id},
                     { $set: { firstName: req.body.firstName } }
                     ) ;
-                    res.json(updatedMember)
+                    res.json(updatedMember);
             } catch (error) {
                 res.json(error);
             }
@@ -117,7 +117,7 @@ export const editMemberById = async (req, res) => {
 // delete project by id
 export const deleteMemberById = async (req, res) => {
     try {
-        const removedMember = await Member.remove({memberId: req.params.id});
+        const removedMember = await Member.deleteOne({memberId: req.params.id});
         res.json(removedMember);
     } catch (error) {
         res.json({message: error});
