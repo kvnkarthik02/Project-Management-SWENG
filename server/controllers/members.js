@@ -17,9 +17,9 @@ export const getMembers = async (req, res) => {
 // get member by id
 export const getMemberById = async (req, res) => {
     try {
-        const { memberId } = req.params;
+        const { id } = req.params;
         const members = await Member.find();
-        const foundMember = members.find((member) => member.memberId === memberId);
+        const foundMember = members.find((member) => member.memberId === id);
         res.send(foundMember);
     } catch (error) {
         res.json({message: error});
@@ -45,43 +45,83 @@ export const createMember = async (req, res) => {
 }
 
 // partial modification of project by id
-export const editMemberById = (req, res) => {
-    const { id } = req.params;
-    const { FirstName } = req.body;
-    const { LastName } = req.body;
-    const { HoursAllocated } = req.body;
-    const { HoursAvailable } = req.body;
-    const { Projects } = req.body;
+export const editMemberById = async (req, res) => {
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const hoursAllocated = req.body.hoursAllocated;
+    const hoursAvailable = req.body.hoursAvailable;
+    const projects = req.body.projects;
 
-    const member = members.find((member) => member.id === id);
+    try {
+        if (firstName) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id},
+                    { $set: { firstName: req.body.firstName } }
+                    ) ;
+                    res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (lastName) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id},
+                    { $set: { lastName: req.body.lastName } }
+                    ) ;
+                    res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (hoursAvailable) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id},
+                    { $set: { hoursAvailable: req.body.hoursAvailable } }
+                    ) ;
+                    res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (hoursAllocated) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id},
+                    { $set: { hoursAllocated: req.body.hoursAllocated } }
+                    ) ;
+                    res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (projects) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id},
+                    { $set: { projects: req.body.projects } }
+                    ) ;
+                    res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        } 
+    } catch (error) {
+        res.json({message: error});
+    }
 
-    if (FirstName) {
-        console.log(`FirstName Chaged from ${member.firstName} to ${FirstName}`);
-        member.firstName = FirstName;
-    }
-    if (LastName) {
-        console.log(`LastName Chaged from ${member.lastName} to ${LastName}`);
-        member.lastName = LastName;
-    }
-    if (HoursAvailable) {
-        console.log(`HoursAvailable Chaged from ${member.hoursAvailable} to ${HoursAvailable}`);
-        member.hoursAvailable = HoursAvailable;
-    }
-    if (HoursAllocated) {
-        console.log(`HoursAllocated Chaged from ${member.hoursAllocated} to ${HoursAllocated}`);
-        member.hoursAllocated = HoursAllocated;
-    }
-    if (Projects) {
-        console.log(`Projects Chaged from ${member.projects} to ${Projects}`);
-        member.projects = Projects;
-    }
 }
 
 // delete project by id
-export const deleteMemberById = (req, res) => {
-    const { id } = req.params;
-    members = members.filter((member) => member.id !== id);
-    res.send(`User with id ${id} deleted`)
+export const deleteMemberById = async (req, res) => {
+    try {
+        const removedMember = await Member.remove({memberId: req.params.id});
+        res.json(removedMember);
+    } catch (error) {
+        res.json({message: error});
+    }
 }
 
 // check allocated hours for a member by id

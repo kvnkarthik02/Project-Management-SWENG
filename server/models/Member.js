@@ -6,7 +6,7 @@ const MemberSchema = mongoose.Schema({
     lastName: String,
     hoursAvailable: Number,
     hoursAllocated: Number,
-    projects: Array
+    projects: [String]
 });
 
 export const Member = mongoose.model('Member', MemberSchema)

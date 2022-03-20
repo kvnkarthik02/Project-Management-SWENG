@@ -22,7 +22,7 @@ router.get('/:id', getMemberById);
 router.post('/', createMember);
 
 // edit member by id
-router.get('/:id', editMemberById);
+router.patch('/:id', editMemberById);
 
 // delete member by id
 router.delete('/:id', deleteMemberById);
@@ -31,6 +31,6 @@ router.delete('/:id', deleteMemberById);
 router.get('/', getMembersAllocatedHours);
 
 //check which members have belong in a project by project ID
-router.patch('/:projectId', getMembersOnProject);
+router.get('/:projectId', getMembersOnProject);
 
 export default router;
