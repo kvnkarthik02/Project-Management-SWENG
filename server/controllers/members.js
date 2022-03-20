@@ -1,25 +1,47 @@
+import { json } from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import { Member } from '../models/Member.js' 
 
 let members = [];
 
 // gets all member
-export const getMembers = (req, res) => {
-    console.log(members);
-    res.send(members);
+export const getMembers = async (req, res) => {
+    try {
+        const members = await Member.find();
+        res.json(members)
+    } catch (error) {
+        res.json({message: error});
+    }
 }
 
 // get member by id
-export const getMemberById = (req, res) => {
-    const { id } = req.params;
-    const foundMember = members.find((member) => member.id === id);
-    res.send(foundMember);
+export const getMemberById = async (req, res) => {
+    try {
+        const { memberId } = req.params;
+        const members = await Member.find();
+        const foundMember = members.find((member) => member.memberId === memberId);
+        res.send(foundMember);
+    } catch (error) {
+        res.json({message: error});
+    }
 }
 
 // creates a new member
-export const createMember = (req, res) => {
-    const member = req.body;
-    members.push({ ...member, id: uuidv4() });
-    res.send(`Member ${member.firstName} added to db`);
+export const createMember = async (req, res) => {
+    const member = new Member({
+        memberId: uuidv4(),
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        hoursAvailable: req.body.hoursAvailable,
+        hoursAllocated: req.body.hoursAllocated,
+        projects: req.body.projects
+    });
+    try {
+        const savedMember = await member.save();
+        res.json(savedMember);
+    } catch (error) {
+        res.json({message: error});
+    }
 }
 
 // partial modification of project by id

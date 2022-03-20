@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 
 const MemberSchema = mongoose.Schema({
-    memberId: Number,
+    memberId: String,
     firstName: String,
     lastName: String,
-    hoursAvailable: String,
-    hoursAllocated: String,
+    hoursAvailable: Number,
+    hoursAllocated: Number,
     projects: Array
 });
 
