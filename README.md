@@ -1,6 +1,6 @@
 # Project-Management
 ## Frontend Demo
-### Playground - [link](https://proj-mgmt.vercel.app/playground)
+### HomePage - [link](https://proj-mgmt.vercel.app/home)
 <p align="center">
   <a>Version 2 20 Mar 2022</a>
   <img alt="Version2" src="https://user-images.githubusercontent.com/59068112/159193942-23ba69e6-4301-4538-8897-c8c9b0e28157.png"/>
