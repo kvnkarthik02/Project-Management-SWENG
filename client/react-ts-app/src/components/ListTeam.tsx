@@ -1,7 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 import { Group, Button, Text, Title, Card } from '@mantine/core';
-import EmployeeCard from './EmployeeCard';
+import EmployeeCard from './elements/EmployeeCard';
 import { FiPlus } from 'react-icons/fi';
 
 interface Employee {
@@ -14,8 +14,7 @@ interface Employee {
 
 // const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
-
-const TeamCard = (props: { team: Employee[]; }) => {
+const ListTeam = (props: { team: Employee[]; }) => {
     return (
         <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
             <Card shadow="sm" p="lg" radius="md" withBorder={true}>
@@ -48,4 +47,4 @@ const TeamCard = (props: { team: Employee[]; }) => {
     )
 }
 
-export default TeamCard
+export default ListTeam

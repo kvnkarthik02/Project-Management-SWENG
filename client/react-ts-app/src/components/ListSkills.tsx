@@ -1,21 +1,15 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
 import { Group, Button, Text, Title, Card } from '@mantine/core';
-import EmployeeCard from './EmployeeCard';
 import { FiPlus } from 'react-icons/fi';
+import SkillCard from './elements/SkillCard'
 
-interface Employee {
+interface Skill {
     name: string;
-    role: string;
-    workload: number;
-    capacity: number;
-    avatarColor: string;
+    exp: string;
+
 }
 
-// const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
-
-
-const TeamCard = (props: { team: Employee[]; }) => {
+const ListSkills = (props: { skills: Skill[]; }) => {
     return (
         <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
             <Card shadow="sm" p="lg" radius="md" withBorder={true}>
@@ -31,7 +25,7 @@ const TeamCard = (props: { team: Employee[]; }) => {
                                 // gradient={{ from: 'indigo', to: 'pink', deg: 45 }}
                                 size="lg"
                                 weight={500}
-                                style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Team</Text>
+                                style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Skills</Text>
                         </Title>
                         <Button size="md" radius="xl" style={{ backgroundColor: "#64E8B7", width: 70 }}>
                             <FiPlus color="white" size={24} strokeWidth={2.5} />
@@ -40,12 +34,12 @@ const TeamCard = (props: { team: Employee[]; }) => {
                 </div>
 
                 <Group position="center" direction="column" spacing="xs">
-                    {props.team.map((member: Employee) => <EmployeeCard name={member.name} role={member.role} workload={member.workload} capacity={member.capacity} avatarColor={member.avatarColor} />)}
+                    {props.skills.map((skill: Skill) => <SkillCard skill={skill} />)}
                 </Group>
 
             </Card>
         </div >
-    )
+    );
 }
 
-export default TeamCard
+export default ListSkills
