@@ -4,19 +4,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTE, USER_PROFILE_ROUTE } from './routing';
 
 import Login from './components/Login';
-import Home from './components/Home';
+// import Home from './components/Home';
 import Project from './pages/Projects';
 
-import Playground from './pages/Playground';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTE.HOME} element={<Home />} />
+        <Route path={ROUTE.HOMEPAGE} element={<HomePage />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.PROJECTS} element={<Project />} />
-        <Route path={ROUTE.PLAYGROUND} element={<Playground />} />
+        {/* <Route path={ROUTE.PLAYGROUND} element={<Playground />} /> */}
         {/* <Route path={ROUTE.USERS} element={<Users />} />
         <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>
           <Route
@@ -25,7 +25,7 @@ function App() {
           />
         </Route> */}
       </Routes>
-    </BrowserRouter> 
+    </BrowserRouter>
   );
 }
 
