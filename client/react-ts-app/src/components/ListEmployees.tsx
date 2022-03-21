@@ -1,4 +1,6 @@
 import EmployeeCard from "./elements/EmployeeCard";
+import { Group, Button, Text, Title, Card } from '@mantine/core';
+import { Plus } from 'react-feather';
 
 const container = {
   boxShadow: "2px 2px 5px lightgrey",
@@ -38,22 +40,37 @@ const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo"
 function ListEmployees() {
   return (
 
-    <div style={container}>
-
-      <div style={headerStyle}>
-        <div style={headingStyle}>
-          Employees
+    <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
+      <Card shadow="sm" p="lg" radius="md" withBorder={true}>
+        <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
+          <Group position="apart">
+            <Title order={1}>
+              <Text
+                color="dark"
+                inherit
+                component="span"
+                variant="text"
+                // variant="gradient"
+                // gradient={{ from: 'indigo', to: 'pink', deg: 45 }}
+                size="xl"
+                weight={700}
+                style={{ fontFamily: 'Greycliff CF, sans-serif' }}> Employees</Text>
+            </Title>
+            <Button size="md" radius="xl" style={{ backgroundColor: "#64E8B7", width: 70 }}>
+              <Plus color="white" size={24} strokeWidth={2.5} />
+            </Button>
+          </Group>
         </div>
-        <div style={addStyle}>
-          +
-        </div>
-      </div>
 
-      <EmployeeCard name="Tim Kelly" role="Senior Developer" workload={6} capacity={16} avatarColor={AvatarColors[3]} />
-      <EmployeeCard name="Ben Vaughan" role="Senior Developer" workload={10} capacity={16} avatarColor={AvatarColors[8]} />
-      <EmployeeCard name="Johnny Shoe" role="Senior Developer" workload={13} capacity={16} avatarColor={AvatarColors[12]} />
+        <Group position="center" direction="column" spacing="xs">
+          <EmployeeCard name="Tim Kelly" role="Senior Developer" workload={6} capacity={16} avatarColor={AvatarColors[3]} />
+          <EmployeeCard name="Ben Vaughan" role="Senior Developer" workload={10} capacity={16} avatarColor={AvatarColors[8]} />
+          <EmployeeCard name="Johnny Shoe" role="Senior Developer" workload={13} capacity={16} avatarColor={AvatarColors[12]} />
+        </Group>
 
-    </div>
+      </Card>
+    </div >
+
   )
 }
 

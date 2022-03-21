@@ -5,6 +5,7 @@ import EmployeeCard from '../components/elements/EmployeeCard';
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
+
 export default {
     title: 'Components/elements/EmployeeCard',
     component: EmployeeCard,

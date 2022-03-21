@@ -1,11 +1,11 @@
 import React, { useReducer, useEffect } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import Button from '@material-ui/core/Button';
+
+// import resolveConfig from "tailwindcss/resolveConfig";
+// import tailwindConfigModule from "../../tailwind.config.js";
+import { useForm } from '@mantine/form'
+import { PasswordInput, TextInput, Card, Button, Title, Box, MantineProvider } from '@mantine/core';
+import { string } from 'yup';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,13 +34,13 @@ const useStyles = makeStyles((theme: Theme) =>
 
 type State = {
   username: string
-  password:  string
+  password: string
   isButtonDisabled: boolean
   helperText: string
   isError: boolean
 };
 
-const initialState:State = {
+const initialState: State = {
   username: '',
   password: '',
   isButtonDisabled: true,
@@ -57,39 +57,46 @@ type Action = { type: 'setUsername', payload: string }
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
-    case 'setUsername': 
+    case 'setUsername':
       return {
         ...state,
         username: action.payload
       };
-    case 'setPassword': 
+    case 'setPassword':
       return {
         ...state,
         password: action.payload
       };
-    case 'setIsButtonDisabled': 
+    case 'setIsButtonDisabled':
       return {
         ...state,
         isButtonDisabled: action.payload
       };
-    case 'loginSuccess': 
+    case 'loginSuccess':
       return {
         ...state,
         helperText: action.payload,
         isError: false
       };
-    case 'loginFailed': 
+    case 'loginFailed':
       return {
         ...state,
         helperText: action.payload,
         isError: true
       };
-    case 'setIsError': 
+    case 'setIsError':
       return {
         ...state,
         isError: action.payload
       };
   }
+}
+
+interface FormValues {
+  username: string; // regular field, same as inferred type
+  password: string;
+  role: 'user' | 'admin'; // union, more specific than inferred type (string)
+  // age: number | undefined; // values that may be undefined cannot be inferred
 }
 
 const Login = () => {
@@ -98,10 +105,10 @@ const Login = () => {
 
   useEffect(() => {
     if (state.username.trim() && state.password.trim()) {
-     dispatch({
-       type: 'setIsButtonDisabled',
-       payload: false
-     });
+      dispatch({
+        type: 'setIsButtonDisabled',
+        payload: false
+      });
     } else {
       dispatch({
         type: 'setIsButtonDisabled',
@@ -145,50 +152,77 @@ const Login = () => {
         payload: event.target.value
       });
     }
+
+  const form = useForm<{ username: string; password: string }>({
+    initialValues: { username: '', password: '' },
+    validate: (values) => ({
+      username: values.username.length < 2 ? 'Too short name' : null,
+      age:
+        values.password === undefined
+          ? 'password is required'
+          : values.password.length < 8
+            ? 'Your password must be at least 8 characters'
+            : null,
+    }),
+  });
+
+
+
   return (
-    <form className={classes.container} noValidate autoComplete="off">
-      <Card className={classes.card}>
-        <CardHeader className={classes.header} title="Login" />
-        <CardContent>
-          <div>
-            <TextField
-              error={state.isError}
-              fullWidth
-              id="username"
-              type="email"
-              label="Username"
-              placeholder="Username"
-              margin="normal"
-              onChange={handleUsernameChange}
-              onKeyPress={handleKeyPress}
-            />
-            <TextField
-              error={state.isError}
-              fullWidth
-              id="password"
-              type="password"
-              label="Password"
-              placeholder="Password"
-              margin="normal"
-              helperText={state.helperText}
-              onChange={handlePasswordChange}
-              onKeyPress={handleKeyPress}
-            />
-          </div>
-        </CardContent>
-        <CardActions>
-          <Button
-            variant="contained"
-            size="large"
-            color="secondary"
-            className={classes.loginBtn}
-            onClick={handleLogin}
-            disabled={state.isButtonDisabled}>
-            Login
-          </Button>
-        </CardActions>
-      </Card>
-    </form>
+    <>
+      <Box sx={{ maxWidth: 340 }} mx="auto">
+        <form className={classes.container} noValidate autoComplete="off">
+          <Card shadow="sm" p="lg" className={classes.card}>
+            <Card.Section component="header" title="Login" className={classes.header}>Login</Card.Section>
+            <Card.Section component="div">
+              <div>
+                <TextInput
+                  error={state.isError}
+                  id="username"
+                  type="email"
+                  label="Username"
+                  placeholder="Username"
+                  onChange={handleUsernameChange}
+                  onKeyPress={handleKeyPress}
+                />
+                <TextInput
+                  error={state.isError}
+                  id="passsword"
+                  type="password"
+                  label="Password"
+                  placeholder="Password"
+                  onChange={handlePasswordChange}
+                  onKeyPress={handleKeyPress}
+                />
+              </div>
+              <Button variant="light" color="blue" className={classes.loginBtn} fullWidth style={{ marginTop: 14 }}
+                onClick={handleLogin}
+                disabled={state.isButtonDisabled}>
+                Login
+              </Button>
+
+            </Card.Section>
+
+          </Card>
+        </form >
+      </Box>
+      <MantineProvider
+        theme={{
+          fontFamily: 'Lexend Deca, sans-serif',
+          headings: { fontFamily: 'Lexend Deca, sans-serif' },
+          colors: {
+            'wavelightgreen': ['#20DF7F'],
+            'wavelightgrey': ["#224957"],
+            'wavedarkgrey': ["#093545"],
+          },
+          primaryColor: 'wavelightgrey'
+        }}
+      >
+        <Title order={1} color="wavelightgrey">Log In</Title>
+        <Button color="wavelightgrey">Verdana button</Button>
+      </MantineProvider>
+
+    </>
   );
 }
 

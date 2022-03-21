@@ -55,7 +55,7 @@ function Projects() {
             <CardContent>
                 <h1>Projects</h1>
                 <ul>
-                    {projects?projects.map(projects => (
+                    {projects ? projects.map(projects => (
                     <li key={projects.ProjectId}>
                         <h1>{projects.ProjectName}</h1>
                         <p>Created:  {projects.CreatedAt}</p>
