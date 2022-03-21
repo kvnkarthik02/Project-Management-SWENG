@@ -1,5 +1,6 @@
 export enum ROUTE {
     HOME = '/',
+    HOMEPAGE = '/home/',
     LOGIN = '/login/',
     PROJECTS = '/projects/',
     PLAYGROUND = '/playground',
@@ -14,6 +15,7 @@ export enum ROUTE {
   
   type TArgs =
     | { path: ROUTE.HOME }
+    | { path: ROUTE.HOMEPAGE }
     | { path: ROUTE.LOGIN }
     | { path: ROUTE.USERS }
     | { path: ROUTE.PLAYGROUND }
