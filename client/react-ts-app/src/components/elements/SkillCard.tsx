@@ -43,11 +43,11 @@ const SkillCard = (props: { skill: Skill }) => {
                             </Button>
                         </Card.Section>
 
-                        <Text weight={700} size="xl">
+                        <Text weight={500} size="xl">
                             {props.skill.name}
                         </Text>
                     </Group>
-                    <Text weight={500} size="md">
+                    <Text weight={200} size="md">
                         {props.skill.exp}
                     </Text>
                 </Group>
