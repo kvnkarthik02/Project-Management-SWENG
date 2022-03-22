@@ -5,7 +5,7 @@ import { ROUTE, USER_PROFILE_ROUTE } from './routing';
 
 import Login from './components/Login';
 // import Home from './components/Home';
-import Project from './pages/Projects';
+import Projects from './pages/Projects';
 
 import HomePage from './pages/HomePage';
 
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path={ROUTE.HOMEPAGE} element={<HomePage />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
-        <Route path={ROUTE.PROJECTS} element={<Project />} />
+        <Route path={ROUTE.PROJECTS} element={<Projects />} />
         {/* <Route path={ROUTE.PLAYGROUND} element={<Playground />} /> */}
         {/* <Route path={ROUTE.USERS} element={<Users />} />
         <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>
