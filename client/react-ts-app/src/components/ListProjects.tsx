@@ -1,6 +1,7 @@
 import ProjectCard from "./elements/ProejctCard";
 import { Group, Button, Text, Title, Card } from '@mantine/core';
-import { Plus } from 'react-feather';
+import { FiPlus } from 'react-icons/fi';
+
 
 // const container = {
 //   boxShadow: "2px 2px 5px lightgrey",
@@ -85,7 +86,7 @@ function ListProjects() {
                 style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Projects</Text>
             </Title>
             <Button size="md" radius="xl" style={{ backgroundColor: "#64E8B7", width: 70 }}>
-              <Plus color="white" size={24} strokeWidth={2.5} />
+              <FiPlus color="white" size={24} strokeWidth={2.5} />
             </Button>
           </Group>
         </div>

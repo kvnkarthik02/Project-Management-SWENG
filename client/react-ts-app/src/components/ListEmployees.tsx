@@ -1,39 +1,39 @@
 import EmployeeCard from "./elements/EmployeeCard";
 import { Group, Button, Text, Title, Card } from '@mantine/core';
-import { Plus } from 'react-feather';
+import { FiPlus } from 'react-icons/fi';
 
-const container = {
-  boxShadow: "2px 2px 5px lightgrey",
-  backgroundColor: "#FDFDFD",
-  borderRadius: "10px",
-  margin: "10px",
-  padding: "16px",
-}
-const headerStyle = {
-  display: "flex",
-  justifyContent: 'center',
-  alignItems: 'center',
-  marginBottom: "20px"
-}
-const headingStyle = {
-  display: "inline-flex",
-  fontSize: "24px",
-  fontWeight: "bold",
-  width: "90%",
-  height: "32px",
-  alignItems: 'center',
-}
-const addStyle = {
-  display: "inline-flex",
-  borderRadius: "90px",
-  backgroundColor: "#64E8B7",
-  color: "white",
-  fontWeight: "bold",
-  width: "10%",
-  height: "32px",
-  justifyContent: 'center',
-  alignItems: 'center',
-}
+// const container = {
+//   boxShadow: "2px 2px 5px lightgrey",
+//   backgroundColor: "#FDFDFD",
+//   borderRadius: "10px",
+//   margin: "10px",
+//   padding: "16px",
+// }
+// const headerStyle = {
+//   display: "flex",
+//   justifyContent: 'center',
+//   alignItems: 'center',
+//   marginBottom: "20px"
+// }
+// const headingStyle = {
+//   display: "inline-flex",
+//   fontSize: "24px",
+//   fontWeight: "bold",
+//   width: "90%",
+//   height: "32px",
+//   alignItems: 'center',
+// }
+// const addStyle = {
+//   display: "inline-flex",
+//   borderRadius: "90px",
+//   backgroundColor: "#64E8B7",
+//   color: "white",
+//   fontWeight: "bold",
+//   width: "10%",
+//   height: "32px",
+//   justifyContent: 'center',
+//   alignItems: 'center',
+// }
 
 const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
@@ -57,7 +57,7 @@ function ListEmployees() {
                 style={{ fontFamily: 'Greycliff CF, sans-serif' }}> Employees</Text>
             </Title>
             <Button size="md" radius="xl" style={{ backgroundColor: "#64E8B7", width: 70 }}>
-              <Plus color="white" size={24} strokeWidth={2.5} />
+              <FiPlus color="white" size={24} strokeWidth={2.5} />
             </Button>
           </Group>
         </div>

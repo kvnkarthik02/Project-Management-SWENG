@@ -55,7 +55,7 @@ const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cya
 function EmployeeCard(employee: Employee) {
 
   let initial = employee.name.substr(0, 1)
-  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  // const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
   return (
     <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
