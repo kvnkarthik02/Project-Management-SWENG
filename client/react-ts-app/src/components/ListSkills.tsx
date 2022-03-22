@@ -6,7 +6,6 @@ import SkillCard from './elements/SkillCard'
 interface Skill {
     name: string;
     exp: string;
-
 }
 
 const ListSkills = (props: { skills: Skill[]; }) => {
