@@ -40,7 +40,7 @@ const TeamCard = (props: { team: Employee[]; }) => {
                 </div>
 
                 <Group position="center" direction="column" spacing="xs">
-                    {props.team.map((member: Employee) => <EmployeeCard name={member.name} role={member.role} workload={member.workload} capacity={member.capacity} avatarColor={member.avatarColor} />)}
+                    {props.team.map((member: Employee) => <EmployeeCard employee={member} />)}
                 </Group>
 
             </Card>

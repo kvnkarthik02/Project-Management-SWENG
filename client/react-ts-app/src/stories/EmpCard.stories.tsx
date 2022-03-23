@@ -16,7 +16,24 @@ export default {
     }
 }
 
-const Template = (args: JSX.IntrinsicAttributes) => <EmployeeCard avatarColor={''} name={''} role={''} workload={0} capacity={0} {...args} />
+
+interface Employee {
+    name: string;
+    role: string;
+    workload: number;
+    capacity: number;
+    avatarColor: string;
+}
+
+const sampleEmployee: Employee = {
+    name: '',
+    role: '',
+    workload: 0,
+    capacity: 0,
+    avatarColor: ''
+}
+
+const Template = (args: JSX.IntrinsicAttributes) => <EmployeeCard employee={sampleEmployee} {...args} />
 
 export const Card = Template.bind({})
 // Card1.args = {
