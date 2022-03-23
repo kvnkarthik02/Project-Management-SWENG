@@ -12,34 +12,25 @@ interface Employee {
   avatarColor: string;
 }
 
-const team: Employee[] = [
-  {
-    name: "Tim Kelly",
-    role: "Senior Developer",
-    workload: 6,
-    capacity: 16,
-    avatarColor: "red"
-  }, {
-    name: "Ben Vaughan",
-    role: "Senior Developer",
-    workload: 10,
-    capacity: 16,
-    avatarColor: "cyan"
-  }, {
-    name: "Johnny Shoe",
-    role: "Senior Developer",
-    workload: 13,
-    capacity: 16,
-    avatarColor: "yellow",
-  }
-]
+interface Project {
+  name: string;
+  description: string;
+  badgeName: string;
+  badgeColor: string;
+  coverImgLink: string;
+  projectPageLink: string;
+  //   workload: number;
+  //   capacity: number;
+  //   avatarColor: string;
+}
 
-function HomePage() {
+
+const HomePage = (props: { team: Employee[]; projects: Project[]; }) => {
   return (
     // <TeamCard {...team} />
     <Grid justify="center" columns={3} >
-      <Grid.Col span={2}><ListProjects /></Grid.Col>
-      <Grid.Col span={1}><ListEmployees /></Grid.Col>
+      <Grid.Col span={2}><ListProjects projects={props.projects} /></Grid.Col>
+      <Grid.Col span={1}><ListEmployees team={props.team} /></Grid.Col>
     </Grid>
 
 

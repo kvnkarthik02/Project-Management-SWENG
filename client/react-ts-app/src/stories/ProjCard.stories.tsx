@@ -29,9 +29,29 @@ export default {
     }
 }
 
+interface Project {
+    name: string;
+    description: string;
+    badgeName: string;
+    badgeColor: string;
+    coverImgLink: string;
+    projectPageLink: string;
+    //   workload: number;
+    //   capacity: number;
+    //   avatarColor: string;
+}
+
+const sampleProject: Project = {
+    name: 'SampleName',
+    description: randomDescription,
+    badgeName: 'Department',
+    badgeColor: colors[3],
+    coverImgLink: images[0],
+    projectPageLink: ''
+}
 // const Template = (args: JSX.IntrinsicAttributes) => <EmployeeCard avatarColor={''} name={''} role={''} workload={0} capacity={0} {...args} />
 
-const Template = (args: JSX.IntrinsicAttributes) => <ProjectCard badgeColor={''} badgeName={''} projectPageLink={''} name={''} description={''} coverImgLink={''} {...args} />
+const Template = (args: JSX.IntrinsicAttributes) => <ProjectCard project={sampleProject} {...args} />
 export const Card = Template.bind({})
 // Card1.args = {
 //     name: "Ben",

@@ -45,30 +45,21 @@ import { FiPlus } from 'react-icons/fi';
 //   width: "90%",
 // }
 
+interface Project {
+  name: string;
+  description: string;
+  badgeName: string;
+  badgeColor: string;
+  coverImgLink: string;
+  projectPageLink: string;
+  //   workload: number;
+  //   capacity: number;
+  //   avatarColor: string;
+}
 
-function ListProjects() {
-  const images = [
-    "https://images.unsplash.com/photo-1640622842223-e1e39f4bf627?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
-    "https://images.unsplash.com/photo-1638913970895-d3df59be1466?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1031&q=80",
-    "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
-    "https://images.unsplash.com/photo-1640622844217-a51dd0f51d19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-    "https://images.unsplash.com/photo-1552120476-9ee56c8611f7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-  ]
-
-  const projectNames = [
-    "Project I",
-    "Project II",
-    "Project II",
-    "Project IV",
-  ];
-
-  const colors = ["teal", "orange", "grape", "yellow", "indigo", "dark", "gray", "red", "pink", "violet", "cyan", "lime", "green"];
-
-  const randomDescription = "With Fjord Tours you can explore more of the magical fjord landscapes with tours and activities on and around the fjords of Norway";
-  const badgeNames = ["Frontend", "Backend", "DevOps", "CI/CD"];
+const ListProjects = (props: { projects: Project[] }) => {
 
   return (
-
     <div style={{ width: 610, margin: 'auto', padding: "5px" }}>
       <Card shadow="sm" p="lg" radius="md" withBorder={true}>
         <div style={{ width: 510, margin: 'auto', padding: "5px" }}>
@@ -90,16 +81,10 @@ function ListProjects() {
             </Button>
           </Group>
         </div>
-
         <Group position="center" direction="column" spacing="xs">
-          <ProjectCard name={projectNames[0]} description={randomDescription} badgeName={badgeNames[0]} badgeColor={colors[0]} coverImgLink={images[0]} projectPageLink={""} />
-          <ProjectCard name={projectNames[1]} description={randomDescription} badgeName={badgeNames[1]} badgeColor={colors[1]} coverImgLink={images[1]} projectPageLink={""} />
-          <ProjectCard name={projectNames[2]} description={randomDescription} badgeName={badgeNames[2]} badgeColor={colors[2]} coverImgLink={images[2]} projectPageLink={""} />
-          <ProjectCard name={projectNames[3]} description={randomDescription} badgeName={badgeNames[3]} badgeColor={colors[3]} coverImgLink={images[3]} projectPageLink={""} />
+          {props.projects.map((project) => <ProjectCard project={project} />)}
         </Group>
-
       </Card>
-
     </div >
   )
 }
