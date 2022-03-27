@@ -7,6 +7,7 @@ import {
     deleteMemberById,
     getMembersAllocatedHours,
     getMembersOnProject,
+    editMemberSkill
 } from '../controllers/members.js';
 
 const router = express.Router();
@@ -31,5 +32,7 @@ router.get('/', getMembersAllocatedHours);
 
 //check which members have belong in a project by project ID
 router.get('/:projectId', getMembersOnProject);
+
+router.patch('/editSkill/:id', editMemberSkill);
 
 export default router;
