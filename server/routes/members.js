@@ -29,7 +29,7 @@ router.patch('/:id', editMemberById);
 router.delete('/:id', deleteMemberById);
 
 // check allocated hours for a member by id
-router.get('/', getMembersAllocatedHours);
+router.get('/:id/hours', getMembersAllocatedHours);
 
 //check which members have belong in a project by project ID
 router.get('/:projectId', getMembersOnProject);
@@ -40,7 +40,6 @@ router.patch('/:id/addSkill', addMemberSkill);
 // edit skill already assigned to a member
 router.patch('/:id/editSkill', editMemberSkill);
 
-//get qqualified members
 
 
 export default router;

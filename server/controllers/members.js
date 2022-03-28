@@ -19,7 +19,7 @@ export const getSkilledMembers = async (req, res) => {
     const name = req.query.name
     const level = req.query.level
 
-    if (level === null) {
+    if (level == null) {
         try {
             const members = await Member.find({"skills": {
             $elemMatch: {
