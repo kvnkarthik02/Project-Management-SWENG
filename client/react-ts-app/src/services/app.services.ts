@@ -16,30 +16,45 @@ export class AppService {
     // To do:
     // Get a single project
     // url: /projects/:id
-    // static async getOneProjects(): Promise<any> {
-
-    // }
+    static async getOneProjects(): Promise<any> {
+        const response = await axios.get('/projects/:id');
+        return response.data;
+    }
 
     // To do:
     // Create a new project
     // url: /projects
-    // static async makeProjects(): Promise<any> {
-
-    // }
+    static async makeProjects(): Promise<any> {
+        const response = await axios.put('/projects', {
+            projectId,                  //getting error lines for this ???
+            projectName,                //getting error lines for this ???
+            projectDescription,         //getting error lines for this ???
+            hasDeadline,                //getting error lines for this ???
+            deadline,                   //getting error lines for this ???
+            isComplete                  //getting error lines for this ???
+        })
+    }
 
     // To do:
     // edit an existing project
     // url: /projects/:id
-    // static async editProject(): Promise<any> {
-
-    // }
+    static async editProject(): Promise<any> {
+        const response = await axios.patch('/projects/:id',{
+            projectId,                  //getting error lines for this ???
+            projectName,                //getting error lines for this ???
+            projectDescription,         //getting error lines for this ???
+            hasDeadline,                //getting error lines for this ???
+            deadline,                   //getting error lines for this ???    
+            isComplete                  //getting error lines for this ???
+        })
+    }
 
     // To do:
     // Delete a single project
     // url: /projects/:id
-    // static async deleteProject(): Promise<any> {
-
-    // }
+    static async deleteProject(): Promise<any> {
+        const response = await axios.delete('/projects/:id'); 
+    }
 
     //
     // Tasks
