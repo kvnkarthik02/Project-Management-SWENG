@@ -14,6 +14,41 @@ export const getAllMembers = async (req, res) => {
     }
 }
 
+// http://localhost:8000/skilledMembers?name=React
+export const getSkilledMembers = async (req, res) => {
+    const name = req.query.name
+    const level = req.query.level
+
+    if (level === null) {
+        try {
+            const members = await Member.find({"skills": {
+            $elemMatch: {
+                name: name
+              }
+            }
+        });
+            res.json(members)
+        } catch (error) {
+            res.json({message: error});
+        }
+    } else {
+        try {
+            const members = await Member.find({"skills": {
+            $elemMatch: {
+                name: name,
+                level: level
+              }
+            }
+        });
+            res.json(members)
+        } catch (error) {
+            res.json({message: error});
+        }
+    }
+
+
+}
+
 // get member by id
 export const getMemberById = async (req, res) => {
     try {
@@ -61,7 +96,6 @@ export const editMemberById = async (req, res) => {
     const hoursAllocated = req.body.hoursAllocated;
     const hoursAvailable = req.body.hoursAvailable;
     const projects = req.body.projects;
-    const skills = req.body.skills;
 
     try {
         if (firstName) {
@@ -119,17 +153,10 @@ export const editMemberById = async (req, res) => {
                 res.json(error);
             }
         }
-        if (skills) {
-            try {
-                const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id},
-                    { $set: { firstName: req.body.firstName } }
-                    ) ;
-                    res.json(updatedMember);
-            } catch (error) {
-                res.json(error);
-            }
-        }
+        // if (skills) {
+
+
+        // }
     } catch (error) {
         res.json({message: error});
     }
@@ -172,46 +199,33 @@ export const getMembersOnProject = (req, res) => {
 }
 
 export const editMemberSkill = async (req, res) => {
-    const member = req.params.id;
     const name = req.body.skills.name;
     const level = req.body.skills.level;
 
-        try {
-            const updatedSkill = await Member.updateOne(
-                { memberId: req.params.id},
-                { $set: { skills: [
-                    {
-                        name: name,
-                        level: level
-                    }
-                ] } }
-                ) ;
-                res.json(updatedSkill);
-        } catch (error) {
-            res.json(error);
-        }
+    try {
+        const updatedSkill = await Member.updateOne(
+            { memberId: req.params.id},
+            { $set: { skills: [
+                {
+                    name: req.body.skills[0].name,
+                    level: req.body.skills[0].level
+                }
+            ] } }
+            ) ;
+            res.json(updatedSkill);
+    } catch (error) {
+        res.json(error);
+    }
 }
 
 export const addMemberSkill = async (req, res) => {
-    const member = req.params.id;
-    const skill = new Skill({
-        name: req.body.name,
-        level: req.body.level
-    });
-    try {
-        const savedMember = await member.save();
-        res.json(savedMember);
-    } catch (error) {
-        res.json({message: error});
-    }
-
         try {
             const updatedSkill = await Member.updateOne(
                 { memberId: req.params.id},
-                { $set: { skills: [
+                { $push: { skills: [
                     {
-                        name: name,
-                        level: level
+                        name: req.body.name,
+                        level: req.body.level
                     }
                 ] } }
                 ) ;

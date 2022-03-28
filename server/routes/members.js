@@ -7,7 +7,8 @@ import {
     deleteMemberById,
     getMembersAllocatedHours,
     getMembersOnProject,
-    editMemberSkill
+    editMemberSkill,
+    addMemberSkill,
 } from '../controllers/members.js';
 
 const router = express.Router();
@@ -33,6 +34,13 @@ router.get('/', getMembersAllocatedHours);
 //check which members have belong in a project by project ID
 router.get('/:projectId', getMembersOnProject);
 
-router.patch('/editSkill/:id', editMemberSkill);
+// AddMemberSkill
+router.patch('/:id/addSkill', addMemberSkill);
+
+// edit skill already assigned to a member
+router.patch('/:id/editSkill', editMemberSkill);
+
+//get qqualified members
+
 
 export default router;
