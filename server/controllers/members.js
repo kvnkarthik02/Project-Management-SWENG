@@ -179,7 +179,7 @@ export const getMembersAllocatedHours = (req, res) => {
     var memberAllocatedHours = members.map((member) => {
         return member.hoursAllocated;
     });
-    console.log(memberAllocatedHours);
+    
     res.send(memberAllocatedHours);
 }
 
@@ -194,7 +194,6 @@ export const getMembersOnProject = (req, res) => {
         }
     });
 
-    console.log(projectMembers);
     res.send(projectMembers);
 }
 
