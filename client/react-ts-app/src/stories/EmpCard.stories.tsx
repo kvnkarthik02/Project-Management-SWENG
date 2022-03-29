@@ -17,23 +17,45 @@ export default {
 }
 
 
-interface Employee {
-    name: string;
-    role: string;
-    workload: number;
-    capacity: number;
-    avatarColor: string;
+// interface Employee {
+//     name: string;
+//     role: string;
+//     workload: number;
+//     capacity: number;
+//     avatarColor: string;
+// }
+
+const sampleEmployee = {
+    name: 'jon',
+    email: 'jwk@tdcd.ie',
+    role: 'dev',
+    workload: 4,
+    capacity: 6,
+    avatarColor: 'red'
 }
 
-const sampleEmployee: Employee = {
-    name: '',
-    role: '',
-    workload: 0,
-    capacity: 0,
-    avatarColor: ''
-}
+const name: string = 'jon';
+const email: string = 'jwk@tdcd.ie';
+const role: string = 'dev';
+const workload: number = 4;
+const capacity: number = 6;
+const avatarColor: string = 'red';
 
-const Template = (args: JSX.IntrinsicAttributes) => <EmployeeCard employee={sampleEmployee} {...args} />
+
+
+const Template = (args: JSX.IntrinsicAttributes) =>
+    <EmployeeCard name={sampleEmployee.name}
+        email={sampleEmployee.email}
+        role={sampleEmployee.role}
+        workload={sampleEmployee.workload}
+        capacity={sampleEmployee.capacity}
+        avatarColor={sampleEmployee.avatarColor} {...args} />
+{/* <EmployeeCard name={name}
+        email={email}
+        role={role}
+        workload={workload}
+        capacity={capacity}
+        avatarColor={avatarColor} {...args} /> */}
 
 export const Card = Template.bind({})
 // Card1.args = {

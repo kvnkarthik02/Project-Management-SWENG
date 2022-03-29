@@ -9,6 +9,9 @@ import Projects from './pages/Projects';
 
 import HomePage from './pages/HomePage';
 
+// import { GlobalContext } from './contexts/TeamContext';
+import { useState } from 'react';
+
 interface Employee {
   name: string;
   role: string;
@@ -17,7 +20,7 @@ interface Employee {
   avatarColor: string;
 }
 
-const team: Employee[] = [
+const sampleTeam: Employee[] = [
   {
     name: "Tim Kelly",
     role: "Senior Developer",
@@ -99,12 +102,17 @@ const projects: Project[] = [
 
 function App() {
 
+  // const [team, setTeam] = useState<Employee[]>();
+
+
   return (
+
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTE.HOMEPAGE} element={<HomePage team={team} projects={projects} />} />
+        <Route path={ROUTE.HOMEPAGE} element={<HomePage team={sampleTeam} projects={projects} />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.PROJECTS} element={<Projects />} />
+
         {/* <Route path={ROUTE.PLAYGROUND} element={<Playground />} /> */}
         {/* <Route path={ROUTE.USERS} element={<Users />} />
         <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>

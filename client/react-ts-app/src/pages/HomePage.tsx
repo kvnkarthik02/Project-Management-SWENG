@@ -6,6 +6,7 @@ import { Grid } from '@mantine/core';
 
 interface Employee {
   name: string;
+  email: string;
   role: string;
   workload: number;
   capacity: number;

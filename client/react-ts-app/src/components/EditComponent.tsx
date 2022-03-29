@@ -1,10 +1,7 @@
+
 import React from 'react'
-// import PropTypes from 'prop-types'
-import { Group, Button, Text, Title, Card } from '@mantine/core';
-import EmployeeCard from './elements/EmployeeCard';
-// import EditComponent from './EditComponent';
 import { useState } from 'react';
-import { Modal, Code, ActionIcon, Select, Box, Avatar } from '@mantine/core';
+import { Modal, Button, Group, Code, ActionIcon, Text, Select, Box, Avatar, Card } from '@mantine/core';
 
 // import { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
@@ -12,21 +9,8 @@ import { FiPlus } from 'react-icons/fi';
 import { TextInput, NumberInput } from '@mantine/core';
 import { useForm, formList } from '@mantine/form';
 import { FiTrash2 } from 'react-icons/fi'
-// import { FormList } from '@mantine/form/lib/form-list/form-list';
-// import { UseFormReturnType } from '@mantine/form/lib/use-form';
 
-
-interface Employee {
-    name: string;
-    email: string;
-    role: string;
-    workload: number;
-    capacity: number;
-    avatarColor: string;
-}
-
-
-const ListTeam = (props: { team: Employee[]; }) => {
+const EditComponent = () => {
     const [opened, setOpened] = useState(false);
 
     const form = useForm({
@@ -127,71 +111,38 @@ const ListTeam = (props: { team: Employee[]; }) => {
                     {fields}
 
                     <Group position="center" mt="md">
-                        <Button onClick={() => {
-                            // setTeam(form.values.employees);
-                            form.addListItem('employees', {
-                                email: '',
-                                name: '',
-                                role: '',
-                                workload: 0,
-                                capacity: 0,
-                                avatarColor: '',
-                            })
-                        }}>
+                        <Button onClick={() => form.addListItem('employees', {
+                            email: '',
+                            name: '',
+                            role: '',
+                            workload: 0,
+                            capacity: 0,
+                            avatarColor: '',
+                        })}>
                             Add employee
                         </Button>
                     </Group>
 
 
-                    {/* <Text size="md" weight={700} mt="md" color="cyan">
+                    <Text size="md" weight={700} mt="md" color="cyan">
                         Form values:
                     </Text>
-                    <Code block>{JSON.stringify(form.values, null, 2)}</Code> */}
+                    <Code block>{JSON.stringify(form.values, null, 2)}</Code>
                 </Box>
             </Modal>
 
-            <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
-                <Card shadow="sm" p="lg" radius="md" withBorder={true}>
-                    <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
-                        <Group position="apart">
-                            <Title order={1}>
-                                <Text
-                                    color="dark"
-                                    inherit
-                                    component="span"
-                                    variant="text"
-                                    // variant="gradient"
-                                    // gradient={{ from: 'indigo', to: 'pink', deg: 45 }}
-                                    size="lg"
-                                    weight={500}
-                                    style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Team</Text>
-                            </Title>
-                            <Group position="center">
-                                <Button size="md" radius="xl"
-                                    onClick={() => setOpened(true)}
-                                    style={{ backgroundColor: "#64E8B7", width: 70 }}>
-                                    <FiPlus color="white" size={24} strokeWidth={2.5} />
-                                </Button>
-                            </Group>
-                        </Group>
-                    </div>
-
-                    <Group position="center" direction="column" spacing="xs">
-                        {form.values.employees.map((member) => <EmployeeCard name={member.name}
-                            email={member.email}
-                            role={member.role}
-                            workload={member.workload}
-                            capacity={member.capacity}
-                            avatarColor={member.avatarColor} />)}
-                    </Group>
-
-                </Card>
-            </div >
-
+            <Group position="center">
+                <Button size="md" radius="xl"
+                    onClick={() => setOpened(true)}
+                    style={{ backgroundColor: "#64E8B7", width: 70 }}>
+                    <FiPlus color="white" size={24} strokeWidth={2.5} />
+                </Button>
+            </Group>
         </div >
     );
 
 
 }
 
-export default ListTeam
+
+export default EditComponent
