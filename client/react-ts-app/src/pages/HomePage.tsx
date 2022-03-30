@@ -27,14 +27,10 @@ interface Project {
 
 const HomePage = (props: { team: Employee[]; projects: Project[]; }) => {
   return (
-    // <TeamCard {...team} />
     <Grid justify="center" columns={3} >
       <Grid.Col span={2}><ListProjects projects={props.projects} /></Grid.Col>
       <Grid.Col span={1}><ListEmployees team={props.team} /></Grid.Col>
     </Grid>
-
-
-
   )
 }
 
