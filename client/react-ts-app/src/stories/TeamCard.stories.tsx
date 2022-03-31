@@ -7,6 +7,7 @@ const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cya
 
 interface Employee {
     name: string;
+    email: string;
     role: string;
     workload: number;
     capacity: number;
@@ -20,12 +21,14 @@ export default {
 const sampleTeam: Employee[] = [
     {
         name: "Tim Kelly",
+        email: "tkelly@prop.ie",
         role: "Senior Developer",
         workload: 6,
         capacity: 16,
         avatarColor: "red"
     }, {
         name: "Johnny Shoe",
+        email: "jshoe@prop.ie",
         role: "Senior Developer",
         workload: 13,
         capacity: 16,
@@ -33,6 +36,7 @@ const sampleTeam: Employee[] = [
     },
     {
         name: "Ben Vaughan",
+        email: "bvaughn@prop.ie",
         role: "Senior Developer",
         workload: 10,
         capacity: 16,

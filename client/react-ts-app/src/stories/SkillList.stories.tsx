@@ -16,7 +16,7 @@ const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cya
 
 interface Skill {
     name: string;
-    exp: string;
+    exp: number;
 
 }
 
@@ -27,18 +27,18 @@ export default {
 const sampleSkills: Skill[] = [
     {
         name: "Django",
-        exp: "Advanced"
+        exp: 4
     }, {
         name: "React.js",
-        exp: "Novice"
+        exp: 2
     },
     {
         name: "Python",
-        exp: "Advanced"
+        exp: 3
     },
     {
         name: "MongoDB",
-        exp: "Novice"
+        exp: 2
     },
 ]
 

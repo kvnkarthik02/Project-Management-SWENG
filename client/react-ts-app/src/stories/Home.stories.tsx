@@ -14,30 +14,34 @@ export default {
     //     }
     // }
 }
-
 interface Employee {
     name: string;
+    email: string;
     role: string;
     workload: number;
     capacity: number;
     avatarColor: string;
 }
 
+
 const team: Employee[] = [
     {
         name: "Tim Kelly",
+        email: '',
         role: "Senior Developer",
         workload: 6,
         capacity: 16,
         avatarColor: "red"
     }, {
         name: "Ben Vaughan",
+        email: '',
         role: "Senior Developer",
         workload: 10,
         capacity: 16,
         avatarColor: "cyan"
     }, {
         name: "Johnny Shoe",
+        email: '',
         role: "Senior Developer",
         workload: 13,
         capacity: 16,

@@ -1,0 +1,9 @@
+{
+    "memberId": 123,
+    "firstName": "Bob",
+    "lastName": "Baxter",
+    "projects":["123","456","789"],
+    "hoursAvailable": 40.0,
+    "hoursAllocated": 0.0
+  }
+  

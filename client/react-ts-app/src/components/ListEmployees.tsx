@@ -4,6 +4,7 @@ import { FiPlus } from 'react-icons/fi';
 
 interface Employee {
   name: string;
+  email: string;
   role: string;
   workload: number;
   capacity: number;
@@ -37,7 +38,12 @@ const ListEmployees = (props: { team: Employee[]; }) => {
         </div>
 
         <Group position="center" direction="column" spacing="xs">
-          {props.team.map((member: Employee) => <EmployeeCard employee={member} />)}
+          {props.team.map((member: Employee) => <EmployeeCard name={member.name}
+            email={member.email}
+            role={member.role}
+            workload={member.workload}
+            capacity={member.capacity}
+            avatarColor={member.avatarColor} />)}
         </Group>
 
       </Card>

@@ -1,10 +1,14 @@
 export enum ROUTE {
-    HOMEPAGE = '/',
+    HOME = '/',
+    HOMEPAGE = '/home/',
     LOGIN = '/login/',
     PROJECTS = '/projects/',
+    PROJECT = '/project/',
+    PLAYGROUND = '/playground',
     USERS = '/users/',
     USER_PROFILE = '/users/:userId/',
     USER_ACTIVITY = `/users/:userId/activities/:activityId/`,
+   
   }
   
   export enum USER_PROFILE_ROUTE {

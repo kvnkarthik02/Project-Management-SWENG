@@ -1,91 +1,174 @@
 import ProjectCard from "./elements/ProejctCard";
-import { Group, Button, Text, Title, Card } from '@mantine/core';
-import { FiPlus } from 'react-icons/fi';
+import { Group, Button, Text, Title, Card, Modal, Code, ActionIcon, Select, Box, Avatar, TextInput, NumberInput, ScrollArea } from '@mantine/core';
+import { useState } from 'react';
+import { FiPlus, FiTrash2 } from 'react-icons/fi';
+import { useForm, formList } from '@mantine/form';
+import { RichTextEditor } from '@mantine/rte';
 
-
-// const container = {
-//   boxShadow: "2px 2px 5px lightgrey",
-//   backgroundColor: "#FDFDFD",
-//   borderRadius: "10px",
-//   margin: "10px",
-//   padding: "16px",
-// }
-// const headerStyle = {
-//   display: "flex",
-//   justifyContent: 'center',
-//   alignItems: 'center',
-//   marginBottom: "20px"
-// }
-// const headingStyle = {
-//   display: "inline-flex",
-//   fontSize: "24px",
-//   fontWeight: "bold",
-//   width: "90%",
-//   height: "32px",
-//   alignItems: 'center',
-// }
-// const addStyle = {
-//   display: "inline-flex",
-//   borderRadius: "90px",
-//   backgroundColor: "#64E8B7",
-//   color: "white",
-//   fontWeight: "bold",
-//   width: "10%",
-//   height: "32px",
-//   justifyContent: 'center',
-//   alignItems: 'center',
-// }
-// const bodyStyle = {
-//   boxShadow: "2px 2px 5px lightgrey",
-//   borderRadius: "10px",
-//   padding: "16px"
-// }
-// const projectStyle = {
-//   display: "inline-flex",
-//   width: "90%",
-// }
 
 interface Project {
   name: string;
   description: string;
   badgeName: string;
   badgeColor: string;
-  coverImgLink: string;
-  projectPageLink: string;
-  //   workload: number;
-  //   capacity: number;
-  //   avatarColor: string;
+  // coverImgLink: string;
+  // projectPageLink: string;
 }
 
 const ListProjects = (props: { projects: Project[] }) => {
+  const initialDescription =
+    '<p> <i>Please enter other details before entering the description</i> Your initial <b>html value</b> or an empty string to init editor without value</p>';
+  // const [description, setDescription] = useState(initialDescription);
+
+  const [opened, setOpened] = useState(false);
+
+  const form = useForm({
+    initialValues: {
+      projects: formList([{
+        name: '',
+        description: initialDescription,
+        badgeName: '',
+        badgeColor: '',
+      }])
+    },
+  });
+  const colors = ["gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
+
+
+  const fields = form.values.projects.map((_, index) => (
+    <div style={{ padding: "5px" }}>
+      <Card shadow="sm" p="lg" radius="md" withBorder={true} >
+        <Box sx={{ maxWidth: 700, margin: 'auto' }} >
+          <Group key={index} mt="xs">
+            <Avatar color={form.values.projects[index].badgeColor} size={40} radius='xl' src='' >
+              {form.values.projects[index].badgeName?.toUpperCase()[0]}
+            </Avatar>
+
+            <TextInput
+              placeholder="Project Name"
+              required
+              sx={{ flex: 1 }}
+              {...form.getListInputProps('projects', index, 'name')}
+            />
+            <TextInput
+              placeholder="Category"
+              required
+              sx={{ flex: 1 }}
+              {...form.getListInputProps('projects', index, 'badgeName')}
+            />
+            <Select
+              placeholder='Color'
+              required
+              sx={{ flex: 0.5 }}
+              data={colors}
+              {...form.getListInputProps('projects', index, 'badgeColor')}>
+            </Select>
+            <ActionIcon
+              color="red"
+              variant="hover"
+              onClick={() => form.removeListItem('projects', index)}
+            >
+              <FiTrash2 size={24} />
+            </ActionIcon>
+          </Group>
+          <ScrollArea sx={{ height: 250, flex: 1 }} scrollHideDelay={0} offsetScrollbars={true}>
+            <Group key={index} mt="xs">
+              <RichTextEditor
+                placeholder={initialDescription}
+                sx={{ flex: 1 }}
+                {...form.getListInputProps('projects', index, 'description')}
+              />
+            </Group>
+
+          </ScrollArea>
+
+        </Box>
+      </Card>
+    </div>
+  ));
 
   return (
-    <div style={{ width: 610, margin: 'auto', padding: "5px" }}>
-      <Card shadow="sm" p="lg" radius="md" withBorder={true}>
-        <div style={{ width: 510, margin: 'auto', padding: "5px" }}>
-          <Group position="apart">
-            <Title order={1}>
-              <Text
-                color="dark"
-                inherit
-                component="span"
-                variant="text"
-                // variant="gradient"
-                // gradient={{ from: 'indigo', to: 'pink', deg: 45 }}
-                size="xl"
-                weight={700}
-                style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Projects</Text>
-            </Title>
-            <Button size="md" radius="xl" style={{ backgroundColor: "#64E8B7", width: 70 }}>
-              <FiPlus color="white" size={24} strokeWidth={2.5} />
+    <div>
+      <Modal
+        opened={opened}
+        onClose={() => setOpened(false)}
+        size={650}
+        title="Edit Project"
+      >
+        <Box sx={{ minWidth: 500 }} >
+          {fields.length > 0 ? (
+            <Group mb="xs">
+            </Group>
+          ) : (
+            <Text color="dimmed" align="center">
+              No one here...
+            </Text>
+          )}
+
+          {fields}
+
+          <Group position="center" mt="md">
+            <Button onClick={() => {
+              // setTeam(form.values.employees);
+              form.addListItem('projects', {
+                name: '',
+                description: initialDescription,
+                badgeName: '',
+                badgeColor: '',
+                // coverImgLink: '',
+                // projectPageLink: '',
+              })
+            }}>
+              Add Project
             </Button>
           </Group>
-        </div>
-        <Group position="center" direction="column" spacing="xs">
-          {props.projects.map((project) => <ProjectCard project={project} />)}
-        </Group>
-      </Card>
-    </div >
+
+
+          {/* <Text size="md" weight={700} mt="md" color="cyan">
+            Form values:
+          </Text>
+          <Code block>{JSON.stringify(form.values, null, 2)}</Code> */}
+        </Box>
+      </Modal>
+      <div style={{ width: 610, margin: 'auto', padding: "5px" }}>
+        <Card shadow="sm" p="lg" radius="md" withBorder={true}>
+          <div style={{ width: 510, margin: 'auto', padding: "5px" }}>
+            <Group position="apart">
+              <Title order={1}>
+                <Text
+                  color="dark"
+                  inherit
+                  component="span"
+                  variant="text"
+                  // variant="gradient"
+                  // gradient={{ from: 'indigo', to: 'pink', deg: 45 }}
+                  size="xl"
+                  weight={700}
+                  style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Projects</Text>
+              </Title>
+              <Button size="md" radius="xl"
+                onClick={() => setOpened(true)}
+                style={{ backgroundColor: "#64E8B7", width: 70 }}>
+                <FiPlus color="white" size={24} strokeWidth={2.5} />
+              </Button>
+            </Group>
+          </div>
+          <Group position="center" direction="column" spacing="xs">
+            {/* {props.projects.map((project) => <ProjectCard project={project} />)} */}
+            {form.values.projects.map((project) => <ProjectCard
+              name={project.name}
+              description={project.description}
+              badgeName={project.badgeName}
+              badgeColor={project.badgeColor}
+            // coverImgLink={project.coverImgLink}
+            // projectPageLink={project.projectPageLink}
+            // coverImgLink={""}
+            // projectPageLink={""}
+            />)}
+          </Group>
+        </Card>
+      </div >
+    </div>
   )
 }
 
