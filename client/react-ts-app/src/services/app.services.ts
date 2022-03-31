@@ -16,8 +16,8 @@ export class AppService {
     // To do:
     // Get a single project
     // url: /projects/:id
-    static async getOneProjects(): Promise<any> {
-        const response = await axios.get('/projects/:id');
+    static async getOneProjects(id: any): Promise<any> {
+        const response = await axios.get(`/projects/${id}`);
         return response.data;
     }
 
