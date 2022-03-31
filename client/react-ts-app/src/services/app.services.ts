@@ -24,36 +24,22 @@ export class AppService {
     // To do:
     // Create a new project
     // url: /projects
-    static async makeProjects(): Promise<any> {
-        const response = await axios.put('/projects', {
-            projectId,                  //getting error lines for this ???
-            projectName,                //getting error lines for this ???
-            projectDescription,         //getting error lines for this ???
-            hasDeadline,                //getting error lines for this ???
-            deadline,                   //getting error lines for this ???
-            isComplete                  //getting error lines for this ???
-        })
+    static async makeProjects(data: any): Promise<any> {
+        await axios.post('/projects', {data})
     }
 
     // To do:
     // edit an existing project
     // url: /projects/:id
-    static async editProject(): Promise<any> {
-        const response = await axios.patch('/projects/:id',{
-            projectId,                  //getting error lines for this ???
-            projectName,                //getting error lines for this ???
-            projectDescription,         //getting error lines for this ???
-            hasDeadline,                //getting error lines for this ???
-            deadline,                   //getting error lines for this ???    
-            isComplete                  //getting error lines for this ???
-        })
+    static async editProject(data: any, id: any): Promise<any> {
+        await axios.patch(`/projects/${id}`,{data});
     }
 
     // To do:
     // Delete a single project
     // url: /projects/:id
-    static async deleteProject(): Promise<any> {
-        const response = await axios.delete('/projects/:id'); 
+    static async deleteProject( id: any): Promise<any> {
+        await axios.delete(`/projects/${id}`); 
     }
 
     //
