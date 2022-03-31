@@ -3,11 +3,9 @@ import * as React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTE, USER_PROFILE_ROUTE } from './routing';
 
-import Login from './components/Login';
-// import Home from './components/Home';
-import Projects from './pages/Projects';
-import LayoutTest from './pages/LayoutTest';
 import HomePage from './pages/HomePage';
+import Login from './components/Login';
+import Projects from './pages/Projects';
 
 interface Employee {
   name: string;
@@ -105,14 +103,6 @@ function App() {
         <Route path={ROUTE.HOMEPAGE} element={<HomePage team={team} projects={projects} />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.PROJECTS} element={<Projects />} />
-        <Route path={ROUTE.LAYOUTTEST} element={<LayoutTest team={team} projects={projects}/>} />
-        {/* <Route path={ROUTE.USERS} element={<Users />} />
-        <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>
-          <Route
-            path={USER_PROFILE_ROUTE.USER_ACTIVITY}
-            element={<UserActivity />}
-          />
-        </Route> */}
       </Routes>
     </BrowserRouter>
   );

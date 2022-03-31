@@ -1,29 +1,5 @@
 import { Avatar, Card, RingProgress, Text, Group, useMantineTheme } from '@mantine/core';
 
-
-// const bodyStyle = {
-//   display: "inline-flex",
-//   width: "100%",
-//   height: "70px",
-//   boxShadow: "2px 2px 5px lightgrey",
-//   borderRadius: "10px",
-//   padding: "16px",
-//   alignItems: 'center',
-// }
-// const capacityStyle = {
-// }
-// const capacityContainer = {
-//   marginRight: "0",
-//   marginLeft: "auto",
-//   border: "1px solid #5D5D5D",
-//   padding: "12px",
-//   borderRadius: "15px",
-//   color: "#5D5D5D",
-// }
-// const nameStyle = {
-//   paddingLeft: '20px'
-// }
-
 interface Employee {
   name: string;
   role: string;
@@ -56,13 +32,9 @@ const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cya
 const EmployeeCard = (props: { employee: Employee }) => {
 
   let initial = props.employee.name.substr(0, 1)
-  // const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
   return (
-    <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
+    <div style={{ width: 340, margin: 'auto', padding: "5px"}}>
       <Card shadow="sm" p="md" radius="lg" withBorder={true}>
-        {/* top, right, left margins are negative – -1 * theme.spacing.xl */}
-
         <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }} spacing="sm">
           <Group>
             <Avatar color={props.employee.avatarColor} size="lg" radius='xl'>{initial}</Avatar>
@@ -90,15 +62,5 @@ const EmployeeCard = (props: { employee: Employee }) => {
     </div>
   )
 }
-
-
-// function getRandomColor() {
-//   var letters = '0123456789ABCDEF';
-//   var color = '#';
-//   for (var i = 0; i < 6; i++) {
-//     color += letters[Math.floor(Math.random() * 16)];
-//   }
-//   return color;
-// }
 
 export default EmployeeCard;

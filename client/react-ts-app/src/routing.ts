@@ -1,9 +1,7 @@
 export enum ROUTE {
-    HOME = '/',
-    HOMEPAGE = '/home/',
+    HOMEPAGE = '/',
     LOGIN = '/login/',
     PROJECTS = '/projects/',
-    LAYOUTTEST = '/layouttest',
     USERS = '/users/',
     USER_PROFILE = '/users/:userId/',
     USER_ACTIVITY = `/users/:userId/activities/:activityId/`,
@@ -14,11 +12,10 @@ export enum ROUTE {
   }
   
   type TArgs =
-    | { path: ROUTE.HOME }
     | { path: ROUTE.HOMEPAGE }
+    | { path: ROUTE.PROJECTS}
     | { path: ROUTE.LOGIN }
     | { path: ROUTE.USERS }
-    | { path: ROUTE.LAYOUTTEST }
     | { path: ROUTE.USER_PROFILE; params: { userId: string } }
     | {
         path: ROUTE.USER_ACTIVITY;

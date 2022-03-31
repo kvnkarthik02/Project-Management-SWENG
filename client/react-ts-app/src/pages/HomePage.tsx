@@ -1,6 +1,6 @@
 import ListProjects from '../components/ListProjects';
 import ListEmployees from '../components/ListEmployees';
-import TeamCard from '../components/elements/TeamCard';
+import LayoutDefault from '../components/layouts/LayoutDefault';
 
 import { Grid } from '@mantine/core';
 
@@ -27,10 +27,12 @@ interface Project {
 
 const HomePage = (props: { team: Employee[]; projects: Project[]; }) => {
   return (
-    <Grid justify="center" columns={3} >
-      <Grid.Col span={2}><ListProjects projects={props.projects} /></Grid.Col>
-      <Grid.Col span={1}><ListEmployees team={props.team} /></Grid.Col>
-    </Grid>
+    <LayoutDefault>
+      <Grid justify="center" columns={3} >
+        <Grid.Col span={2}><ListProjects projects={props.projects} /></Grid.Col>
+        <Grid.Col span={1}><ListEmployees team={props.team} /></Grid.Col>
+      </Grid>
+    </LayoutDefault>
   )
 }
 

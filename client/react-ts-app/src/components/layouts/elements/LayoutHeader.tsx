@@ -9,10 +9,15 @@ const headerStyle = {
     boxShadow: '0px 3px 5px #f2f2f2'
 }
 
+const logoStyle = {
+    maxHeight: '30px'
+}
+
 function LayoutHeader() {
     return(
         <div style={headerStyle}>
-            Propylon Team Management
+            {/* <img style={logoStyle} src={require('../propylonLogo.png')}/> */}
+            Propylon Project Management App
         </div>
     )
 }
