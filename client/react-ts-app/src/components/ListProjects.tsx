@@ -124,10 +124,10 @@ const ListProjects = (props: { projects: Project[] }) => {
           </Group>
 
 
-          <Text size="md" weight={700} mt="md" color="cyan">
+          {/* <Text size="md" weight={700} mt="md" color="cyan">
             Form values:
           </Text>
-          <Code block>{JSON.stringify(form.values, null, 2)}</Code>
+          <Code block>{JSON.stringify(form.values, null, 2)}</Code> */}
         </Box>
       </Modal>
       <div style={{ width: 610, margin: 'auto', padding: "5px" }}>
