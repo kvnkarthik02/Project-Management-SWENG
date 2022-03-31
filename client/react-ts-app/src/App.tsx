@@ -6,7 +6,6 @@ import { ROUTE, USER_PROFILE_ROUTE } from './routing';
 import HomePage from './pages/HomePage';
 import Login from './components/Login';
 import Projects from './pages/Projects';
-import HomePage from './pages/HomePage';
 import ProjectPage from './pages/ProjectPage';
 // import { GlobalContext } from './contexts/TeamContext';
 import { useState } from 'react';
