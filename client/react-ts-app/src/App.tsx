@@ -3,10 +3,9 @@ import * as React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ROUTE, USER_PROFILE_ROUTE } from './routing';
 
+import HomePage from './pages/HomePage';
 import Login from './components/Login';
-// import Home from './components/Home';
 import Projects from './pages/Projects';
-
 import HomePage from './pages/HomePage';
 import ProjectPage from './pages/ProjectPage';
 // import { GlobalContext } from './contexts/TeamContext';

@@ -30,7 +30,7 @@ const EmployeeCard = (props: {
 }) => {
 
   let initial = props.name[0]?.toUpperCase() || '';
-
+  
   return (
     <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
       <Card shadow="sm" p="md" radius="lg" withBorder={true}>
@@ -67,15 +67,5 @@ const EmployeeCard = (props: {
     </div>
   )
 }
-
-
-// function getRandomColor() {
-//   var letters = '0123456789ABCDEF';
-//   var color = '#';
-//   for (var i = 0; i < 6; i++) {
-//     color += letters[Math.floor(Math.random() * 16)];
-//   }
-//   return color;
-// }
 
 export default EmployeeCard;
