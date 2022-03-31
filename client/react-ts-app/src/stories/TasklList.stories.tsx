@@ -21,7 +21,7 @@ export default {
 interface Task {
     name: string;
     subtasks: string[];
-    teammembers: string[];
+    teamMembers: string[];
     avatarColors: string[];
 }
 
@@ -29,19 +29,19 @@ const sampleTasks: Task[] = [
     {
         name: 'API Configuration',
         subtasks: ['Add CRUD Functions', 'Build Models', 'Finish Controller Scripts'],
-        teammembers: ["Tim", "Ben", "John", "Karthik", "Zee", "Mani", "Robert"],
+        teamMembers: ["Tim", "Ben", "John", "Karthik", "Zee", "Mani", "Robert"],
         avatarColors: ["grape", "red", "teal", "violet", "indigo", "cyan", "yellow", "orange"]
     },
     {
         name: 'Website Redesign',
         subtasks: ['Update Landing Page', 'Adjust Log-in Form'],
-        teammembers: ["John", "Ben", "Tim", "Karthik", "Zee", "Mani", "Robert"],
+        teamMembers: ["John", "Ben", "Tim", "Karthik", "Zee", "Mani", "Robert"],
         avatarColors: ["cyan", "yellow", "orange", "grape", "red", "teal", "violet", "indigo"]
     },
     {
         name: 'Database Restructure',
         subtasks: ['Study Existing Database', 'Find areas to improve'],
-        teammembers: ["Zee", "Mani", "Robert", "Tim", "Ben", "John", "Karthik"],
+        teamMembers: ["Zee", "Mani", "Robert", "Tim", "Ben", "John", "Karthik"],
         avatarColors: ["grape", "red", "teal", "violet", "cyan", "yellow", "orange", "indigo"]
     }
 ]

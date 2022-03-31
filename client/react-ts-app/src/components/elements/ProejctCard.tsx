@@ -1,4 +1,7 @@
-import { Card, Image, Text, Badge, Button, Group, useMantineTheme } from '@mantine/core';
+import { Card, Text, Badge, Button, Group, Spoiler } from '@mantine/core';
+
+import parse from 'html-react-parser';
+import { useRef } from 'react';
 
 interface Project {
     name: string;
@@ -7,41 +10,41 @@ interface Project {
     badgeColor: string;
     coverImgLink: string;
     projectPageLink: string;
-    //   workload: number;
-    //   capacity: number;
-    //   avatarColor: string;
 }
 
-const ProjectCard = (props: { project: Project }) => {
+
+const ProjectCard = (props: {
+    name: string,
+    description: string,
+    badgeName: string,
+    badgeColor: string,
+    // coverImgLink: string,
+    // projectPageLink: string
+}) => {
     const secondaryColor = "dark";
 
-
     return (
-        <div style={{ width: 510, margin: 'auto', padding: "5px" }}>
-            <Card shadow="sm" p="lg" withBorder={true} radius="md">
-                <Card.Section component="a" href={props.project.projectPageLink} target="_blank">
-                    <Image
-                        src={props.project.coverImgLink}
-                        height={240}
-                        alt="Project Image"
-                    />
-                </Card.Section>
+        <div>
+            <div style={{ width: 510, margin: 'auto', padding: "5px" }}>
+                <Card shadow="sm" p="lg" withBorder={true} radius="md">
+                    <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }}>
+                        <Text size="xl" weight={500}>{props.name}</Text>
+                        <Badge size="lg" color={props.badgeColor} variant="light">
+                            {props.badgeName}
+                        </Badge>
+                    </Group>
 
-                <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }}>
-                    <Text size="xl" weight={500}>{props.project.name}</Text>
-                    <Badge size="lg" color={props.project.badgeColor} variant="light">
-                        {props.project.badgeName}
-                    </Badge>
-                </Group>
-
-                <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
-                    {props.project.description}
-                </Text>
-
-                <Button variant="light" color="cyan" fullWidth style={{ marginTop: 14 }}>
-                    Know More
-                </Button>
-            </Card>
+                    <Spoiler maxHeight={120} showLabel="Show more" hideLabel="Hide">
+                        <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>
+                            {parse(props.description)}
+                        </Text>
+                    </Spoiler>
+                    {/* 
+                    <Button variant="light" color="cyan" fullWidth style={{ marginTop: 14 }}>
+                        Know More
+                    </Button> */}
+                </Card>
+            </div>
         </div>
     )
 }

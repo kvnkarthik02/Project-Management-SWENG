@@ -15,13 +15,13 @@ interface Employee {
 interface Task {
     name: string;
     subtasks: string[];
-    teammembers: string[];
+    teamMembers: string[];
     avatarColors: string[];
 }
 
 interface Skill {
     name: string;
-    exp: string;
+    exp: number;
 }
 
 interface Project {
@@ -61,44 +61,49 @@ const sampleTeam: Employee[] = [
 const sampleSkills: Skill[] = [
     {
         name: "Django",
-        exp: "Advanced"
+        exp: 4
     }, {
         name: "React.js",
-        exp: "Novice"
+        exp: 2
     },
     {
         name: "Python",
-        exp: "Advanced"
+        exp: 3
     },
     {
         name: "MongoDB",
-        exp: "Novice"
+        exp: 2
     },
 ]
-
 const sampleTasks: Task[] = [
     {
         name: 'API Configuration',
         subtasks: ['Add CRUD Functions', 'Build Models', 'Finish Controller Scripts'],
-        teammembers: ["Tim", "Ben", "John", "Karthik", "Zee", "Mani", "Robert"],
+        teamMembers: ["Tim", "Ben", "John", "Karthik", "Zee", "Mani", "Robert"],
         avatarColors: ["grape", "red", "teal", "violet", "indigo", "cyan", "yellow", "orange"]
     },
     {
         name: 'Website Redesign',
         subtasks: ['Update Landing Page', 'Adjust Log-in Form'],
-        teammembers: ["John", "Ben", "Tim", "Karthik", "Zee", "Mani", "Robert"],
+        teamMembers: ["John", "Ben", "Tim", "Karthik", "Zee", "Mani", "Robert"],
         avatarColors: ["cyan", "yellow", "orange", "grape", "red", "teal", "violet", "indigo"]
     },
     {
         name: 'Database Restructure',
         subtasks: ['Study Existing Database', 'Find areas to improve'],
-        teammembers: ["Zee", "Mani", "Robert", "Tim", "Ben", "John", "Karthik"],
+        teamMembers: ["Zee", "Mani", "Robert", "Tim", "Ben", "John", "Karthik"],
         avatarColors: ["grape", "red", "teal", "violet", "cyan", "yellow", "orange", "indigo"]
     }
 ]
 
 
-const ProjectPage = (props: { project: Project; }) => {
+const ProjectPage = (props: {
+    name: string;
+    progress: number;
+    team: Employee[];
+    skills: Skill[];
+    tasks: Task[];
+}) => {
     return (
         <div style={{ width: "80%", margin: 'auto', padding: "5px" }}>
             <div style={{ width: "510", margin: 'auto', padding: "5px" }}>
@@ -113,22 +118,22 @@ const ProjectPage = (props: { project: Project; }) => {
                             // gradient={{ from: 'indigo', to: 'pink', deg: 45 }}
                             size="xl"
                             weight={700}
-                            style={{ fontFamily: 'Greycliff CF, sans-serif' }}>{props.project.name}</Text>
+                            style={{ fontFamily: 'Greycliff CF, sans-serif' }}>{props.name}</Text>
                     </Title>
-                    <Progress radius="lg" color="teal" size={25} value={props.project.progress} style={{ width: 200, color: "#64E8B7", marginRight: -60 }} />
+                    <Progress radius="lg" color="teal" size={25} value={props.progress} style={{ width: 200, color: "#64E8B7", marginRight: -60 }} />
                 </Group>
             </div>
             <div style={{ width: "510", margin: 'auto', padding: "5px", marginLeft: -70 }}>
                 <Grid columns={2} >
                     <Grid.Col span={1}>
                         <Group direction="column">
-                            <ListSkills skills={props.project.skills} />
+                            <ListSkills skills={props.skills} />
                             {/* <ListTeam team={props.project.team} /> */}
                             <ListTeam team={sampleTeam} />
                         </Group>
                     </Grid.Col>
                     <Grid.Col span={1}>
-                        <ListTasks tasks={props.project.tasks} />
+                        <ListTasks tasks={props.tasks} />
                     </Grid.Col>
                 </Grid>
             </div>

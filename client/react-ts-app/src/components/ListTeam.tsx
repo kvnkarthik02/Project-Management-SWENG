@@ -2,14 +2,13 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 import { Group, Button, Text, Title, Card } from '@mantine/core';
 import EmployeeCard from './elements/EmployeeCard';
-// import EditComponent from './EditComponent';
+
 import { useState } from 'react';
-import { Modal, Code, ActionIcon, Select, Box, Avatar } from '@mantine/core';
+import { Modal, Code, ActionIcon, Select, Box, Avatar, TextInput, NumberInput } from '@mantine/core';
 
 // import { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 // import { useInputState } from '@mantine/hooks';
-import { TextInput, NumberInput } from '@mantine/core';
 import { useForm, formList } from '@mantine/form';
 import { FiTrash2 } from 'react-icons/fi'
 // import { FormList } from '@mantine/form/lib/form-list/form-list';
@@ -26,6 +25,7 @@ interface Employee {
 }
 
 
+// const ListTeam = (props: { team: Employee[]; }) => {
 const ListTeam = (props: { team: Employee[]; }) => {
     const [opened, setOpened] = useState(false);
 
@@ -81,6 +81,7 @@ const ListTeam = (props: { team: Employee[]; }) => {
                             placeholder='W'
                             required
                             sx={{ flex: 0.3 }}
+                            min={0}
                             // size="xs"
                             // label="Workload"
                             {...form.getListInputProps('employees', index, 'workload')}
@@ -89,6 +90,7 @@ const ListTeam = (props: { team: Employee[]; }) => {
                             placeholder='C'
                             required
                             sx={{ flex: 0.3 }}
+                            min={0}
                             // size="xs"
                             // label="Capacity"
                             {...form.getListInputProps('employees', index, 'capacity')}

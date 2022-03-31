@@ -8,39 +8,18 @@ import Login from './components/Login';
 import Projects from './pages/Projects';
 
 import HomePage from './pages/HomePage';
-
+import ProjectPage from './pages/ProjectPage';
 // import { GlobalContext } from './contexts/TeamContext';
 import { useState } from 'react';
 
 interface Employee {
   name: string;
+  email: string;
   role: string;
   workload: number;
   capacity: number;
   avatarColor: string;
 }
-
-const sampleTeam: Employee[] = [
-  {
-    name: "Tim Kelly",
-    role: "Senior Developer",
-    workload: 6,
-    capacity: 16,
-    avatarColor: "red"
-  }, {
-    name: "Ben Vaughan",
-    role: "Senior Developer",
-    workload: 10,
-    capacity: 16,
-    avatarColor: "cyan"
-  }, {
-    name: "Johnny Shoe",
-    role: "Senior Developer",
-    workload: 13,
-    capacity: 16,
-    avatarColor: "yellow",
-  }
-]
 
 const images = [
   "https://images.unsplash.com/photo-1640622844217-a51dd0f51d19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
@@ -99,6 +78,76 @@ const projects: Project[] = [
   }
 ]
 
+const sampleTeam: Employee[] = [
+  {
+    name: "Tim Kelly",
+    email: "tim@gmail.com",
+    role: "Senior Developer",
+    workload: 6,
+    capacity: 16,
+    avatarColor: "red"
+  }, {
+    name: "Johnny Shoe",
+    email: "jshoe@tcd.ie",
+    role: "Senior Developer",
+    workload: 13,
+    capacity: 16,
+    avatarColor: "yellow",
+  },
+  {
+    name: "Ben Vaughan",
+    email: "ben@gmail.com",
+    role: "Senior Developer",
+    workload: 10,
+    capacity: 16,
+    avatarColor: "cyan"
+  },
+]
+
+interface Skill {
+  name: string;
+  exp: number;
+}
+
+
+const sampleSkills: Skill[] = [
+  {
+    name: "Django",
+    exp: 4
+  }, {
+    name: "React.js",
+    exp: 2
+  },
+  {
+    name: "Python",
+    exp: 3
+  },
+  {
+    name: "MongoDB",
+    exp: 2
+  },
+]
+
+const sampleTasks = [
+  {
+    name: 'API Configuration',
+    subtasks: ['Add CRUD Functions', 'Build Models', 'Finish Controller Scripts'],
+    teamMembers: ["Tim", "Ben", "John", "Karthik", "Zee", "Mani", "Robert"],
+    avatarColors: ["grape", "red", "teal", "violet", "indigo", "cyan", "yellow", "orange"]
+  },
+  {
+    name: 'Website Redesign',
+    subtasks: ['Update Landing Page', 'Adjust Log-in Form'],
+    teamMembers: ["John", "Ben", "Tim", "Karthik", "Zee", "Mani", "Robert"],
+    avatarColors: ["cyan", "yellow", "orange", "grape", "red", "teal", "violet", "indigo"]
+  },
+  {
+    name: 'Database Restructure',
+    subtasks: ['Study Existing Database', 'Find areas to improve'],
+    teamMembers: ["Zee", "Mani", "Robert", "Tim", "Ben", "John", "Karthik"],
+    avatarColors: ["grape", "red", "teal", "violet", "cyan", "yellow", "orange", "indigo"]
+  }
+]
 
 function App() {
 
@@ -109,9 +158,10 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTE.HOMEPAGE} element={<HomePage team={sampleTeam} projects={projects} />} />
+        <Route path={ROUTE.HOMEPAGE} element={<HomePage projects={projects} team={[]} />} />
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.PROJECTS} element={<Projects />} />
+        <Route path={ROUTE.PROJECT} element={<ProjectPage name={''} progress={60} team={sampleTeam} skills={sampleSkills} tasks={sampleTasks} />} />
 
         {/* <Route path={ROUTE.PLAYGROUND} element={<Playground />} /> */}
         {/* <Route path={ROUTE.USERS} element={<Users />} />

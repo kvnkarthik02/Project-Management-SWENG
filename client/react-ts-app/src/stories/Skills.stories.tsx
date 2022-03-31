@@ -42,10 +42,10 @@ export default {
 // ]
 const skill = {
     name: "Django",
-    exp: "Advanced"
+    exp: 4
 }
 
-const Template = (args: JSX.IntrinsicAttributes) => <SkillCard skill={skill} />
+const Template = (args: JSX.IntrinsicAttributes) => <SkillCard name={skill.name} exp={skill.exp} />
 
 export const Card = Template.bind({})
 // Card1.args = {

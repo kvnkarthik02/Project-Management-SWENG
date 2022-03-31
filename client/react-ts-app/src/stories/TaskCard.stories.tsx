@@ -20,18 +20,18 @@ export default {
 interface Task {
     name: string;
     subtasks: string[];
-    teammembers: string[];
+    teamMembers: string[];
     avatarColors: string[];
 }
-const sampleTask: Task = {
+const task = {
     name: 'API Configuration',
     subtasks: ['Add CRUD Functions', 'Build Models', 'Finish Controller Scripts'],
-    teammembers: ["Tim", "Ben", "John", "Karthik", "Zee", "Mani", "Robert"],
-    avatarColors: ["cyan", "yellow", "orange", "grape", "red", "teal", "violet", "indigo"]
-
+    teamMembers: ["Tim", "Ben", "John", "Karthik", "Zee", "Mani", "Robert"],
+    avatarColors: ["cyan", "yellow", "orange", "grape", "red", "teal", "violet", "indigo"],
+    skills: ["react", 'typescript'],
 }
 
-const Template = (args: JSX.IntrinsicAttributes) => <TaskCard task={sampleTask} {...args} />
+const Template = (args: JSX.IntrinsicAttributes) => <TaskCard skills={task.skills} name={task.name} subtasks={task.subtasks} teamMembers={task.teamMembers} avatarColors={task.avatarColors} {...args} />
 
 export const Card = Template.bind({})
 // Card1.args = {

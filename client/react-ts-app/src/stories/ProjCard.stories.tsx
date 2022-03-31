@@ -41,7 +41,7 @@ interface Project {
     //   avatarColor: string;
 }
 
-const sampleProject: Project = {
+const project: Project = {
     name: 'SampleName',
     description: randomDescription,
     badgeName: 'Department',
@@ -51,7 +51,14 @@ const sampleProject: Project = {
 }
 // const Template = (args: JSX.IntrinsicAttributes) => <EmployeeCard avatarColor={''} name={''} role={''} workload={0} capacity={0} {...args} />
 
-const Template = (args: JSX.IntrinsicAttributes) => <ProjectCard project={sampleProject} {...args} />
+const Template = (args: JSX.IntrinsicAttributes) => <ProjectCard
+    name={project.name}
+    description={project.description}
+    badgeName={project.badgeName}
+    badgeColor={project.badgeColor}
+    // coverImgLink={project.coverImgLink}
+    // projectPageLink={project.projectPageLink} 
+    {...args} />
 export const Card = Template.bind({})
 // Card1.args = {
 //     name: "Ben",

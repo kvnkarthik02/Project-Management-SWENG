@@ -1,37 +1,14 @@
 import React from 'react'
-import { Group, Button, Text, Title, Card } from '@mantine/core';
-import { FiPlus } from 'react-icons/fi';
+import { Group, Button, Text, Card, Progress } from '@mantine/core';
 import { BiCodeAlt } from 'react-icons/bi';
 
-interface Skill {
+const SkillCard = (props: {
     name: string;
-    exp: string;
-
-}
-
-// const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
-
-// const sampleSkills: Skill[] = [
-//     {
-//         name: "Django",
-//         exp: "Advanced"
-//     }, {
-//         name: "React.js",
-//         exp: "Novice"
-//     },
-//     {
-//         name: "Python",
-//         exp: "Advanced"
-//     },
-//     {
-//         name: "MongoDB",
-//         exp: "Novice"
-//     },
-// ]
-
-
-// const SkillCard = (props: { skills: Skill[]; }) => {
-const SkillCard = (props: { skill: Skill }) => {
+    exp: number;
+}) => {
+    const colors = ["green", "lime", "yellow", "orange", "red"];
+    const expLevel = Math.round((props.exp / 5) * 100)
+    const levelColor = colors[(props.exp > 0) ? props.exp - 1 : 0];
     return (
         <div style={{ width: 340, margin: 'auto', padding: "2px" }}>
             <Card shadow="sm" p="lg" radius="md" withBorder={true} >
@@ -44,12 +21,10 @@ const SkillCard = (props: { skill: Skill }) => {
                         </Card.Section>
 
                         <Text weight={500} size="xl">
-                            {props.skill.name}
+                            {props.name}
                         </Text>
                     </Group>
-                    <Text weight={200} size="md">
-                        {props.skill.exp}
-                    </Text>
+                    <Progress radius="lg" color={levelColor} size={15} value={expLevel} style={{ width: 100, color: "#64E8B7", marginLeft: -100 }} />
                 </Group>
             </Card>
         </div>

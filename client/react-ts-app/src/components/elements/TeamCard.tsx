@@ -4,6 +4,7 @@ import EmployeeCard from './EmployeeCard';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import { formList, useForm } from '@mantine/form';
 
+
 interface Employee {
     name: string;
     email: string;
@@ -68,6 +69,7 @@ const TeamCard = (props: { team: Employee[]; }) => {
                             placeholder='W'
                             required
                             sx={{ flex: 0.3 }}
+                            min={0}
                             // size="xs"
                             // label="Workload"
                             {...form.getListInputProps('employees', index, 'workload')}
@@ -76,6 +78,7 @@ const TeamCard = (props: { team: Employee[]; }) => {
                             placeholder='C'
                             required
                             sx={{ flex: 0.3 }}
+                            min={0}
                             // size="xs"
                             // label="Capacity"
                             {...form.getListInputProps('employees', index, 'capacity')}
