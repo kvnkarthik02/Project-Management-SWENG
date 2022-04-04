@@ -16,30 +16,31 @@ export class AppService {
     // To do:
     // Get a single project
     // url: /projects/:id
-    // static async getOneProjects(): Promise<any> {
-
-    // }
+    static async getOneProjects(id: any): Promise<any> {
+        const response = await axios.get(`/projects/${id}`);
+        return response.data;
+    }
 
     // To do:
     // Create a new project
     // url: /projects
-    // static async makeProjects(): Promise<any> {
-
-    // }
+    static async makeProjects(data: any): Promise<any> {
+        await axios.post('/projects', {data})
+    }
 
     // To do:
     // edit an existing project
     // url: /projects/:id
-    // static async editProject(): Promise<any> {
-
-    // }
+    static async editProject(data: any, id: any): Promise<any> {
+        await axios.patch(`/projects/${id}`,{data});
+    }
 
     // To do:
     // Delete a single project
     // url: /projects/:id
-    // static async deleteProject(): Promise<any> {
-
-    // }
+    static async deleteProject( id: any): Promise<any> {
+        await axios.delete(`/projects/${id}`); 
+    }
 
     //
     // Tasks
