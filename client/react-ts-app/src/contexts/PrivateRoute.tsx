@@ -6,15 +6,37 @@ import { useAuth } from './AuthContext'
 //     component: React.ComponentType;
 // 
 
-interface Props {
-    element: React.ElementType;
+// interface Props {
+//     element: React.ElementType;
+// }
+
+// export const PrivateRoute: React.FC<Props> = ({ element: RouteComponent }) => {
+//     return <RouteComponent />
+// }
+
+// const PrivateRoute = ({component, isAuthenticated, ...rest}: any) => {
+//     const routeComponent = (props: any) => (
+//         isAuthenticated
+//             ? React.createElement(component, props)
+//             : <Navigate to={{pathname: '/login'}}/>
+//     )
+//     return <Route {...rest} render={routeComponent}/>;
+// }
+
+export type ProtectedRouteProps = {
+    isAuthenticated: boolean,
+    authenticationPath: string;
+    outlet: JSX.Element;
 }
 
-export const PrivateRoute: React.FC<Props> = ({ element: RouteComponent }) => {
-    return <RouteComponent />
-}
-
-
+export default function PrivateRoute({isAuthenticated, authenticationPath, outlet}: ProtectedRouteProps) {
+    if (isAuthenticated) {
+        return outlet;
+    }
+    else {
+        return <Navigate to={{ pathname: authenticationPath }} />;
+    }
+};
 
 
 

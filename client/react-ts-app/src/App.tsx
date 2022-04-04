@@ -9,6 +9,10 @@ import Projects from './pages/Projects';
 import ProjectPage from './pages/ProjectPage';
 // import { GlobalContext } from './contexts/TeamContext';
 import { useState } from 'react';
+import PrivateRoute, { ProtectedRouteProps } from './contexts/PrivateRoute';
+import { auth } from './firebase';
+
+
 
 interface Employee {
   name: string;
@@ -147,28 +151,21 @@ const sampleTasks = [
   }
 ]
 
+const defaultProtectedRouteProps: Omit<ProtectedRouteProps, 'outlet'> = {
+  isAuthenticated: !!auth.currentUser,
+  authenticationPath: '/login',
+};
+
 function App() {
-
-  // const [team, setTeam] = useState<Employee[]>();
-
-
   return (
 
     <BrowserRouter>
       <Routes>
-        <Route path={ROUTE.HOMEPAGE} element={<HomePage projects={projects} team={[]} />} />
+        {/* <Route path={ROUTE.HOMEPAGE} element={<HomePage projects={projects} team={[]} />} /> */}
         <Route path={ROUTE.LOGIN} element={<Login />} />
         <Route path={ROUTE.PROJECTS} element={<Projects />} />
         <Route path={ROUTE.PROJECT} element={<ProjectPage name={''} progress={60} team={sampleTeam} skills={sampleSkills} tasks={sampleTasks} />} />
-
-        {/* <Route path={ROUTE.PLAYGROUND} element={<Playground />} /> */}
-        {/* <Route path={ROUTE.USERS} element={<Users />} />
-        <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>
-          <Route
-            path={USER_PROFILE_ROUTE.USER_ACTIVITY}
-            element={<UserActivity />}
-          />
-        </Route> */}
+        <Route path={ROUTE.HOMEPAGE} element={<PrivateRoute {...defaultProtectedRouteProps} outlet={<HomePage projects={projects} team={[]}/>}/>}/>
       </Routes>
     </BrowserRouter>
   );
