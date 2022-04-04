@@ -1,8 +1,7 @@
-import React, { useContext, useState, useEffect } from "react"
-import { Router, Routes, Route } from 'react-router-dom';
-import { auth } from "../firebase"
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { auth } from '../firebase'
 
-const AuthContext = React.createContext()
+export const AuthContext = React.createContext()
 
 export function useAuth() {
   return useContext(AuthContext)
@@ -17,6 +16,7 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
+    console.log(`Sending request to Firebase with e-mail ${email} & pass ${password}`)
     return auth.signInWithEmailAndPassword(email, password)
   }
 
@@ -60,3 +60,4 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   )
 }
+
