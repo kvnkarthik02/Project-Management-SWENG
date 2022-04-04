@@ -1,6 +1,7 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import mongoose from "mongoose";
+import cors from "cors"
 
 
 import projectsRoutes from './routes/projects.js';
@@ -8,7 +9,10 @@ import membersRoutes from './routes/members.js';
 
 import { getSkilledMembers } from './controllers/members.js'
 
+
+
 const app = express();
+app.use(cors())
 const PORT = 8000;
 
 // connect to db

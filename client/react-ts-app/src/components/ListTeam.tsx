@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 // import PropTypes from 'prop-types'
 import { Group, Button, Text, Title, Card } from '@mantine/core';
 import EmployeeCard from './elements/EmployeeCard';
+import { AppService } from "../services/app.services";
 
 import { useState } from 'react';
 import { Modal, Code, ActionIcon, Select, Box, Avatar, TextInput, NumberInput } from '@mantine/core';
@@ -28,6 +29,21 @@ interface Employee {
 // const ListTeam = (props: { team: Employee[]; }) => {
 const ListTeam = (props: { team: Employee[]; }) => {
     const [opened, setOpened] = useState(false);
+    const [members, setMembers] = useState([]);
+
+    useEffect(() => {
+      handleProjects();
+    }, []);
+  
+    const handleProjects = async () => {
+      try {
+        const result = await AppService.getMembers();
+        console.log(result);
+        setMembers(result);
+      } catch (err) {
+        console.log(err)
+      }
+    };
 
     const form = useForm({
         initialValues: {

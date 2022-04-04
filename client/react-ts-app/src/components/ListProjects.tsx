@@ -1,9 +1,11 @@
 import ProjectCard from "./elements/ProejctCard";
 import { Group, Button, Text, Title, Card, Modal, Code, ActionIcon, Select, Box, Avatar, TextInput, NumberInput, ScrollArea } from '@mantine/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import { useForm, formList } from '@mantine/form';
 import { RichTextEditor } from '@mantine/rte';
+import axios from "axios";
+import { AppService } from "../services/app.services";
 
 
 interface Project {
@@ -21,6 +23,21 @@ const ListProjects = (props: { projects: Project[] }) => {
   // const [description, setDescription] = useState(initialDescription);
 
   const [opened, setOpened] = useState(false);
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    handleProjects();
+  }, []);
+
+  const handleProjects = async () => {
+    try {
+      const result = await AppService.getProjects();
+      console.log(result);
+      setProjects(result);
+    } catch (err) {
+      console.log(err)
+    }
+  };
 
   const form = useForm({
     initialValues: {
