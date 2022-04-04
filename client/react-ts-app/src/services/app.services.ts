@@ -8,7 +8,7 @@ export class AppService {
 
     // Get all projects
     // url: /projects
-    static async getProjects(): Promise<any> {
+    static async getProjects() {
         const response = await axios.get('/projects');
         return response.data;
     }
@@ -92,7 +92,7 @@ export class AppService {
 
     // Get all members
     // url: /members
-    static async getMembers(): Promise<any> {
+    static async getMembers() {
         const response = await axios.get('/members');
         return response.data;
     }
