@@ -14,6 +14,9 @@ interface Employee {
 const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
 const ListEmployees = (props: { team: Employee[]; }) => {
+
+  
+
   return (
     <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
       <Card shadow="sm" p="lg" radius="md" withBorder={true}>
