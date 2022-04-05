@@ -9,6 +9,7 @@ import {
     getMembersOnProject,
     editMemberSkill,
     addMemberSkill,
+    getQualifiedMembers,
 } from '../controllers/members.js';
 
 const router = express.Router();

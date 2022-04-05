@@ -30,11 +30,8 @@ router.delete('/:id', deleteProject);
 // partial modification of project by id
 router.patch('/:id', changeProject);
 
-// get all tasks
-// router.get('/tasks', getAllTasks);
-
 // get a single task
-//router.get('/tasks/:taskId', getAllTasks);
+router.get('/tasks/:taskId', getAllTasks);
 
 // get all tasks for a project
 router.get('/:projectId/tasks', getAllTasks);
@@ -46,7 +43,7 @@ router.post('/:projectId/tasks/', createTask);
 router.patch('/:projectId/tasks/:id', changeTask);
 
 // delete a task
-// router.patch('/:projectId/tasks/:id', changeTask);
+router.patch('/:projectId/tasks/:id', changeTask);
 
 
 export default router;

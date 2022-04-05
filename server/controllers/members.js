@@ -175,12 +175,15 @@ export const deleteMemberById = async (req, res) => {
 
 // check allocated hours for a member by id
 // getMembersAllocatedHours()
-export const getMembersAllocatedHours = (req, res) => {
-    var memberAllocatedHours = members.map((member) => {
-        return member.hoursAllocated;
-    });
-    
-    res.send(memberAllocatedHours);
+export const getMembersAllocatedHours = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const members = await Member.find();
+        const foundMember = members.find((member) => member.memberId === id);
+        res.json(foundMember.hoursAllocated);
+    } catch (error) {
+        res.json({message: error});
+    }
 }
 
 //check which members have belong in a project by project ID
@@ -196,6 +199,8 @@ export const getMembersOnProject = (req, res) => {
 
     res.send(projectMembers);
 }
+
+
 
 export const editMemberSkill = async (req, res) => {
     const name = req.body.skills.name;
