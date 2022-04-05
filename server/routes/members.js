@@ -9,7 +9,7 @@ import {
     getMembersOnProject,
     editMemberSkill,
     addMemberSkill,
-    getQualifiedMembers,
+    getSkilledMembers,
 } from '../controllers/members.js';
 
 const router = express.Router();
@@ -31,6 +31,9 @@ router.delete('/:id', deleteMemberById);
 
 // check allocated hours for a member by id
 router.get('/:id/hours', getMembersAllocatedHours);
+
+// get all Members
+router.get('/', getAllMembers);
 
 //check which members have belong in a project by project ID
 router.get('/:projectId', getMembersOnProject);
