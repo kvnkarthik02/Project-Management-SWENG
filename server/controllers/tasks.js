@@ -71,6 +71,24 @@ export const changeTask = async (req, res) => {
 
 }
 
+export const assignTask = async (req, res) => {
+    console.log(req.params.taskId)
+    console.log(req.body.employeeAssigned)
+
+        try {
+            const updatedTask = await Task.findOneAndUpdate(
+                { taskId: req.params.taskId},
+                { $set: { employeeAssigned: req.body.employeeAssigned } }
+                ) ;
+                res.json(updatedTask);
+        } catch (error) {
+            res.json(error);
+        }
+        
+        
+
+}
+
 // delete task
 export const deleteTask = async (req, res) => {
     try {
