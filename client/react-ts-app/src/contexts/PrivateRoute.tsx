@@ -24,19 +24,18 @@ import { useAuth } from './AuthContext'
 // }
 
 export type ProtectedRouteProps = {
-    isAuthenticated: boolean,
+    isAuthenticated: boolean;
     authenticationPath: string;
     outlet: JSX.Element;
-}
+  };
 
-export default function PrivateRoute({isAuthenticated, authenticationPath, outlet}: ProtectedRouteProps) {
-    if (isAuthenticated) {
-        return outlet;
+  export default function ProtectedRoute({isAuthenticated, authenticationPath, outlet}: ProtectedRouteProps) {
+    if(isAuthenticated) {
+      return outlet;
+    } else {
+      return <Navigate to={{ pathname: authenticationPath }} />;
     }
-    else {
-        return <Navigate to={{ pathname: authenticationPath }} />;
-    }
-};
+  };
 
 
 

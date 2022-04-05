@@ -1,11 +1,14 @@
 import React, { useRef, useState, useContext } from "react";
-import { AuthContext } from "../contexts/AuthContextII";
+import { useAuth } from "../contexts/AuthContextII";
 
-import { Link, BrowserRouter } from "react-router-dom";
+import { Link, BrowserRouter, Navigate } from "react-router-dom";
 import { Form, Button, Card, Alert } from "react-bootstrap"
 
+
+
 export default function Login() {
-  const Context = React.useContext(AuthContext);
+  
+  const { login, logout } = useAuth();
   const [values, setValues] = useState({
     email: "",
     password: ""
@@ -20,26 +23,43 @@ export default function Login() {
   async function handleSubmit() {
 
     try {
-      console.log(`Success ~ Email / Pass: ${emailRef.current.value} / ${passwordRef.current.value}`)
-      await Context.login(emailRef.current.value, passwordRef.current.value).then(() => {
-        BrowserRouter.push('/');
-      })
+      console.log(`Attempting to log in via Firebase...`)
+      await login(emailRef.current.value, passwordRef.current.value).then(() => {
+      }).catch(err => (console.log(JSON.stringify(err))));
     }
 
+    catch(e){
+      console.log(e);
+      console.log('Failed to log in.');
+    }
+  }
+
+  async function getOut() {
+    try {
+      console.log(`Signing out....`);
+      await logout().then((res) => {
+        console.log(`Logged out successfully. Response: ${res}`)
+      }).catch(err => (console.log(JSON.stringify(err))));
+    }
     catch {
-      console.log(`Fail ~ Email / Pass: ${emailRef.current.value} / ${passwordRef.current.value}`)
-      setError('Failed to log in.');
+      console.log(`Couldn't reach Firebase to sign out.`)
     }
   }
 
 
   return (
     <>
-      <Card>
+      <div>
+        <input ref={emailRef} placeholder="email"/>
+        <input ref={passwordRef} placeholder="password"/>
+        <button onClick={handleSubmit}> Submit </button>
+        <button onClick={getOut}> Log Out </button>
+      </div>
+      {/* <Card>
         <Card.Body>
           <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={ handleSubmit }>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
@@ -60,6 +80,7 @@ export default function Login() {
       <div className="w-100 text-center mt-2">
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
+      <Button onClick={ getOut }>Sign Out</Button> */}
     </>
   )
 }
