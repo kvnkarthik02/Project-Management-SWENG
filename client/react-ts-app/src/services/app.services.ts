@@ -24,8 +24,10 @@ export class AppService {
     // To do:
     // Create a new project
     // url: /projects
-    static async makeProjects(data: any): Promise<any> {
-        await axios.post('/projects', {data})
+    static async makeProjects(data: any) {
+        await axios.post('/projects', data).then((res) => {
+            console.log(res);
+        })
     }
 
     // To do:

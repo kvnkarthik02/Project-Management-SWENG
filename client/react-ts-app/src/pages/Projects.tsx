@@ -32,8 +32,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Projects() {
     const classes = useStyles();
-    let [projects, setProjects] = useState<any[]>([]);;
+    let [projects, setProjects] = useState<any[]>([]);
+    let [makeProject,setMakeProject] = useState({
+        projectName: "API connect",
+        projectDescription: "connect endpoints to frontend",
+        hasDeadline: false,
+        deadline: null,
+        isComplete: false
+    });
 
+    
 
     useEffect(() => {
         const getProjects = async () => {
