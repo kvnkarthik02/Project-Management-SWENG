@@ -10,7 +10,8 @@ import {
 import {
     getAllTasks,
     createTask,
-    changeTask
+    changeTask,
+    getAllTasksForProject
 } from '../controllers/tasks.js';
 
 const router = express.Router();
@@ -34,7 +35,7 @@ router.patch('/:id', changeProject);
 router.get('/tasks/:taskId', getAllTasks);
 
 // get all tasks for a project
-router.get('/:projectId/tasks', getAllTasks);
+router.get('/:projectId/tasks', getAllTasksForProject);
 
 // add a task to a project
 router.post('/:projectId/tasks/', createTask);

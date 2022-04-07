@@ -186,6 +186,18 @@ export const getMembersAllocatedHours = async (req, res) => {
     }
 }
 
+export const checkHours = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const members = await Member.find();
+        const foundMember = members.find((member) => member.memberId === id);
+        const check = foundMember.hoursAllocated < foundMember.hoursAvailable;
+        res.json(check);
+    } catch (error) {
+        res.json({message: error});
+    }
+}
+
 //check which members have belong in a project by project ID
 // getMembersOnProject() 
 export const getMembersOnProject = (req, res) => {
