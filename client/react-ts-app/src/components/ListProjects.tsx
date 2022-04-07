@@ -1,66 +1,131 @@
 import ProjectCard from "./elements/ProejctCard";
-import { Group, Button, Text, Title, Card, Modal, Code, ActionIcon, Select, Box, Avatar, TextInput, NumberInput, ScrollArea } from '@mantine/core';
+import { Group, Button, Text, Title, Card, Modal, Code, ActionIcon, Select, Box, Avatar, TextInput, NumberInput, ScrollArea, Checkbox } from '@mantine/core';
 import { useEffect, useState } from 'react';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import { useForm, formList } from '@mantine/form';
 import { RichTextEditor } from '@mantine/rte';
-import axios from "axios";
+// import axios from "axios";
 import { AppService } from "../services/app.services";
 
 
-interface Project {
-  name: string;
-  description: string;
-  badgeName: string;
-  badgeColor: string;
-  // coverImgLink: string;
-  // projectPageLink: string;
-}
 
-const ListProjects = (props: { projects: Project[] }) => {
+// const ListProjects = (props: { projectsList: Project[] }) => {
+const ListProjects = () => {
   const initialDescription =
     '<p> <i>Please enter other details before entering the description</i> Your initial <b>html value</b> or an empty string to init editor without value</p>';
   // const [description, setDescription] = useState(initialDescription);
 
   const [opened, setOpened] = useState(false);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([{
+    projectId: "",
+    projectName: "",
+    projectDescription: "Complete frontend for landing page dashboard",
+    tasks: [],
+    deadline: null,
+    hasDeadline: false,
+    isComplete: false,
+  }]);
+
+  const form = useForm({
+    initialValues: {
+      projects: formList([{
+        id: '',
+        name: '',
+        description: initialDescription,
+        deadline: '',
+        hasDeadline: false,
+        isComplete: false,
+        badgeColor: '',
+        tasks: []
+      }])
+    },
+  });
 
   useEffect(() => {
     handleProjects();
-  }, []);
+
+  }, [projects.length]);
 
   const handleProjects = async () => {
     try {
       const result = await AppService.getProjects();
       console.log(result);
+      result.map((project: any) => {
+        const proj = {
+          id: project.id,
+          name: project.projectName,
+          description: project.projectDescription,
+          deadline: project.deadline,
+          badgeColor: 'teal',
+          hasDeadline: (project.deadline === undefined || project.deadline === null || project.deadline.match(/^ *$/)),
+          isComplete: false,
+          tasks: []
+        };
+        form.addListItem('projects', proj);
+        return proj;
+      });
       setProjects(result);
     } catch (err) {
       console.log(err)
     }
   };
 
-  const form = useForm({
-    initialValues: {
-      projects: formList([{
-        name: '',
-        description: initialDescription,
-        badgeName: '',
-        badgeColor: '',
-      }])
-    },
-  });
-  const colors = ["gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
+  // projectId: "4f4cf77e-fa2a-49eb-8c24-b0c46a74eedd"
 
+  // To create
+  // projectName: "Landing page"
+  // projectDescription: "Complete frontend for landing page dashboard"
+  // hasDeadline: false
+  // deadline: null
+  // isComplete: false
+  // tasks: []
+
+  const createProject = async (proj: {
+    id: string,
+    name: string;
+    description: string;
+    hasDeadline: boolean;
+    deadline: string;
+    isComplete: boolean;
+    tasks: string[];
+  }) => {
+    try {
+      const data = {
+        projectName: proj.name,
+        projectDescription: proj.description,
+        hasDeadline: proj.hasDeadline,
+        deadline: proj.deadline,
+        isComplete: proj.isComplete,
+        tasks: proj.tasks
+      }
+      console.log(data)
+      console.log(proj)
+      // AppService.makeProjects(data);
+    } catch (err) {
+      console.log(err)
+    }
+  };
+
+  const deleteProject = async (id: string) => {
+    try {
+      console.log(id)
+      AppService.deleteProject(id);
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const colors = ["gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
   const fields = form.values.projects.map((_, index) => (
     <div style={{ padding: "5px" }}>
       <Card shadow="sm" p="lg" radius="md" withBorder={true} >
         <Box sx={{ maxWidth: 700, margin: 'auto' }} >
           <Group key={index} mt="xs">
+            <Checkbox label=""  {...form.getListInputProps('projects', index, 'isComplete')} />
             <Avatar color={form.values.projects[index].badgeColor} size={40} radius='xl' src='' >
-              {form.values.projects[index].badgeName?.toUpperCase()[0]}
+              <></>
             </Avatar>
-
             <TextInput
               placeholder="Project Name"
               required
@@ -68,11 +133,21 @@ const ListProjects = (props: { projects: Project[] }) => {
               {...form.getListInputProps('projects', index, 'name')}
             />
             <TextInput
-              placeholder="Category"
+              placeholder="Due Date"
               required
               sx={{ flex: 1 }}
-              {...form.getListInputProps('projects', index, 'badgeName')}
+              {...form.getListInputProps('projects', index, 'deadline')}
             />
+            {/* <DatePicker
+              allowFreeInput
+              dateParser={(dateString) => new Date(Date.parse(dateString))}
+              placeholder="Deadline"
+              required
+              sx={{ flex: 1 }}
+            // onChange={form.setListItem('projects', index, 'badgeName', )}
+            // {...form.getListInputProps('projects', index, 'badgeName')} />
+            // {...form.setListItem('projects', index, 'badgeName')} 
+            /> */}
             <Select
               placeholder='Color'
               required
@@ -83,7 +158,11 @@ const ListProjects = (props: { projects: Project[] }) => {
             <ActionIcon
               color="red"
               variant="hover"
-              onClick={() => form.removeListItem('projects', index)}
+              onClick={() => {
+                const id = form.values.projects[index].id;
+                deleteProject(id);
+                form.removeListItem('projects', index)
+              }}
             >
               <FiTrash2 size={24} />
             </ActionIcon>
@@ -108,7 +187,12 @@ const ListProjects = (props: { projects: Project[] }) => {
     <div>
       <Modal
         opened={opened}
-        onClose={() => setOpened(false)}
+        onClose={() => {
+          setOpened(false);
+          const lastProject = form.values.projects.slice(-1)[0];
+          createProject(lastProject);
+          return;
+        }}
         size={650}
         title="Edit Project"
       >
@@ -125,26 +209,22 @@ const ListProjects = (props: { projects: Project[] }) => {
           {fields}
 
           <Group position="center" mt="md">
-            <Button onClick={() => {
+            <Button style={{ backgroundColor: "#64E8B7" }} onClick={() => {
               // setTeam(form.values.employees);
               form.addListItem('projects', {
+                id: '',
                 name: '',
-                description: initialDescription,
-                badgeName: '',
-                badgeColor: '',
-                // coverImgLink: '',
-                // projectPageLink: '',
+                description: '',
+                deadline: '',
+                badgeColor: 'teal',
+                hasDeadline: false,
+                isComplete: false,
+                tasks: []
               })
             }}>
               Add Project
             </Button>
           </Group>
-
-
-          {/* <Text size="md" weight={700} mt="md" color="cyan">
-            Form values:
-          </Text>
-          <Code block>{JSON.stringify(form.values, null, 2)}</Code> */}
         </Box>
       </Modal>
       <div style={{ width: 610, margin: 'auto', padding: "5px" }}>
@@ -175,7 +255,7 @@ const ListProjects = (props: { projects: Project[] }) => {
             {form.values.projects.map((project) => <ProjectCard
               name={project.name}
               description={project.description}
-              badgeName={project.badgeName}
+              deadline={project.deadline}
               badgeColor={project.badgeColor}
             // coverImgLink={project.coverImgLink}
             // projectPageLink={project.projectPageLink}

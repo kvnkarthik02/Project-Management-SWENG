@@ -6,9 +6,10 @@ const ProjectSchema = mongoose.Schema({
     projectDescription: String,
     hasDeadline: Boolean,
     deadline: Date,
-    isComplete: Boolean
+    isComplete: Boolean,
+    tasks: [String],
 });
 
 
-export const Project = mongoose.model('Project',ProjectSchema);
+export const Project = mongoose.model('Project', ProjectSchema);
 // module.exports = mongoose.module('Projects', ProjectSchema);

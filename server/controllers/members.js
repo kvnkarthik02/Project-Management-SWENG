@@ -1,6 +1,6 @@
 import { json } from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { Member, Skill } from '../models/Member.js' 
+import { Member, Skill } from '../models/Member.js'
 
 let members = [];
 
@@ -10,7 +10,7 @@ export const getAllMembers = async (req, res) => {
         const members = await Member.find();
         res.json(members)
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 }
 
@@ -21,28 +21,30 @@ export const getSkilledMembers = async (req, res) => {
 
     if (level == null) {
         try {
-            const members = await Member.find({"skills": {
-            $elemMatch: {
-                name: name
-              }
-            }
-        });
+            const members = await Member.find({
+                "skills": {
+                    $elemMatch: {
+                        name: name
+                    }
+                }
+            });
             res.json(members)
         } catch (error) {
-            res.json({message: error});
+            res.json({ message: error });
         }
     } else {
         try {
-            const members = await Member.find({"skills": {
-            $elemMatch: {
-                name: name,
-                level: level
-              }
-            }
-        });
+            const members = await Member.find({
+                "skills": {
+                    $elemMatch: {
+                        name: name,
+                        level: level
+                    }
+                }
+            });
             res.json(members)
         } catch (error) {
-            res.json({message: error});
+            res.json({ message: error });
         }
     }
 
@@ -57,7 +59,7 @@ export const getMemberById = async (req, res) => {
         const foundMember = members.find((member) => member.memberId === id);
         res.send(foundMember);
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 }
 
@@ -85,7 +87,7 @@ export const createMember = async (req, res) => {
         const savedMember = await member.save();
         res.json(savedMember);
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 }
 
@@ -101,10 +103,10 @@ export const editMemberById = async (req, res) => {
         if (firstName) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id},
+                    { memberId: req.params.id },
                     { $set: { firstName: req.body.firstName } }
-                    ) ;
-                    res.json(updatedMember);
+                );
+                res.json(updatedMember);
             } catch (error) {
                 res.json(error);
             }
@@ -112,10 +114,10 @@ export const editMemberById = async (req, res) => {
         if (lastName) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id},
+                    { memberId: req.params.id },
                     { $set: { lastName: req.body.lastName } }
-                    ) ;
-                    res.json(updatedMember)
+                );
+                res.json(updatedMember)
             } catch (error) {
                 res.json(error);
             }
@@ -123,10 +125,10 @@ export const editMemberById = async (req, res) => {
         if (hoursAvailable) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id},
+                    { memberId: req.params.id },
                     { $set: { hoursAvailable: req.body.hoursAvailable } }
-                    ) ;
-                    res.json(updatedMember)
+                );
+                res.json(updatedMember)
             } catch (error) {
                 res.json(error);
             }
@@ -134,10 +136,10 @@ export const editMemberById = async (req, res) => {
         if (hoursAllocated) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id},
+                    { memberId: req.params.id },
                     { $set: { hoursAllocated: req.body.hoursAllocated } }
-                    ) ;
-                    res.json(updatedMember)
+                );
+                res.json(updatedMember)
             } catch (error) {
                 res.json(error);
             }
@@ -145,10 +147,10 @@ export const editMemberById = async (req, res) => {
         if (projects) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id},
+                    { memberId: req.params.id },
                     { $set: { projects: req.body.projects } }
-                    ) ;
-                    res.json(updatedMember)
+                );
+                res.json(updatedMember)
             } catch (error) {
                 res.json(error);
             }
@@ -158,7 +160,7 @@ export const editMemberById = async (req, res) => {
 
         // }
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 
 }
@@ -166,21 +168,24 @@ export const editMemberById = async (req, res) => {
 // delete project by id
 export const deleteMemberById = async (req, res) => {
     try {
-        const removedMember = await Member.deleteOne({memberId: req.params.id});
+        const removedMember = await Member.deleteOne({ memberId: req.params.id });
         res.json(removedMember);
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 }
 
 // check allocated hours for a member by id
 // getMembersAllocatedHours()
-export const getMembersAllocatedHours = (req, res) => {
-    var memberAllocatedHours = members.map((member) => {
-        return member.hoursAllocated;
-    });
-    
-    res.send(memberAllocatedHours);
+export const getMembersAllocatedHours = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const members = await Member.find();
+        const foundMember = members.find((member) => member.memberId === id);
+        res.json(foundMember.hoursAllocated);
+    } catch (error) {
+        res.json({ message: error });
+    }
 }
 
 //check which members have belong in a project by project ID
@@ -203,33 +208,41 @@ export const editMemberSkill = async (req, res) => {
 
     try {
         const updatedSkill = await Member.updateOne(
-            { memberId: req.params.id},
-            { $set: { skills: [
-                {
-                    name: req.body.skills[0].name,
-                    level: req.body.skills[0].level
+            { memberId: req.params.id },
+            {
+                $set: {
+                    skills: [
+                        {
+                            name: req.body.skills[0].name,
+                            level: req.body.skills[0].level
+                        }
+                    ]
                 }
-            ] } }
-            ) ;
-            res.json(updatedSkill);
+            }
+        );
+        res.json(updatedSkill);
     } catch (error) {
         res.json(error);
     }
 }
 
 export const addMemberSkill = async (req, res) => {
-        try {
-            const updatedSkill = await Member.updateOne(
-                { memberId: req.params.id},
-                { $push: { skills: [
-                    {
-                        name: req.body.name,
-                        level: req.body.level
-                    }
-                ] } }
-                ) ;
-                res.json(updatedSkill);
-        } catch (error) {
-            res.json(error);
-        }
+    try {
+        const updatedSkill = await Member.updateOne(
+            { memberId: req.params.id },
+            {
+                $push: {
+                    skills: [
+                        {
+                            name: req.body.name,
+                            level: req.body.level
+                        }
+                    ]
+                }
+            }
+        );
+        res.json(updatedSkill);
+    } catch (error) {
+        res.json(error);
+    }
 }

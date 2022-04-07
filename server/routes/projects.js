@@ -1,10 +1,10 @@
 import express from 'express';
-import { 
-    getAllProjects, 
-    createProject, 
-    getProject, 
-    changeProject, 
-    deleteProject 
+import {
+    getAllProjects,
+    createProject,
+    getProject,
+    changeProject,
+    deleteProject
 } from '../controllers/projects.js';
 
 import {
@@ -34,7 +34,7 @@ router.patch('/:id', changeProject);
 // router.get('/tasks', getAllTasks);
 
 // get a single task
-//router.get('/tasks/:taskId', getAllTasks);
+router.get('/tasks/:taskId', getAllTasks);
 
 // get all tasks for a project
 router.get('/:projectId/tasks', getAllTasks);
@@ -46,7 +46,7 @@ router.post('/:projectId/tasks/', createTask);
 router.patch('/:projectId/tasks/:id', changeTask);
 
 // delete a task
-// router.patch('/:projectId/tasks/:id', changeTask);
+router.patch('/:projectId/tasks/:id', changeTask);
 
 
 export default router;

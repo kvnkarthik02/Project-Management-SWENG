@@ -13,33 +13,31 @@ export class AppService {
         return response.data;
     }
 
-    // To do:
     // Get a single project
     // url: /projects/:id
-    static async getOneProjects(id: any): Promise<any> {
+    static async getOneProjects(id: any) {
         const response = await axios.get(`/projects/${id}`);
         return response.data;
     }
 
-    // To do:
     // Create a new project
     // url: /projects
-    static async makeProjects(data: any): Promise<any> {
-        await axios.post('/projects', {data})
+    static async makeProjects(data: any) {
+        await axios.post('/projects', data).then((res) => {
+            console.log(res);
+        })
     }
 
-    // To do:
     // edit an existing project
     // url: /projects/:id
-    static async editProject(data: any, id: any): Promise<any> {
-        await axios.patch(`/projects/${id}`,{data});
+    static async editProject(data: any, id: any) {
+        await axios.patch(`/projects/${id}`, { data });
     }
 
-    // To do:
     // Delete a single project
     // url: /projects/:id
-    static async deleteProject( id: any): Promise<any> {
-        await axios.delete(`/projects/${id}`); 
+    static async deleteProject(id: any) {
+        await axios.delete(`/projects/${id}`);
     }
 
     //
@@ -98,33 +96,30 @@ export class AppService {
         return response.data;
     }
 
-    // To do:
     // Get a single member
     // url: /members/:id
-    // static async getOneMember(): Promise<any> {
+    static async getOneMember(id: any) {
+        const response = await axios.get(`/members/${id}`);
+        return response.data;
+    }
 
-    // }
-
-    // To do:
     // Create a new member
     // url: /members
-    // static async makeMember(): Promise<any> {
+    static async makeMember(data: any) {
+        await axios.post('/members', { data })
+    }
 
-    // }
-
-    // To do:
     // edit an existing member
     // url: /members/:id
-    // static async editMember(): Promise<any> {
+    static async editMember(data: any, id: any) {
+        await axios.patch(`/members/${id}`, { data });
+    }
 
-    // }
-
-    // To do:
     // Delete a single member
     // url: /members/:id
-    // static async deleteMember(): Promise<any> {
-
-    // }
+    static async deleteMember(id: any) {
+        await axios.delete(`/members/${id}`);
+    }
 
     // To do:
     // Get all members with a relavent skill (and level)

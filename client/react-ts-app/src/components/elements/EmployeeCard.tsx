@@ -30,23 +30,27 @@ const EmployeeCard = (props: {
 }) => {
 
   let initial = props.name[0]?.toUpperCase() || '';
-  
+  const PH_Email = "abcdefgh@xyz.ie";
+  const PH_Role = "Developer";
+  const PH_Name = "Name";
+  const PH_Initial = "P";
+
   return (
     <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
       <Card shadow="sm" p="md" radius="lg" withBorder={true}>
 
         <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }} spacing="sm">
           <Group>
-            <Avatar color={props.avatarColor} size="lg" radius='xl'>{initial}</Avatar>
+            <Avatar color={props.avatarColor} size="lg" radius='xl'>{initial || PH_Initial}</Avatar>
             <div>
-              <Text weight={500} size="lg">{props.name}</Text>
+              <Text weight={500} size="lg">{props.name || PH_Name}</Text>
               <div style={{ marginLeft: "-5px", paddingTop: "2px", paddingBottom: "2px" }}>
                 <Badge size="lg" color="cyan" variant="light" >
-                  {props.role}
+                  {props.role || PH_Role}
                 </Badge>
               </div>
               <Text size="sm" style={{ color: "#4E4E4E", lineHeight: 1.5 }}>
-                {props.email}
+                {props.email || PH_Email}
               </Text>
             </div>
           </Group>

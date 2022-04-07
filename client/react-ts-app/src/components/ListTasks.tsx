@@ -5,13 +5,29 @@ import { Group, Button, Text, Title, Card, Modal, Code, ActionIcon, Box, TextInp
 import { useState } from 'react';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import { useForm, formList } from '@mantine/form';
-import { RichTextEditor } from '@mantine/rte';
+// import { RichTextEditor } from '@mantine/rte';
+import { AppService } from "../services/app.services";
+
 interface Task {
     name: string;
     subtasks: string[];
     teamMembers: string[];
     avatarColors: string[];
 }
+
+// {
+//     taskId: String,
+//     projectId: String,
+//     taskName: String,
+//     taskDescription: String,
+//     hasDeadline: Boolean,
+//     deadline: Date,
+//     isComplete: Boolean,
+//     skill: String,
+//     skillLevel: String,
+//     allocatedTime: Number,
+//     employeeAssigned: String
+// }
 // const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
 
@@ -47,36 +63,44 @@ const ListTasks = (props: { tasks: Task[]; }) => {
             capacity: 16,
             avatarColor: "red"
         }, {
-            name: "Johnny Shoe",
+            name: "John Kommala",
             email: "jshoe@gmail.com",
-            role: "Senior Developer",
+            role: "Frontend Developer",
             workload: 13,
             capacity: 16,
             avatarColor: "yellow",
         }, {
             name: "Karthik",
             email: "jshoe@gmail.com",
-            role: "Junior Developer",
+            role: "Backend Developer",
             workload: 13,
             capacity: 16,
             avatarColor: "yellow",
         }, {
-            name: "Zee",
+            name: "Zemyna Kaite",
             email: "jshoe@gmail.com",
-            role: "Junior Developer",
+            role: "Frontend Developer",
             workload: 13,
             capacity: 16,
             avatarColor: "yellow",
         }, {
-            name: "Naga",
+            name: "Manikanta Naga",
             email: "jshoe@gmail.com",
-            role: "Junior Developer",
+            role: "Backend Developer",
             workload: 13,
             capacity: 16,
             avatarColor: "yellow",
         },
         {
             name: "Ben Vaughan",
+            email: "ben@gmail.com",
+            role: "Frontend Developer",
+            workload: 10,
+            capacity: 16,
+            avatarColor: "cyan"
+        },
+        {
+            name: "Robert Gaynor",
             email: "ben@gmail.com",
             role: "Frontend Developer",
             workload: 10,

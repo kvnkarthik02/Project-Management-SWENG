@@ -129,7 +129,7 @@ const ProjectPage = (props: {
                         <Group direction="column">
                             <ListSkills skills={props.skills} />
                             {/* <ListTeam team={props.project.team} /> */}
-                            <ListTeam team={sampleTeam} />
+                            <ListTeam />
                         </Group>
                     </Grid.Col>
                     <Grid.Col span={1}>

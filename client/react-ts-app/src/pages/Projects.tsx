@@ -1,39 +1,35 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { AppService } from '../services/app.services'; 
+import { AppService } from '../services/app.services';
+import moment from 'moment';
+import { Card, Button, Title, Stack, Box, TextInput, Checkbox, Group } from '@mantine/core';
+import { useForm } from '@mantine/form';
+import { DatePicker } from '@mantine/dates';
+import ProjectAddModal from '../components/newComponents/ProjectAddModal';
+import parse from 'html-react-parser';
 
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import CardHeader from '@material-ui/core/CardHeader';
-import Button from '@material-ui/core/Button';
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        container: {
-            display: 'flex',
-            flexWrap: 'wrap',
-            width: '60vw',
-            margin: `${theme.spacing(0)} auto`,
-            justifyContent: 'space-between'
-        },
-        addProject: {
-            justifyContent: 'flex-end',
-            margin: theme.spacing(2)
-        },
-        card: {
-            marginTop: theme.spacing(10),
-            backgroundColor:"red"
-        }
-    })
-);
-
+// id: string,
+//     //     name: string;
+//     //     description: string;
+//     //     hasDeadline: boolean;
+//     //     deadline: string;
+//     //     isComplete: boolean;
+//     //     tasks: string[];
 
 function Projects() {
-    const classes = useStyles();
-    let [projects, setProjects] = useState<any[]>([]);;
+    // const form = useForm({
+    //     initialValues: {
+    //         projectName: "",
+    //         projectDescription: "",
+    //         hasDeadline: false,
+    //         deadline: '',
+    //         isComplete: false,
+    //         tasks: [],
+    //     },
+    // });
 
+
+    let [projects, setProjects] = useState<any[]>([]);
+    // const [date, setDate] = useState<Date | null>();
 
     useEffect(() => {
         const getProjects = async () => {
@@ -41,43 +37,62 @@ function Projects() {
                 const response = await AppService.getProjects();
                 setProjects(response);
                 console.log(response);
-            } catch(err) {
+            } catch (err) {
                 console.log(err);
             }
         };
 
         getProjects();
-      }, [])
+    }, [])
+
+    // const handleMakeProject = async (data: any) => {
+    //     console.log(`Button Pressed`);
+    //     console.log(`Projects`)
+    //     // await AppService.makeProjects(data);
+    //     console.log(data);
+    // }
 
     return (
-        <Card className={classes.container}>
+        <Card sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between'
+        }}>
 
-            <CardContent>
-                <h1>Projects</h1>
+            <Stack sx={{
+                display: 'flex',
+                justifyContent: 'center'
+            }}>
+                <Title order={1}>Projects</Title>
                 <ul>
-                    {projects ? projects.map(projects => (
-                    <li key={projects.ProjectId}>
-                        <h1>{projects.ProjectName}</h1>
-                        <p>Created:  {projects.CreatedAt}</p>
-                        <p>Deadline: {projects.DeadlineDate}</p>
-
-                    </li>
-                ))
-                : <li>Loading...</li>
-                }
+                    {projects ? projects.map(project => (
+                        <li key={project.projectId}>
+                            <div style={{
+                                margin: '5px',
+                                padding: '5px',
+                            }}>
+                                <Card shadow="sm" p="lg" withBorder={true}>
+                                    <h1>Name: <strong >{project.projectName}</strong></h1>
+                                    <p>ID: <i>{project.projectId}</i></p>
+                                    <p>Deadline: <b>{project.deadline || "TBD"}</b></p>
+                                    <p>hasDeadline: <b>{project.hasDeadline.toString()}</b></p>
+                                    <p>isComplete: <b>{project.isComplete.toString()}</b></p>
+                                    <p>Description: <em>{parse(project.projectDescription)}</em></p>
+                                    <p>Tasks: {JSON.stringify(project.tasks, null, 2)}</p>
+                                </Card>
+                            </div>
+                        </li>
+                    ))
+                        : <li>Loading...</li>
+                    }
                 </ul>
-            </CardContent>
-            <CardActions>
-                <Button
-                    variant="contained"
-                    size="large"
-                    color="secondary"
-                    className={classes.addProject}
-                >
-                    Add Project
-                </Button>
-            </CardActions>
-        </Card>
+
+                <Box sx={{ maxWidth: 600 }} mx="auto">
+                    <ProjectAddModal />
+                </Box>
+
+            </Stack>
+        </Card >
     )
 }
 

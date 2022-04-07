@@ -44,7 +44,7 @@ const sampleTeam: Employee[] = [
     },
 ]
 
-const Template = (args: JSX.IntrinsicAttributes) => <ListTeam team={sampleTeam} />
+const Template = (args: JSX.IntrinsicAttributes) => <ListTeam />
 
 export const Card = Template.bind({})
 // Card1.args = {

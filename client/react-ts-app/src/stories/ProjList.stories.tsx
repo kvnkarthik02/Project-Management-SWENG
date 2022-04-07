@@ -75,7 +75,7 @@ const sampleProjects: Project[] = [
 
 ]
 
-const Template = (args: JSX.IntrinsicAttributes) => <ListProjects projects={sampleProjects} {...args} />
+const Template = (args: JSX.IntrinsicAttributes) => <ListProjects {...args} />
 
 export const Card = Template.bind({})
 // Card1.args = {

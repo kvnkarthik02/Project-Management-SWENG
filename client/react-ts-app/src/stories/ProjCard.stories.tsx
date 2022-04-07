@@ -54,7 +54,7 @@ const project: Project = {
 const Template = (args: JSX.IntrinsicAttributes) => <ProjectCard
     name={project.name}
     description={project.description}
-    badgeName={project.badgeName}
+    deadline={project.badgeName}
     badgeColor={project.badgeColor}
     // coverImgLink={project.coverImgLink}
     // projectPageLink={project.projectPageLink} 
