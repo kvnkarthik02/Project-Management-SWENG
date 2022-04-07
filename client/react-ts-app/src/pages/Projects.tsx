@@ -72,7 +72,7 @@ function Projects() {
                                             <Card shadow="sm" p="lg" withBorder={true} onClick={() => { console.log(project) }}>
                                                 <h1 id="name">Name: <strong >{project.projectName}</strong></h1>
                                                 <p id="id">ID: <i>{project.projectId}</i></p>
-                                                <p id="deadline">Deadline: <b>{project.deadline || "TBD"}</b></p>
+                                                <p id="deadline">Deadline: <b>{(project.deadline ? (moment(project.deadline)).format('DD MMM YYYY') : "TBD")}</b></p>
                                                 <p>hasDeadline: <b>{project.hasDeadline.toString()}</b></p>
                                                 <p>isComplete: <b>{project.isComplete.toString()}</b></p>
                                                 <p>Description: <em>{parse(project.projectDescription)}</em></p>
