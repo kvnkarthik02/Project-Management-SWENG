@@ -57,7 +57,7 @@ const ProjectAddModal = () => {
         console.log(`Button Pressed`);
         console.log(`Projects`);
         console.log(form.values);
-        await AppService.makeProjects(form.values);
+        // await AppService.makeProjects(form.values);
         // console.log(data);
     }
 
