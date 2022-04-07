@@ -31,7 +31,9 @@ export class AppService {
     // edit an existing project
     // url: /projects/:id
     static async editProject(data: any, id: any) {
-        await axios.patch(`/projects/${id}`, { data });
+        await axios.patch(`/projects/${id}`, data).then((res) => {
+            console.log(res);
+        });
     }
 
     // Delete a single project

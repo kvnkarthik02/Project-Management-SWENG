@@ -3,32 +3,45 @@ import moment from 'moment';
 import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
 import { DatePicker } from '@mantine/dates';
-import { FiPlus, FiTrash2 } from 'react-icons/fi';
+import { FiEdit3, FiPlus, FiTrash2 } from 'react-icons/fi';
 import RichTextEditor from '@mantine/rte';
 import { AppService } from '../../services/app.services';
 
-const ProjectAddModal = () => {
-    // const [projects, setProjects] = useState<any[]>([]);
+const ProjectEditModal = (props: {
+    project: {
+        projectId: any,
+        projectName: any,
+        projectDescription: any,
+        hasDeadline: any,
+        deadline: any,
+        isComplete: any,
+        tasks: any[],
+    }
+}) => {
 
     const [opened, setOpened] = useState(false);
     const [date, setDate] = useState<Date | null>();
 
     const form = useForm({
         initialValues: {
-            projectName: "",
-            projectDescription: "",
-            hasDeadline: false,
-            deadline: '',
-            isComplete: false,
-            tasks: [""],
+            projectName: props.project.projectName,
+            projectDescription: props.project.projectDescription,
+            hasDeadline: props.project.hasDeadline,
+            deadline: props.project.deadline,
+            isComplete: props.project.isComplete,
+            tasks: props.project.tasks,
         },
     });
 
+    const TodoInitialTasks = props.project.tasks.map((task) => { return { name: task } });
+    // console.log(TodoInitialTasks)
     const TodoForm = useForm({
         initialValues: {
-            tasks: formList([{ name: "" }]),
+            tasks: formList(TodoInitialTasks),
         },
     })
+
+
 
     const TodoFields = TodoForm.values.tasks.map((_, index) => (
         <Group key={index} mt="xs">
@@ -48,15 +61,10 @@ const ProjectAddModal = () => {
         </Group>
     ));
 
-    const initialDescription =
-        '<p> <i>Please enter other details before entering the description</i> Your initial <b>html value</b> or an empty string to init editor without value</p>';
-
-    const handleMakeProject = async () => {
-        console.log(`Button Pressed`);
-        console.log(`Projects`);
+    const handleEditProject = async () => {
+        console.log(`Edit ${props.project.projectName} - ${form.values.projectName}- ${props.project.projectId} `)
         console.log(form.values);
-        // await AppService.makeProjects(form.values);
-        // console.log(data);
+        // await AppService.editProject(form.values, props.project.projectId);
     }
 
     return (
@@ -65,7 +73,7 @@ const ProjectAddModal = () => {
                 opened={opened}
                 onClose={() => { setOpened(false) }}
                 size={650}
-                title="Add Project"
+                title="Edit Project"
             >
                 <Box sx={{ minWidth: 700 }} >
                     <Group mb="xs">
@@ -74,12 +82,16 @@ const ProjectAddModal = () => {
                                 <form onSubmit={form.onSubmit((values) => {
                                     var formattedDate = (moment(date)).format('DD MMM , YYYY');
                                     form.setFieldValue('deadline', formattedDate);
+
                                     var hasDeadline = (values.deadline.toString() === null || values.deadline === undefined || (values.deadline.match(/^ *$/) !== null));
                                     form.setFieldValue('hasDeadline', hasDeadline);
+
                                     var tasks = TodoForm.values.tasks.map((task) => task.name);
                                     form.setFieldValue('tasks', tasks);
+
                                     setOpened(false);
-                                    handleMakeProject();
+                                    handleEditProject();
+                                    // handleMakeProject();
                                     // console.log(form.values);
                                 })}>
                                     <Group mt="xs">
@@ -95,6 +107,7 @@ const ProjectAddModal = () => {
                                             required
                                             allowFreeInput
                                             label="Event date"
+                                            placeholder={props.project.deadline}
                                             value={date}
                                             onChange={setDate}
                                             dateParser={(dateString) => {
@@ -119,7 +132,6 @@ const ProjectAddModal = () => {
                                         <ScrollArea sx={{ height: 250 }} scrollbarSize={8} scrollHideDelay={0} offsetScrollbars={true}>
                                             <Group mt="xs" >
                                                 <RichTextEditor
-                                                    placeholder={initialDescription}
                                                     sx={{ flex: 1, minHeight: 240 }}
                                                     {...form.getInputProps('projectDescription')}
                                                 />
@@ -172,7 +184,7 @@ const ProjectAddModal = () => {
                                             size="lg"
                                             style={{ backgroundColor: "#64E8B7" }}
                                             type="submit">
-                                            Add Project
+                                            Save Changes
                                         </Button>
                                     </Group>
                                 </form>
@@ -185,13 +197,22 @@ const ProjectAddModal = () => {
                     <Code block>{JSON.stringify(form.values, null, 2)}</Code> */}
                 </Box>
             </Modal>
-            <Button size="md" radius="xl"
-                onClick={() => setOpened(true)}
-                style={{ backgroundColor: "#64E8B7", width: 70 }}>
-                <FiPlus color="white" size={24} strokeWidth={2.5} />
-            </Button>
+            <ActionIcon
+                color="cyan"
+                variant="hover"
+                onClick={() => {
+                    // const id = form.values.projects[index].id;
+                    // deleteProject(id);
+                    // form.removeListItem('projects', index)
+                    setOpened(true)
+                    // console.log(`Edit ${props.project.projectName} - ${props.project.projectId} `)
+                    // console.log(props.project.tasks.map((task: any) => { return { name: task } }));
+                }}
+            >
+                <FiEdit3 size={24} />
+            </ActionIcon>
         </div >
     )
 }
 
-export default ProjectAddModal
+export default ProjectEditModal
