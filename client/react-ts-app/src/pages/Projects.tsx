@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { AppService } from '../services/app.services';
-import moment from 'moment';
-import { Card, Title, Stack, Box, Text, Group } from '@mantine/core';
+import { Card, Title, Stack, Box, Text, Group, List } from '@mantine/core';
 import ProjectAddModal from '../components/newComponents/ProjectAddModal';
-import ProjectEditModal from '../components/newComponents/ProjectEditModal';
-import ProjectDeleteModal from '../components/newComponents/ProjectDeleteModal'
-import parse from 'html-react-parser';
+import ProjectCard from '../components/elements/ProejctCard';
 
 
 function Projects() {
     let [projects, setProjects] = useState<any[]>([]);
-    // const [date, setDate] = useState<Date | null>();
+    const isAdmin = true;
 
     useEffect(() => {
         const getProjects = async () => {
@@ -25,19 +22,6 @@ function Projects() {
 
         getProjects();
     }, [])
-
-    const handleDeleteProject = async (project: {
-        projectId: any,
-        projectName: any,
-        projectDescription: any,
-        hasDeadline: any,
-        deadline: any,
-        isComplete: any,
-        tasks: any[],
-    }) => {
-        console.log(`Deleting project - ${project.projectName}`);
-        // await AppService.deleteProject(project.projectId);
-    }
 
     return (
         <div style={{ width: 710, margin: 'auto', padding: "5px" }}>
@@ -54,7 +38,8 @@ function Projects() {
                                 weight={700}
                                 style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Projects</Text>
                         </Title>
-                        <ProjectAddModal />
+                        {/* {props.isAdmin && (<ProjectAddModal />)} */}
+                        {isAdmin && (<ProjectAddModal />)}
                     </Group>
                     <Stack sx={{
                         display: 'flex',
@@ -62,32 +47,20 @@ function Projects() {
                     }}>
                         <Box sx={{ maxWidth: 600 }} mx="auto">
 
-                            <ul>
+                            <List>
                                 {projects ? projects.map(project => (
-                                    <li key={project.projectId}>
+                                    <List.Item>
                                         <div style={{
                                             margin: '5px',
                                             padding: '5px',
                                         }}>
-                                            <Card shadow="sm" p="lg" withBorder={true} onClick={() => { console.log(project) }}>
-                                                <h1 id="name">Name: <strong >{project.projectName}</strong></h1>
-                                                <p id="id">ID: <i>{project.projectId}</i></p>
-                                                <p id="deadline">Deadline: <b>{(project.deadline ? (moment(project.deadline)).format('DD MMM YYYY') : "TBD")}</b></p>
-                                                <p>hasDeadline: <b>{project.hasDeadline.toString()}</b></p>
-                                                <p>isComplete: <b>{project.isComplete.toString()}</b></p>
-                                                <p>Description: <em>{parse(project.projectDescription)}</em></p>
-                                                <p>Tasks: {JSON.stringify(project.tasks, null, 2)}</p>
-                                                <Group>
-                                                    <ProjectEditModal project={project} />
-                                                    <ProjectDeleteModal project={project} />
-                                                </Group>
-                                            </Card>
+                                            <ProjectCard project={project} isAdmin={isAdmin} />
                                         </div>
-                                    </li>
+                                    </List.Item>
                                 ))
                                     : <li>Loading...</li>
                                 }
-                            </ul>
+                            </List>
                         </Box>
 
                     </Stack>

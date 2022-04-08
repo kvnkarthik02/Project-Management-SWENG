@@ -9,60 +9,32 @@ const images = ["https://images.unsplash.com/photo-1552120476-9ee56c8611f7?ixlib
     "https://images.unsplash.com/photo-1640622842223-e1e39f4bf627?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
     "https://images.unsplash.com/photo-1638913970895-d3df59be1466?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1031&q=80",];
 
-const randomDescription = "With Fjord Tours you can explore more of the magical fjord landscapes with tours and activities on and around the fjords of Norway"
+const randomDescription = `With Fjord Tours you can explore more of the magical fjord landscapes with tours and activities on and around the fjords of Norway Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quae, nam architecto quia at excepturi animi?
+Nostrum, quis dolores.Temporibus aspernatur soluta modi veritatis saepe est vitae aut suscipit accusamus! 
+Lorem ipsum dolor sit amet consectetur adipisicing elit.Ipsum quae, nam architecto quia at excepturi animi ?`
 
 
 export default {
     title: 'Components/elements/ProjectCard',
     component: ProjectCard,
     argTypes: {
-        coverImgLink: {
-            control: { type: "select", options: images },
-        },
-        description: {
-            default: randomDescription,
-            control: { type: "text" }
-        },
-        badgeColor: {
-            control: { type: "select", options: colors },
+        isAdmin: {
+            control: { type: "select", options: [true, false] },
         }
     }
 }
 
-interface Project {
-    name: string;
-    description: string;
-    badgeName: string;
-    badgeColor: string;
-    coverImgLink: string;
-    projectPageLink: string;
-    //   workload: number;
-    //   capacity: number;
-    //   avatarColor: string;
+const project = {
+    projectId: "123io4891",
+    projectName: 'SampleName',
+    projectDescription: randomDescription,
+    deadline: '',
+    hasDeadline: false,
+    isComplete: false,
+    tasks: ["Task 1", "Task 2", "Task 3"]
 }
-
-const project: Project = {
-    name: 'SampleName',
-    description: randomDescription,
-    badgeName: 'Department',
-    badgeColor: colors[3],
-    coverImgLink: images[0],
-    projectPageLink: ''
-}
-// const Template = (args: JSX.IntrinsicAttributes) => <EmployeeCard avatarColor={''} name={''} role={''} workload={0} capacity={0} {...args} />
 
 const Template = (args: JSX.IntrinsicAttributes) => <ProjectCard
-    name={project.name}
-    description={project.description}
-    deadline={project.badgeName}
-    badgeColor={project.badgeColor}
-    // coverImgLink={project.coverImgLink}
-    // projectPageLink={project.projectPageLink} 
+    isAdmin={false} project={project}
     {...args} />
 export const Card = Template.bind({})
-// Card1.args = {
-//     name: "Ben",
-//     role: "Frontend Developer",
-//     workload: 8,
-//     capacity: 10,
-// }
