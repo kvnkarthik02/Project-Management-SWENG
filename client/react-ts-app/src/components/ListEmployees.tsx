@@ -15,7 +15,7 @@ const AvatarColors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo"
 
 const ListEmployees = (props: { team: Employee[]; }) => {
 
-  
+
 
   return (
     <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
@@ -46,7 +46,12 @@ const ListEmployees = (props: { team: Employee[]; }) => {
             role={member.role}
             workload={member.workload}
             capacity={member.capacity}
-            avatarColor={member.avatarColor} />)}
+            avatarColor={member.avatarColor}
+            projects={[]}
+            skills={[{
+              name: "undefined",
+              level: 1
+            }]} />)}
         </Group>
 
       </Card>

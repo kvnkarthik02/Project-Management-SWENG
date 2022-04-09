@@ -172,7 +172,12 @@ const TeamCard = (props: { team: Employee[]; }) => {
                             role={member.role}
                             workload={member.workload}
                             capacity={member.capacity}
-                            avatarColor={member.avatarColor} />)}
+                            avatarColor={member.avatarColor}
+                            projects={[]}
+                            skills={[{
+                                name: "undefined",
+                                level: 1
+                            }]} />)}
                     </Group>
 
                 </Card>

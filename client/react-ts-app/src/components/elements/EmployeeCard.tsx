@@ -19,6 +19,16 @@ function getColor(value: number) {
 
 const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
+// Members Schema:
+//     memberId: String,
+//     firstName: String,
+//     lastName: String,
+//     email: String,
+//     avatarColor: String,
+//     hoursAvailable: Number,
+//     hoursAllocated: Number,
+//     skills: [SkillSchema],
+//     projects: [String]
 
 const EmployeeCard = (props: {
   name: string,
@@ -26,7 +36,12 @@ const EmployeeCard = (props: {
   role: string,
   workload: number,
   capacity: number,
-  avatarColor: string
+  avatarColor: string,
+  projects: string[],
+  skills: {
+    name: String,
+    level: Number
+  }[]
 }) => {
 
   let initial = props.name[0]?.toUpperCase() || '';
@@ -60,7 +75,6 @@ const EmployeeCard = (props: {
             roundCaps
             sections={[{ value: ((props.workload / props.capacity) * 100), color: getColor((props.workload / props.capacity) * 100) }]}
             label={
-              // <Text color={getColor((employee.workload / employee.capacity) * 100)} weight={450} align="center" size="lg">
               <Text color="black" weight={450} align="center" size="lg">
                 {props.workload} / {props.capacity}
               </Text>

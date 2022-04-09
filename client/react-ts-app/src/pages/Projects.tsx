@@ -4,6 +4,7 @@ import { Card, Title, Stack, Box, Text, Group, List } from '@mantine/core';
 import ProjectAddModal from '../components/newComponents/ProjectAddModal';
 import ProjectCard from '../components/elements/ProejctCard';
 import ListProjects from '../components/ListProjects';
+import MemberAddModal from '../components/newComponents/MemberAddModal';
 
 
 function Projects() {
@@ -33,6 +34,9 @@ function Projects() {
     // memberId: String,
     // firstName: String,
     // lastName: String,
+    // email: String,
+    // role: String,
+    // avatarColor: String,
     // hoursAvailable: Number,
     // hoursAllocated: Number,
     // skills: [SkillSchema],
@@ -70,7 +74,7 @@ function Projects() {
                                 style={{ fontFamily: 'Greycliff CF, sans-serif' }}>Team</Text>
                         </Title>
                         {/* {props.isAdmin && (<ProjectAddModal />)} */}
-                        {isAdmin && (<ProjectAddModal />)}
+                        {isAdmin && (<MemberAddModal />)}
                     </Group>
                     <Stack sx={{
                         display: 'flex',
@@ -85,26 +89,19 @@ function Projects() {
                                             padding: '5px',
                                         }}>
                                             <Card shadow="sm" p="lg" withBorder={true}>
-
-                                                {/* // memberId: String,
-                                                    // firstName: String,
-                                                    // lastName: String,
-                                                    // hoursAvailable: Number,
-                                                    // hoursAllocated: Number,
-                                                    // skills: [SkillSchema],
-                                                    // projects: [String] */}
-
                                                 <h1>FirstName: <strong >{member.firstName}</strong></h1>
                                                 <h1>LastName: <strong >{member.lastName}</strong></h1>
+                                                <h1>Role: <strong >{member.role || 'Newly Added JOHN'}</strong></h1>
+                                                <h1>Email: <strong >{member.email || 'Newly Added JOHN'}</strong></h1>
+                                                <h1>Avatar Color: <strong >{member.avatarColor || 'Newly Added JOHN'}</strong></h1>
                                                 <p>ID: <i>{member.memberId}</i></p>
                                                 <p>hoursAvailable: <b>{member.hoursAllocated}</b></p>
                                                 <p>hoursAllocated: <b>{member.hoursAllocated}</b></p>
                                                 <p>projects: <b>{JSON.stringify(member.projects, null, 2)}</b></p>
-                                                <p>skills: <b>{member.skills.map((skill: any) => (<div>{skill.name} - {skill.level}</div>))}</b></p>
-                                                {/* <p>skills: <b>{member.skills}</b></p> */}
-                                                {/* <p>isComplete: <b>{project.isComplete.toString()}</b></p>
-                                                <p>Description: <em>{parse(project.projectDescription)}</em></p>
-                                                <p>Tasks: {JSON.stringify(project.tasks, null, 2)}</p> */}
+                                                <p>skills:
+                                                    <p>{member.skills.map((skill: any) => (<div><b>{skill.name} - {skill.level}</b> - <i>{skill._id}</i></div>))}</p>
+                                                </p>
+
                                             </Card>
                                             {/* <ProjectCard project={project} isAdmin={isAdmin} /> */}
                                         </div>

@@ -16,51 +16,33 @@ export default {
     }
 }
 
-
-// interface Employee {
-//     name: string;
-//     role: string;
-//     workload: number;
-//     capacity: number;
-//     avatarColor: string;
-// }
-
 const sampleEmployee = {
     name: 'jon',
     email: 'jwk@tdcd.ie',
     role: 'dev',
     workload: 4,
     capacity: 6,
-    avatarColor: 'red'
+    avatarColor: 'red',
+    projects: [],
+    skills: [{
+        name: "React",
+        level: 3
+    }, {
+        name: "Node.js",
+        level: 5
+    }]
 }
 
-const name: string = 'jon';
-const email: string = 'jwk@tdcd.ie';
-const role: string = 'dev';
-const workload: number = 4;
-const capacity: number = 6;
-const avatarColor: string = 'red';
-
-
-
 const Template = (args: JSX.IntrinsicAttributes) =>
-    <EmployeeCard name={sampleEmployee.name}
+    <EmployeeCard
+        name={sampleEmployee.name}
         email={sampleEmployee.email}
         role={sampleEmployee.role}
         workload={sampleEmployee.workload}
         capacity={sampleEmployee.capacity}
-        avatarColor={sampleEmployee.avatarColor} {...args} />
-{/* <EmployeeCard name={name}
-        email={email}
-        role={role}
-        workload={workload}
-        capacity={capacity}
-        avatarColor={avatarColor} {...args} /> */}
+        avatarColor={sampleEmployee.avatarColor}
+        projects={sampleEmployee.projects}
+        skills={sampleEmployee.skills}
+        {...args} />
 
 export const Card = Template.bind({})
-// Card1.args = {
-//     name: "Ben",
-//     role: "Frontend Developer",
-//     workload: 8,
-//     capacity: 10,
-// }

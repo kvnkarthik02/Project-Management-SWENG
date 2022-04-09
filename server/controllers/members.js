@@ -77,6 +77,9 @@ export const createMember = async (req, res) => {
         memberId: uuidv4(),
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        role: req.body.role,
+        email: req.body.email,
+        avatarColor: req.body.avatarColor,
         hoursAvailable: req.body.hoursAvailable,
         hoursAllocated: req.body.hoursAllocated,
         projects: req.body.projects,
@@ -95,6 +98,9 @@ export const createMember = async (req, res) => {
 export const editMemberById = async (req, res) => {
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
+    const role = req.body.role;
+    const email = req.body.email;
+    const avatarColor = req.body.avatarColor;
     const hoursAllocated = req.body.hoursAllocated;
     const hoursAvailable = req.body.hoursAvailable;
     const projects = req.body.projects;
@@ -116,6 +122,39 @@ export const editMemberById = async (req, res) => {
                 const updatedMember = await Member.updateOne(
                     { memberId: req.params.id },
                     { $set: { lastName: req.body.lastName } }
+                );
+                res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (role) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id },
+                    { $set: { role: req.body.role } }
+                );
+                res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (email) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id },
+                    { $set: { email: req.body.email } }
+                );
+                res.json(updatedMember)
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (avatarColor) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id },
+                    { $set: { avatarColor: req.body.avatarColor } }
                 );
                 res.json(updatedMember)
             } catch (error) {

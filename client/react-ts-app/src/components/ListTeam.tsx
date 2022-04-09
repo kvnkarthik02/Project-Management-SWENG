@@ -1,38 +1,13 @@
 import React, { useEffect } from 'react'
-// import PropTypes from 'prop-types'
 import { Group, Button, Text, Title, Card } from '@mantine/core';
 import EmployeeCard from './elements/EmployeeCard';
 import { AppService } from "../services/app.services";
 
 import { useState } from 'react';
 import { Modal, Code, ActionIcon, Select, Box, Avatar, TextInput, NumberInput } from '@mantine/core';
-
-// import { useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
-// import { useInputState } from '@mantine/hooks';
 import { useForm, formList } from '@mantine/form';
 import { FiTrash2 } from 'react-icons/fi'
-// import { FormList } from '@mantine/form/lib/form-list/form-list';
-// import { UseFormReturnType } from '@mantine/form/lib/use-form';
-
-
-// interface Employee {
-//     name: string;
-//     email: string;
-//     role: string;
-//     workload: number;
-//     capacity: number;
-//     avatarColor: string;
-// }
-
-// {
-// memberId: 123,
-// firstName: "Bob",
-// lastName: "Baxter",
-// projects:["123","456","789"],
-// hoursAvailable: 40.0,
-// hoursAllocated: 0.0
-//   }
 
 // const ListTeam = (props: { team: Employee[]; }) => {
 // const ListTeam = (props: { team: Employee[]; }) => {
@@ -292,7 +267,12 @@ const ListTeam = () => {
                             email={''} role={''}
                             workload={member.hoursAllocated}
                             capacity={member.hoursAvailable}
-                            avatarColor={member.avatarColor} />)}
+                            avatarColor={member.avatarColor}
+                            projects={[]}
+                            skills={[{
+                                name: "undefined",
+                                level: 1
+                            }]} />)}
                     </Group>
 
                 </Card>
