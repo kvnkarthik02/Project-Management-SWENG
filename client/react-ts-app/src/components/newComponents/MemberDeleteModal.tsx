@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
 import { Button, Text, Box, Group, Modal, ActionIcon } from '@mantine/core';
 import { FiTrash2 } from 'react-icons/fi';
+import { AppService } from '../../services/app.services';
 
-const ProjectDeleteModal = (props: {
-    project: {
-        projectId: any,
-        projectName: any,
-        projectDescription: any,
-        hasDeadline: any,
-        deadline: any,
-        isComplete: any,
-        tasks: any[],
+
+const MemberDeleteModal = (props: {
+    member: {
+        memberId: string,
+        firstName: string,
+        lastName: string,
+        hoursAllocated: number,
+        hoursAvailable: number,
+        projects: string[],
+        skills: {
+            name: String,
+            level: Number
+        }[]
     }
 }) => {
     const [opened, setOpened] = useState(false);
-    const handleDeleteProject = async () => {
-        console.log(`Deleting project - ${props.project.projectName}`);
-        // await AppService.deleteProject(props.project.projectId);
+    const handleDeleteMember = async () => {
+        console.log(`Deleting Member - ${props.member.firstName}  ${props.member.lastName}`);
+        // await AppService.deleteMember(props.member.memberId);
         setOpened(false);
     }
 
@@ -26,19 +31,20 @@ const ProjectDeleteModal = (props: {
                 opened={opened}
                 onClose={() => { setOpened(false) }}
                 size={400}
-                title={props.project.projectName || "Delete Project"}
+
+                title={`${props.member.firstName}  ${props.member.lastName}` || "Remove Member"}
             >
                 <Box sx={{ minWidth: 400 }} >
                     <Group mb="xs">
                         <div style={{ padding: "5px" }}>
                             <Box sx={{ maxWidth: 400, margin: 'auto' }} mx="auto">
-                                <Text>Are you sure you want to delete this project ?</Text>
+                                <Text>Are you sure you want to remove this member ?</Text>
                                 <Group position="center" sx={{ marginTop: '10px' }}>
                                     <Button variant="subtle" color="red" radius="lg" size="md"
                                         onClick={() => {
-                                            handleDeleteProject();
+                                            handleDeleteMember();
                                         }}>
-                                        Delete
+                                        Remove
                                     </Button>
                                     <Button variant="subtle" color="gray" radius="lg" size="md"
                                         onClick={() => {
@@ -56,15 +62,13 @@ const ProjectDeleteModal = (props: {
                 color="red"
                 variant="hover"
                 onClick={() => {
-                    // console.log(`DeleteRequest ${props.project.projectName} - ${props.project.projectId}`)
-                    // handleDeleteProject();
                     setOpened(true)
                 }}
             >
                 <FiTrash2 size={24} />
             </ActionIcon>
-        </div >
+        </div>
     )
 }
 
-export default ProjectDeleteModal
+export default MemberDeleteModal

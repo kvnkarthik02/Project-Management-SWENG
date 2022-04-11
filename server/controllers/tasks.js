@@ -24,6 +24,18 @@ export const getTask = async (req, res) => {
     }
 }
 
+// get all tasks for a project
+export const getAllTasksForProject = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const task = await Task.find();
+        const tasks = await Task.find();
+        res.json(tasks)
+    } catch (error) {
+        res.json({ message: error });
+    }
+}
+
 // create a task
 export const createTask = async (req, res) => {
     const task = new Task({

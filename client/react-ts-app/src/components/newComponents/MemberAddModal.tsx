@@ -44,14 +44,12 @@ const MemberAddModal = () => {
         <Group key={index} mt="xs">
             <TextInput
                 placeholder="Skill Name"
-                required
                 sx={{ flex: 1 }}
                 {...SkillsForm.getListInputProps('skills', index, 'name')}
             />
             <NumberInput
                 // label="Exp. Level"
                 placeholder='Level'
-                required
                 sx={{ flex: 0.3 }}
                 min={1}
                 max={5}
@@ -69,10 +67,10 @@ const MemberAddModal = () => {
     ));
 
     const handleMakeMember = async () => {
-        console.log(`Button Pressed`);
+        console.log(`Form Submitted`);
         console.log(`Members`);
         console.log(form.values);
-        // await AppService.makeProjects(form.values);
+        // await AppService.makeMember(form.values);
         // console.log(data);
     }
 
@@ -91,13 +89,8 @@ const MemberAddModal = () => {
                                 <form onSubmit={form.onSubmit((values) => {
                                     var skills = SkillsForm.values.skills.map((skill) => { return { name: skill.name, level: skill.level } });
                                     form.setFieldValue('skills', skills);
-                                    console.log("skills")
-                                    console.log(skills)
-                                    console.log("SkillsForm.values")
-                                    console.log(SkillsForm.values.skills)
                                     setOpened(false);
                                     handleMakeMember();
-                                    // console.log(form.values);
                                 })}>
                                     <Group mt="xs">
                                         <Avatar color={form.values.avatarColor} size={45} radius='xl'>{form.values.firstName[0]?.toUpperCase()}</Avatar>
@@ -138,7 +131,6 @@ const MemberAddModal = () => {
 
 
                                     <Group mt="xs">
-
                                         <NumberInput
                                             label="Workload"
                                             placeholder='W'
@@ -180,8 +172,6 @@ const MemberAddModal = () => {
                                     </Group>
 
                                     <Stack>
-
-
                                         <Box sx={{ minWidth: 600 }} mx="auto">
                                             {SkillFields.length > 0 ? (
                                                 <Group mb="sm">

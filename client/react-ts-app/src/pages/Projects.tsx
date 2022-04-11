@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { AppService } from '../services/app.services';
-import { Card, Title, Stack, Box, Text, Group, List } from '@mantine/core';
+import { Card, Title, Stack, Box, Text, Group, List, Code } from '@mantine/core';
 import ProjectAddModal from '../components/newComponents/ProjectAddModal';
 import ProjectCard from '../components/elements/ProejctCard';
 import ListProjects from '../components/ListProjects';
 import MemberAddModal from '../components/newComponents/MemberAddModal';
-
+import EmployeeCard from '../components/elements/EmployeeCard';
+import MemberDeleteModal from '../components/newComponents/MemberDeleteModal';
 
 function Projects() {
     let [projects, setProjects] = useState<any[]>([]);
@@ -88,19 +89,32 @@ function Projects() {
                                             margin: '5px',
                                             padding: '5px',
                                         }}>
-                                            <Card shadow="sm" p="lg" withBorder={true}>
-                                                <h1>FirstName: <strong >{member.firstName}</strong></h1>
-                                                <h1>LastName: <strong >{member.lastName}</strong></h1>
-                                                <h1>Role: <strong >{member.role || 'Newly Added JOHN'}</strong></h1>
-                                                <h1>Email: <strong >{member.email || 'Newly Added JOHN'}</strong></h1>
-                                                <h1>Avatar Color: <strong >{member.avatarColor || 'Newly Added JOHN'}</strong></h1>
-                                                <p>ID: <i>{member.memberId}</i></p>
-                                                <p>hoursAvailable: <b>{member.hoursAllocated}</b></p>
-                                                <p>hoursAllocated: <b>{member.hoursAllocated}</b></p>
-                                                <p>projects: <b>{JSON.stringify(member.projects, null, 2)}</b></p>
-                                                <p>skills:
-                                                    <p>{member.skills.map((skill: any) => (<div><b>{skill.name} - {skill.level}</b> - <i>{skill._id}</i></div>))}</p>
-                                                </p>
+                                            <Card shadow="sm" p="lg" withBorder={true} onClick={() => { console.log(member) }}>
+                                                <EmployeeCard
+                                                    name={member.firstName + " " + member.lastName}
+                                                    email={member.email}
+                                                    role={member.role}
+                                                    workload={member.hoursAllocated}
+                                                    capacity={member.hoursAvailable}
+                                                    avatarColor={member.avatarColor}
+                                                    projects={member.projects}
+                                                    skills={member.skills}
+                                                />
+                                                <MemberDeleteModal member={member} />
+                                                <Code block >
+                                                    <h1>FirstName: <strong >{member.firstName}</strong></h1>
+                                                    <h1>LastName: <strong >{member.lastName}</strong></h1>
+                                                    <h1>Role: <strong >{member.role || 'Newly Added JOHN'}</strong></h1>
+                                                    <h1>Email: <strong >{member.email || 'Newly Added JOHN'}</strong></h1>
+                                                    <h1>Avatar Color: <strong >{member.avatarColor || 'Newly Added JOHN'}</strong></h1>
+                                                    <p>ID: <i>{member.memberId}</i></p>
+                                                    <p>hoursAvailable: <b>{member.hoursAvailable}</b></p>
+                                                    <p>hoursAllocated: <b>{member.hoursAllocated}</b></p>
+                                                    <p>projects: <b>{JSON.stringify(member.projects, null, 2)}</b></p>
+                                                    <p>skills:
+                                                        <p>{member.skills.map((skill: any) => (<div><b>{skill.name} - {skill.level}</b> - <i>{skill._id}</i></div>))}</p>
+                                                    </p>
+                                                </Code>
 
                                             </Card>
                                             {/* <ProjectCard project={project} isAdmin={isAdmin} /> */}

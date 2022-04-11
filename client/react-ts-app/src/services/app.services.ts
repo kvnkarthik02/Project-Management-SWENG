@@ -108,7 +108,9 @@ export class AppService {
     // Create a new member
     // url: /members
     static async makeMember(data: any) {
-        await axios.post('/members', { data })
+        await axios.post('/members', data).then((res) => {
+            console.log(res);
+        })
     }
 
     // edit an existing member

@@ -52,7 +52,7 @@ const ProjectAddModal = () => {
         '<p> <i>Please enter other details before entering the description</i> Your initial <b>html value</b> or an empty string to init editor without value</p>';
 
     const handleMakeProject = async () => {
-        console.log(`Button Pressed`);
+        console.log(`Form Submitted`);
         console.log(`Projects`);
         console.log(form.values);
         // await AppService.makeProjects(form.values);
