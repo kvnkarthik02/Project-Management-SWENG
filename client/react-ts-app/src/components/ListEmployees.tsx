@@ -41,17 +41,8 @@ const ListEmployees = (props: { team: Employee[]; }) => {
         </div>
 
         <Group position="center" direction="column" spacing="xs">
-          {props.team.map((member: Employee) => <EmployeeCard name={member.name}
-            email={member.email}
-            role={member.role}
-            workload={member.workload}
-            capacity={member.capacity}
-            avatarColor={member.avatarColor}
-            projects={[]}
-            skills={[{
-              name: "undefined",
-              level: 1
-            }]} />)}
+          {/* {props.team.map((member: Employee) =>
+            <EmployeeCard member={member}  />)} */}
         </Group>
 
       </Card>

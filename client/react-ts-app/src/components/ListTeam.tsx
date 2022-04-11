@@ -38,7 +38,7 @@ const ListTeam = () => {
     const form = useForm({
         initialValues: {
             employees: formList([{
-                id: 0,
+                id: "",
                 firstName: '',
                 lastName: '',
                 projects: [],
@@ -100,7 +100,7 @@ const ListTeam = () => {
         }
     };
 
-    const removeMember = async (id: number) => {
+    const removeMember = async (id: string) => {
         try {
             console.log(id)
             AppService.deleteMember(id);
@@ -212,7 +212,7 @@ const ListTeam = () => {
                             onClick={() => {
                                 // setTeam(form.values.employees);
                                 form.addListItem('employees', {
-                                    id: 0,
+                                    id: "",
                                     firstName: '',
                                     lastName: '',
                                     projects: [],
@@ -260,19 +260,8 @@ const ListTeam = () => {
                     </div>
 
                     <Group position="center" direction="column" spacing="xs">
-                        {form.values.employees.map((member) => <EmployeeCard
-                            name={`${member.firstName} ${member.lastName}`}
-                            // email={member.email}
-                            // role={member.role}
-                            email={''} role={''}
-                            workload={member.hoursAllocated}
-                            capacity={member.hoursAvailable}
-                            avatarColor={member.avatarColor}
-                            projects={[]}
-                            skills={[{
-                                name: "undefined",
-                                level: 1
-                            }]} />)}
+                        {/* {form.values.employees.map((member) => <EmployeeCard
+                            member={member} />)} */}
                     </Group>
 
                 </Card>

@@ -90,17 +90,7 @@ function Projects() {
                                             padding: '5px',
                                         }}>
                                             <Card shadow="sm" p="lg" withBorder={true} onClick={() => { console.log(member) }}>
-                                                <EmployeeCard
-                                                    name={member.firstName + " " + member.lastName}
-                                                    email={member.email}
-                                                    role={member.role}
-                                                    workload={member.hoursAllocated}
-                                                    capacity={member.hoursAvailable}
-                                                    avatarColor={member.avatarColor}
-                                                    projects={member.projects}
-                                                    skills={member.skills}
-                                                />
-                                                <MemberDeleteModal member={member} />
+                                                <EmployeeCard member={member} isAdmin={isAdmin} />
                                                 <Code block >
                                                     <h1>FirstName: <strong >{member.firstName}</strong></h1>
                                                     <h1>LastName: <strong >{member.lastName}</strong></h1>

@@ -5,22 +5,13 @@ import { AppService } from '../../services/app.services';
 
 
 const MemberDeleteModal = (props: {
-    member: {
-        memberId: string,
-        firstName: string,
-        lastName: string,
-        hoursAllocated: number,
-        hoursAvailable: number,
-        projects: string[],
-        skills: {
-            name: String,
-            level: Number
-        }[]
-    }
+    memberId: string,
+    name: string,
 }) => {
     const [opened, setOpened] = useState(false);
     const handleDeleteMember = async () => {
-        console.log(`Deleting Member - ${props.member.firstName}  ${props.member.lastName}`);
+        console.log(`Deleting Member - ${props.name}`);
+        console.log(`Deleting Member - ${props.memberId}`);
         // await AppService.deleteMember(props.member.memberId);
         setOpened(false);
     }
@@ -31,8 +22,7 @@ const MemberDeleteModal = (props: {
                 opened={opened}
                 onClose={() => { setOpened(false) }}
                 size={400}
-
-                title={`${props.member.firstName}  ${props.member.lastName}` || "Remove Member"}
+                title={`Remove ${props.name || "this member "} from the team`}
             >
                 <Box sx={{ minWidth: 400 }} >
                     <Group mb="xs">

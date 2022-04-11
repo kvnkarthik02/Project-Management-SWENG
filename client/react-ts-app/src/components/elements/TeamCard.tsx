@@ -20,6 +20,7 @@ const TeamCard = (props: { team: Employee[]; }) => {
     const form = useForm({
         initialValues: {
             employees: formList([{
+                id: '',
                 name: '',
                 email: '',
                 role: '',
@@ -122,6 +123,7 @@ const TeamCard = (props: { team: Employee[]; }) => {
                             form.addListItem('employees', {
                                 email: '',
                                 name: '',
+                                id: '',
                                 role: '',
                                 workload: 0,
                                 capacity: 0,
@@ -167,17 +169,8 @@ const TeamCard = (props: { team: Employee[]; }) => {
                     </div>
 
                     <Group position="center" direction="column" spacing="xs">
-                        {form.values.employees.map((member) => <EmployeeCard name={member.name}
-                            email={member.email}
-                            role={member.role}
-                            workload={member.workload}
-                            capacity={member.capacity}
-                            avatarColor={member.avatarColor}
-                            projects={[]}
-                            skills={[{
-                                name: "undefined",
-                                level: 1
-                            }]} />)}
+                        {/* {form.values.employees.map((member) =>
+                            <EmployeeCard member={member} />)} */}
                     </Group>
 
                 </Card>

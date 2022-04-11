@@ -10,20 +10,22 @@ export default {
     title: 'Components/elements/EmployeeCard',
     component: EmployeeCard,
     argTypes: {
-        avatarColor: {
-            control: { type: "select", options: colors },
+        isAdmin: {
+            control: { type: "select", options: [true, false] },
         }
     }
 }
 
 const sampleEmployee = {
-    name: 'jon',
+    memberId: "62543ae1cd0eb5749a9fc2c5",
+    firstName: 'Jon',
+    lastName: 'Swanson',
     email: 'jwk@tdcd.ie',
     role: 'dev',
-    workload: 4,
-    capacity: 6,
+    hoursAllocated: 4,
+    hoursAvailable: 6,
     avatarColor: 'red',
-    projects: [],
+    projects: ["sample project"],
     skills: [{
         name: "React",
         level: 3
@@ -34,15 +36,6 @@ const sampleEmployee = {
 }
 
 const Template = (args: JSX.IntrinsicAttributes) =>
-    <EmployeeCard
-        name={sampleEmployee.name}
-        email={sampleEmployee.email}
-        role={sampleEmployee.role}
-        workload={sampleEmployee.workload}
-        capacity={sampleEmployee.capacity}
-        avatarColor={sampleEmployee.avatarColor}
-        projects={sampleEmployee.projects}
-        skills={sampleEmployee.skills}
-        {...args} />
+    <EmployeeCard member={sampleEmployee} isAdmin={false} {...args} />
 
 export const Card = Template.bind({})

@@ -1,4 +1,6 @@
-import { Avatar, Card, RingProgress, Text, Group, useMantineTheme, Badge } from '@mantine/core';
+import { Avatar, Card, RingProgress, Text, Group, useMantineTheme, Badge, Stack } from '@mantine/core';
+import MemberDeleteModal from '../newComponents/MemberDeleteModal';
+import MemberEditModal from '../newComponents/MemberEditModal';
 
 function getColor(value: number) {
   //value from 0 to 1
@@ -16,40 +18,33 @@ function getColor(value: number) {
   return '#' + ('000000' + h.toString(16)).slice(-6);
 }
 
-
 const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
-// Members Schema:
-//     memberId: String,
-//     firstName: String,
-//     lastName: String,
-//     email: String,
-//     avatarColor: String,
-//     hoursAvailable: Number,
-//     hoursAllocated: Number,
-//     skills: [SkillSchema],
-//     projects: [String]
-
 const EmployeeCard = (props: {
-  name: string,
-  email: string,
-  role: string,
-  workload: number,
-  capacity: number,
-  avatarColor: string,
-  projects: string[],
-  skills: {
-    name: String,
-    level: Number
-  }[]
-}) => {
+  member: {
+    memberId: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    role: string,
+    avatarColor: string,
+    hoursAvailable: number,
+    hoursAllocated: number,
+    skills: any[],
+    projects: any[]
+  },
+  isAdmin: boolean
+}
+) => {
 
-  let initial = props.name[0]?.toUpperCase() || '';
+  const name = props.member.firstName + " " + props.member.lastName
+  let initial = name[0]?.toUpperCase() || '';
   const PH_Email = "abcdefgh@xyz.ie";
   const PH_Role = "Developer";
   const PH_Name = "Name";
   const PH_Initial = "P";
   const Default_Avatar = "blue";
+  const Workload_Percentage = (props.member.hoursAllocated / props.member.hoursAvailable) * 100;
 
   return (
     <div style={{ minWidth: 340, margin: 'auto', padding: "5px" }}>
@@ -57,16 +52,16 @@ const EmployeeCard = (props: {
 
         <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }} spacing="sm">
           <Group>
-            <Avatar color={props.avatarColor || Default_Avatar} size="lg" radius='xl'>{initial || PH_Initial}</Avatar>
+            <Avatar color={props.member.avatarColor || Default_Avatar} size="lg" radius='xl'>{initial || PH_Initial}</Avatar>
             <div>
-              <Text weight={500} size="lg">{props.name || PH_Name}</Text>
+              <Text weight={500} size="lg">{name || PH_Name}</Text>
               <div style={{ marginLeft: "-5px", paddingTop: "2px", paddingBottom: "2px" }}>
                 <Badge size="lg" color="cyan" variant="light" >
-                  {props.role || PH_Role}
+                  {props.member.role || PH_Role}
                 </Badge>
               </div>
               <Text size="sm" style={{ color: "#4E4E4E", lineHeight: 1.5 }}>
-                {props.email || PH_Email}
+                {props.member.email || PH_Email}
               </Text>
             </div>
           </Group>
@@ -74,13 +69,24 @@ const EmployeeCard = (props: {
             size={75}
             thickness={3}
             roundCaps
-            sections={[{ value: ((props.workload / props.capacity) * 100), color: getColor((props.workload / props.capacity) * 100) }]}
+            sections={[{ value: (Workload_Percentage), color: getColor(Workload_Percentage) }]}
             label={
               <Text color="black" weight={450} align="center" size="lg">
-                {props.workload} / {props.capacity}
+                {props.member.hoursAllocated} / {props.member.hoursAvailable}
               </Text>
             }
           />
+          {props.isAdmin && (
+            <Group>
+              <Stack>
+                <MemberDeleteModal
+                  memberId={props.member.memberId}
+                  name={name}
+                />
+                <MemberEditModal member={props.member} />
+              </Stack>
+            </Group>
+          )}
         </Group>
       </Card>
     </div>

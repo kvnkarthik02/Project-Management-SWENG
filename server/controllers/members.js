@@ -85,7 +85,6 @@ export const createMember = async (req, res) => {
         projects: req.body.projects,
         skills: skills
     });
-    console.log();
     try {
         const savedMember = await member.save();
         res.json(savedMember);
@@ -95,115 +94,139 @@ export const createMember = async (req, res) => {
 }
 
 // partial modification of member by id
-export const editMemberById = async (req, res) => {
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const role = req.body.role;
-    const email = req.body.email;
-    const avatarColor = req.body.avatarColor;
-    const hoursAllocated = req.body.hoursAllocated;
-    const hoursAvailable = req.body.hoursAvailable;
-    const projects = req.body.projects;
-
+export const editMemberById = async (req, res, next) => {
     try {
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+        const role = req.body.role;
+        const email = req.body.email;
+        const avatarColor = req.body.avatarColor;
+        const hoursAllocated = req.body.hoursAllocated;
+        const hoursAvailable = req.body.hoursAvailable;
+        const projects = req.body.projects;
+        const skills = [];
+        for (let i = 0; i < req.body.skills.length; i++) {
+            skills[i] = new Skill({
+                name: req.body.skills[i].name,
+                level: req.body.skills[i].level
+            })
+        }
+
+
         if (firstName) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { firstName: req.body.firstName } }
                 );
                 res.json(updatedMember);
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
         if (lastName) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { lastName: req.body.lastName } }
                 );
                 res.json(updatedMember)
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
         if (role) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { role: req.body.role } }
                 );
                 res.json(updatedMember)
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
         if (email) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { email: req.body.email } }
                 );
                 res.json(updatedMember)
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
         if (avatarColor) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { avatarColor: req.body.avatarColor } }
                 );
                 res.json(updatedMember)
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
         if (hoursAvailable) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { hoursAvailable: req.body.hoursAvailable } }
                 );
                 res.json(updatedMember)
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
         if (hoursAllocated) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { hoursAllocated: req.body.hoursAllocated } }
                 );
                 res.json(updatedMember)
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
         if (projects) {
             try {
                 const updatedMember = await Member.updateOne(
-                    { memberId: req.params.id },
+                    { memberId: req.body.memberId },
                     { $set: { projects: req.body.projects } }
                 );
                 res.json(updatedMember)
             } catch (error) {
-                res.json(error);
+                // res.json(error);
+                next(error);
             }
         }
-        // if (skills) {
+        if (skills) {
+            try {
+                const updatedMember = await Member.updateOne(
+                    { memberId: req.params.id },
+                    { $set: { skills: req.body.skills } }
+                );
+                res.json(updatedMember)
+            } catch (error) {
+                // res.json(error);
+                next(error);
+            }
 
-
-        // }
+        }
     } catch (error) {
-        res.json({ message: error });
+        next(error);
+        // res.json({ message: error });
     }
-
 }
-
 
 // delete project by id
 export const deleteMemberById = async (req, res) => {

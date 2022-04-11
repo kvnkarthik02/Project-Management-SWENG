@@ -113,10 +113,24 @@ export class AppService {
         })
     }
 
+    // edit an existing project
+    // url: /projects/:id
+    // static async editProject(data: any, id: any) {
+    //     await axios.patch(`/projects/${id}`, data).then((res) => {
+    //         console.log(res);
+    //     });
+    // }
+
     // edit an existing member
     // url: /members/:id
     static async editMember(data: any, id: any) {
-        await axios.patch(`/members/${id}`, { data });
+        console.log("edit member")
+        console.log(data)
+        console.log(id)
+        await axios.patch(`/members/${id}`, data).then((res) => {
+            console.log(res);
+        });
+
     }
 
     // Delete a single member

@@ -1,33 +1,48 @@
 import React, { useState } from 'react'
-import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code, Avatar, NumberInput, Select, MultiSelect } from '@mantine/core';
+import { Card, Button, Text, Stack, Box, TextInput, Group, Modal, ActionIcon, Code, NumberInput, Select, MultiSelect, Avatar } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
-import { FiPlus, FiTrash2 } from 'react-icons/fi';
+import { FiEdit3, FiPlus, FiTrash2 } from 'react-icons/fi';
 import { AppService } from '../../services/app.services';
 
-const MemberAddModal = () => {
+const MemberEditModal = (props: {
+    member: {
+        memberId: any,
+        firstName: any,
+        lastName: any,
+        email: any,
+        role: any,
+        avatarColor: any,
+        hoursAvailable: any,
+        hoursAllocated: any,
+        skills: any[],
+        projects: any[]
+    }
+}) => {
+
     const [opened, setOpened] = useState(false);
     const [projects, setProjects] = useState(['Sample Project']);
     const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
     const form = useForm({
         initialValues: {
-            memberId: '',
-            firstName: '',
-            lastName: '',
-            email: '',
-            role: '',
-            avatarColor: '',
-            hoursAvailable: 0,
-            hoursAllocated: 0,
-            projects: [''],
-            skills: [{}]
+            memberId: props.member.memberId,
+            firstName: props.member.firstName,
+            lastName: props.member.lastName,
+            email: props.member.email,
+            role: props.member.role,
+            avatarColor: props.member.avatarColor,
+            hoursAvailable: props.member.hoursAvailable,
+            hoursAllocated: props.member.hoursAllocated,
+            projects: props.member.projects,
+            skills: props.member.skills,
         },
     });
 
-    // use this for skills
+    // const IntialSkills = props.member.skills.map((skill) => { return { name: skill.name, level: skill.level } });
+
     const SkillsForm = useForm({
         initialValues: {
-            skills: formList([{ name: "", level: 0 }]),
+            skills: formList(props.member.skills),
         },
     })
 
@@ -57,13 +72,14 @@ const MemberAddModal = () => {
         </Group>
     ));
 
-    const handleMakeMember = async () => {
-        console.log(`Form Submitted`);
-        console.log(`Members`);
+    const handleEditMember = async () => {
+        console.log(`Edit ${props.member.firstName} ${props.member.memberId}`)
         console.log(form.values);
-        // await AppService.makeMember(form.values);
-        // console.log(data);
+        console.log(form.values.avatarColor);
+
+        await AppService.editMember(form.values, props.member.memberId);
     }
+
 
     return (
         <div>
@@ -71,7 +87,7 @@ const MemberAddModal = () => {
                 opened={opened}
                 onClose={() => { setOpened(false) }}
                 size={650}
-                title="Add Member"
+                title="Edit Team Member"
             >
                 <Box sx={{ minWidth: 700 }} >
                     <Group mb="xs">
@@ -81,10 +97,14 @@ const MemberAddModal = () => {
                                     var skills = SkillsForm.values.skills.map((skill) => { return { name: skill.name, level: skill.level } });
                                     form.setFieldValue('skills', skills);
                                     setOpened(false);
-                                    handleMakeMember();
+                                    handleEditMember();
                                 })}>
                                     <Group mt="xs">
-                                        <Avatar color={form.values.avatarColor} size={45} radius='xl'>{form.values.firstName[0]?.toUpperCase()}</Avatar>
+                                        <Avatar
+                                            color={form.values.avatarColor}
+                                            size={45}
+                                            radius='xl'
+                                        >{form.values.firstName[0]?.toUpperCase()}</Avatar>
                                         <TextInput
                                             label="First Name"
                                             placeholder="First Name"
@@ -99,9 +119,7 @@ const MemberAddModal = () => {
                                             sx={{ flex: 1 }}
                                             {...form.getInputProps('lastName')}
                                         />
-
                                     </Group>
-
 
                                     <Group mt="xs">
                                         <TextInput
@@ -119,7 +137,6 @@ const MemberAddModal = () => {
                                             {...form.getInputProps('email')}
                                         />
                                     </Group>
-
 
                                     <Group mt="xs">
                                         <NumberInput
@@ -202,7 +219,7 @@ const MemberAddModal = () => {
                                             size="lg"
                                             style={{ backgroundColor: "#64E8B7" }}
                                             type="submit">
-                                            Add Project
+                                            Save Changes
                                         </Button>
                                     </Group>
                                 </form>
@@ -215,13 +232,23 @@ const MemberAddModal = () => {
                     <Code block>{JSON.stringify(form.values, null, 2)}</Code> */}
                 </Box>
             </Modal>
-            <Button size="md" radius="xl"
-                onClick={() => setOpened(true)}
-                style={{ backgroundColor: "#64E8B7", width: 70 }}>
-                <FiPlus color="white" size={24} strokeWidth={2.5} />
-            </Button>
+
+            <ActionIcon
+                color="cyan"
+                variant="hover"
+                onClick={() => {
+                    // const id = form.values.projects[index].id;
+                    // deleteProject(id);
+                    // form.removeListItem('projects', index)
+                    setOpened(true)
+                    console.log(`Edit ${props.member.firstName} - ${props.member.memberId} `)
+                    // console.log(props.project.tasks.map((task: any) => { return { name: task } }));
+                }}
+            >
+                <FiEdit3 size={24} />
+            </ActionIcon>
         </div >
     )
 }
 
-export default MemberAddModal
+export default MemberEditModal
