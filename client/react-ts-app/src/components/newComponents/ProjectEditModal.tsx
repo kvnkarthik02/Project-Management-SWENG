@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
-import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code } from '@mantine/core';
+import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code, MultiSelect } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
 import { DatePicker } from '@mantine/dates';
 import { FiEdit3, FiPlus, FiTrash2 } from 'react-icons/fi';
@@ -16,17 +16,48 @@ const ProjectEditModal = (props: {
         hasDeadline: any,
         deadline: any,
         isComplete: any,
+        team: any[],
         tasks: any[],
     }
 }) => {
 
     const [opened, setOpened] = useState(false);
     const [date, setDate] = useState<Date | null>();
+    const [teamData, setTeamData] = useState([{ value: "", label: "", group: "" }]);
+
 
     const [overlay, setOverlay] = useContext(OverlayContext);
     useEffect(() => {
         setOverlay(opened);
     }, [opened]);
+
+    useEffect(() => {
+        const getMembers = async () => {
+            try {
+                const membersResponse = await AppService.getMembers();
+                const data = membersResponse.map((emp: {
+                    memberId: any,
+                    firstName: any,
+                    lastName: any,
+                    email: any,
+                    role: any,
+                    avatarColor: any,
+                    hoursAvailable: any,
+                    hoursAllocated: any,
+                    skills: any[],
+                    projects: any[]
+                }) => {
+                    const name = emp.firstName + " " + emp.lastName;
+                    return { value: { memberId: emp.memberId, name: name }, label: name, group: emp.role }
+                });
+                setTeamData(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getMembers();
+    }, [])
+
 
     const form = useForm({
         initialValues: {
@@ -36,6 +67,7 @@ const ProjectEditModal = (props: {
             deadline: props.project.deadline,
             isComplete: props.project.isComplete,
             tasks: props.project.tasks,
+            team: props.project.team
         },
     });
 
@@ -124,7 +156,16 @@ const ProjectEditModal = (props: {
                                             }}
                                         />
                                     </Group>
-
+                                    <Group mt="xs">
+                                        <MultiSelect
+                                            label="Team Members"
+                                            sx={{ flex: 1 }}
+                                            placeholder="Employees"
+                                            searchable
+                                            data={teamData}
+                                            {...form.getInputProps('team')}
+                                        />
+                                    </Group>
                                     <Stack>
                                         <Text sx={{
                                             'display': 'inline-block',

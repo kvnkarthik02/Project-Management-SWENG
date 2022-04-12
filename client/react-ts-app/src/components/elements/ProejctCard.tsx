@@ -14,6 +14,7 @@ const ProjectCard = (props: {
         deadline: any,
         isComplete: any,
         tasks: any[],
+        team: any[]
     },
     isAdmin: boolean
 }) => {

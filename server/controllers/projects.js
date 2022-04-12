@@ -32,7 +32,8 @@ export const createProject = async (req, res) => {
         hasDeadline: req.body.hasDeadline,
         deadline: req.body.deadline,
         isComplete: req.body.isComplete,
-        tasks: req.body.tasks
+        tasks: req.body.tasks,
+        team: req.body.team
     });
     try {
         const savedProject = await project.save();
@@ -122,6 +123,17 @@ export const changeProject = async (req, res) => {
                 const updatedProject = await Project.updateOne(
                     { projectId: req.body.projectId },
                     { $set: { tasks: req.body.tasks } }
+                );
+                res.json(updatedProject);
+            } catch (error) {
+                res.json(error);
+            }
+        }
+        if (team) {
+            try {
+                const updatedProject = await Project.updateOne(
+                    { projectId: req.body.projectId },
+                    { $set: { team: req.body.team } }
                 );
                 res.json(updatedProject);
             } catch (error) {

@@ -31,7 +31,8 @@ const project = {
     deadline: '',
     hasDeadline: false,
     isComplete: false,
-    tasks: ["Task 1", "Task 2", "Task 3"]
+    tasks: ["Task 1", "Task 2", "Task 3"],
+    team: []
 }
 
 const Template = (args: JSX.IntrinsicAttributes) => <ProjectCard

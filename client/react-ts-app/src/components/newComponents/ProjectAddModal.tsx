@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
-import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code } from '@mantine/core';
+import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code, MultiSelect } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
 import { DatePicker } from '@mantine/dates';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
@@ -13,11 +13,40 @@ const ProjectAddModal = () => {
 
     const [opened, setOpened] = useState(false);
     const [date, setDate] = useState<Date | null>();
+    const [teamData, setTeamData] = useState([{ value: "", label: "", group: "" }]);
 
     const [overlay, setOverlay] = useContext(OverlayContext);
+
     useEffect(() => {
         setOverlay(opened);
     }, [opened]);
+
+    useEffect(() => {
+        const getMembers = async () => {
+            try {
+                const membersResponse = await AppService.getMembers();
+                const data = membersResponse.map((emp: {
+                    memberId: any,
+                    firstName: any,
+                    lastName: any,
+                    email: any,
+                    role: any,
+                    avatarColor: any,
+                    hoursAvailable: any,
+                    hoursAllocated: any,
+                    skills: any[],
+                    projects: any[]
+                }) => {
+                    const name = emp.firstName + " " + emp.lastName;
+                    return { value: { memberId: emp.memberId, name: name }, label: name, group: emp.role }
+                });
+                setTeamData(data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getMembers();
+    }, [])
 
     const form = useForm({
         initialValues: {
@@ -26,6 +55,7 @@ const ProjectAddModal = () => {
             hasDeadline: false,
             deadline: '',
             isComplete: false,
+            team: [""],
             tasks: [""],
         },
     });
@@ -40,7 +70,6 @@ const ProjectAddModal = () => {
         <Group key={index} mt="xs">
             <TextInput
                 placeholder="Task Description"
-                required
                 sx={{ flex: 1 }}
                 {...TodoForm.getListInputProps('tasks', index, 'name')}
             />
@@ -84,7 +113,13 @@ const ProjectAddModal = () => {
                                     form.setFieldValue('hasDeadline', hasDeadline);
                                     var tasks = TodoForm.values.tasks.map((task) => task.name);
                                     form.setFieldValue('tasks', tasks);
-                                    setOpened(false);
+                                    if (values.team[0] === "") {
+                                        console.log(values.team.shift())
+                                    }
+                                    // console.log(values.team);
+
+                                    // setOpened(false);
+
                                     handleMakeProject();
                                     // console.log(form.values);
                                 })}>
@@ -98,9 +133,8 @@ const ProjectAddModal = () => {
                                         />
                                         <DatePicker
                                             sx={{ flex: 0.75 }}
-                                            required
                                             allowFreeInput
-                                            label="Event date"
+                                            label="Deadline"
                                             value={date}
                                             onChange={setDate}
                                             dateParser={(dateString) => {
@@ -109,6 +143,16 @@ const ProjectAddModal = () => {
                                                 setDate(date);
                                                 return date;
                                             }}
+                                        />
+                                    </Group>
+                                    <Group mt="xs">
+                                        <MultiSelect
+                                            label="Team Members"
+                                            sx={{ flex: 1 }}
+                                            placeholder="Employees"
+                                            searchable
+                                            data={teamData}
+                                            {...form.getInputProps('team')}
                                         />
                                     </Group>
 

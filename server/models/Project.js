@@ -7,6 +7,7 @@ const ProjectSchema = mongoose.Schema({
     hasDeadline: Boolean,
     deadline: String,
     isComplete: Boolean,
+    team: [String],
     tasks: [String],
 });
 
