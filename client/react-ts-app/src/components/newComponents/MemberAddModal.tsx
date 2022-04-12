@@ -1,13 +1,20 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code, Avatar, NumberInput, Select, MultiSelect } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import { AppService } from '../../services/app.services';
+import { OverlayContext } from '../../OverlayContext';
+
 
 const MemberAddModal = () => {
     const [opened, setOpened] = useState(false);
     const [projects, setProjects] = useState(['Sample Project']);
     const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
+
+    const [overlay, setOverlay] = useContext(OverlayContext);
+    useEffect(() => {
+        setOverlay(opened);
+    }, [opened]);
 
     const form = useForm({
         initialValues: {

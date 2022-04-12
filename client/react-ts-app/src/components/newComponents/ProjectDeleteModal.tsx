@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Button, Text, Box, Group, Modal, ActionIcon } from '@mantine/core';
 import { FiTrash2 } from 'react-icons/fi';
+import { AppService } from '../../services/app.services';
+import { OverlayContext } from '../../OverlayContext';
 
 const ProjectDeleteModal = (props: {
     project: {
@@ -14,6 +16,13 @@ const ProjectDeleteModal = (props: {
     }
 }) => {
     const [opened, setOpened] = useState(false);
+
+    const [overlay, setOverlay] = useContext(OverlayContext);
+    useEffect(() => {
+        setOverlay(opened);
+    }, [opened]);
+
+
     const handleDeleteProject = async () => {
         console.log(`Deleting project - ${props.project.projectName}`);
         // await AppService.deleteProject(props.project.projectId);

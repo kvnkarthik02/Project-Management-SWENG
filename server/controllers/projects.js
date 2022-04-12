@@ -65,7 +65,7 @@ export const changeProject = async (req, res) => {
         if (projectName) {
             try {
                 const updatedProject = await Project.updateOne(
-                    { projectId: req.params.id },
+                    { projectId: req.body.projectId },
                     { $set: { projectName: req.body.projectName } }
                 );
                 res.json(updatedProject);
@@ -76,7 +76,7 @@ export const changeProject = async (req, res) => {
         if (projectDescription) {
             try {
                 const updatedProject = await Project.updateOne(
-                    { projectId: req.params.id },
+                    { projectId: req.body.projectId },
                     { $set: { projectDescription: req.body.projectDescription } }
                 );
                 res.json(updatedProject);
@@ -87,7 +87,7 @@ export const changeProject = async (req, res) => {
         if (hasDeadline) {
             try {
                 const updatedProject = await Project.updateOne(
-                    { projectId: req.params.id },
+                    { projectId: req.body.projectId },
                     { $set: { hasDeadline: req.body.hasDeadline } }
                 );
                 res.json(updatedProject);
@@ -98,7 +98,7 @@ export const changeProject = async (req, res) => {
         if (deadline) {
             try {
                 const updatedProject = await Project.updateOne(
-                    { projectId: req.params.id },
+                    { projectId: req.body.projectId },
                     { $set: { deadline: req.body.deadline } }
                 );
                 res.json(updatedProject);
@@ -109,7 +109,7 @@ export const changeProject = async (req, res) => {
         if (isComplete) {
             try {
                 const updatedProject = await Project.updateOne(
-                    { projectId: req.params.id },
+                    { projectId: req.body.projectId },
                     { $set: { isComplete: req.body.isComplete } }
                 );
                 res.json(updatedProject);
@@ -120,7 +120,7 @@ export const changeProject = async (req, res) => {
         if (tasks) {
             try {
                 const updatedProject = await Project.updateOne(
-                    { projectId: req.params.id },
+                    { projectId: req.body.projectId },
                     { $set: { tasks: req.body.tasks } }
                 );
                 res.json(updatedProject);

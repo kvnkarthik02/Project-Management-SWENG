@@ -9,7 +9,7 @@ import Projects from './pages/Projects';
 import ProjectPage from './pages/ProjectPage';
 // import { GlobalContext } from './contexts/TeamContext';
 import { useState } from 'react';
-
+import { OverlayContext } from "./OverlayContext";
 interface Employee {
   name: string;
   email: string;
@@ -150,27 +150,29 @@ const sampleTasks = [
 function App() {
 
   // const [team, setTeam] = useState<Employee[]>();
-
+  const [overlay, setOverlay] = useState(false);
 
   return (
+    <OverlayContext.Provider value={[overlay, setOverlay]}>
+      <BrowserRouter>
+        <Routes>
+          <Route path={ROUTE.HOMEPAGE} element={<HomePage projects={projects} team={[]} />} />
+          <Route path={ROUTE.LOGIN} element={<Login />} />
+          <Route path={ROUTE.PROJECTS} element={<Projects />} />
+          <Route path={ROUTE.PROJECT} element={<ProjectPage name={''} progress={60} team={sampleTeam} skills={sampleSkills} tasks={sampleTasks} />} />
 
-    <BrowserRouter>
-      <Routes>
-        <Route path={ROUTE.HOMEPAGE} element={<HomePage projects={projects} team={[]} />} />
-        <Route path={ROUTE.LOGIN} element={<Login />} />
-        <Route path={ROUTE.PROJECTS} element={<Projects />} />
-        <Route path={ROUTE.PROJECT} element={<ProjectPage name={''} progress={60} team={sampleTeam} skills={sampleSkills} tasks={sampleTasks} />} />
-
-        {/* <Route path={ROUTE.PLAYGROUND} element={<Playground />} /> */}
-        {/* <Route path={ROUTE.USERS} element={<Users />} />
+          {/* <Route path={ROUTE.PLAYGROUND} element={<Playground />} /> */}
+          {/* <Route path={ROUTE.USERS} element={<Users />} />
         <Route path={ROUTE.USER_PROFILE} element={<UserProfile />}>
           <Route
             path={USER_PROFILE_ROUTE.USER_ACTIVITY}
             element={<UserActivity />}
           />
         </Route> */}
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </OverlayContext.Provider >
+
   );
 }
 

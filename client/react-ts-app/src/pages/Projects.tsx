@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppService } from '../services/app.services';
-import { Card, Title, Stack, Box, Text, Group, List, Code } from '@mantine/core';
+import { Card, Title, Stack, Box, Text, Group, List, Code, Overlay } from '@mantine/core';
 import ProjectAddModal from '../components/newComponents/ProjectAddModal';
 import ProjectCard from '../components/elements/ProejctCard';
 import ListProjects from '../components/ListProjects';
 import MemberAddModal from '../components/newComponents/MemberAddModal';
 import EmployeeCard from '../components/elements/EmployeeCard';
 import MemberDeleteModal from '../components/newComponents/MemberDeleteModal';
+import { OverlayContext } from '../OverlayContext';
 
 function Projects() {
     let [projects, setProjects] = useState<any[]>([]);
     let [members, setMembers] = useState<any[]>([]);
+    const [visible, setVisible] = useState(false);
+    const [overlay, setOverlay] = useContext(OverlayContext);
     const isAdmin = true;
 
     useEffect(() => {
@@ -31,6 +34,8 @@ function Projects() {
 
         getProjects();
     }, [])
+
+
 
     // memberId: String,
     // firstName: String,
@@ -57,10 +62,13 @@ function Projects() {
     //     ))
     //                                 : < li > Loading...</li >}
     //                         </List >
+    // const [visible, setVisible] = useState(false);
+
     return (
         // <ListProjects />
 
         <div style={{ width: 710, margin: 'auto', padding: "5px" }}>
+            {overlay && <Overlay opacity={0.5} />}
             <Card shadow="sm" p="lg" radius="md" withBorder={true}>
                 <div style={{ width: 510, margin: 'auto', padding: "5px" }}>
                     <Group position="apart">
@@ -89,7 +97,7 @@ function Projects() {
                                             margin: '5px',
                                             padding: '5px',
                                         }}>
-                                            <Card shadow="sm" p="lg" withBorder={true} onClick={() => { console.log(member) }}>
+                                            <Card shadow="sm" p="lg" withBorder={true} onClick={() => { (!overlay) && console.log(member) }}>
                                                 <EmployeeCard member={member} isAdmin={isAdmin} />
                                                 <Code block >
                                                     <h1>FirstName: <strong >{member.firstName}</strong></h1>

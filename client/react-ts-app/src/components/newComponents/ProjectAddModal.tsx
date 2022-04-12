@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import moment from 'moment';
 import { Card, Button, Text, Stack, Box, TextInput, Checkbox, Group, Modal, Title, ScrollArea, ActionIcon, Code } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
@@ -6,12 +6,18 @@ import { DatePicker } from '@mantine/dates';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import RichTextEditor from '@mantine/rte';
 import { AppService } from '../../services/app.services';
+import { OverlayContext } from '../../OverlayContext';
 
 const ProjectAddModal = () => {
     // const [projects, setProjects] = useState<any[]>([]);
 
     const [opened, setOpened] = useState(false);
     const [date, setDate] = useState<Date | null>();
+
+    const [overlay, setOverlay] = useContext(OverlayContext);
+    useEffect(() => {
+        setOverlay(opened);
+    }, [opened]);
 
     const form = useForm({
         initialValues: {

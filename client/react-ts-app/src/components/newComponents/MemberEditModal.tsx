@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
-import { Card, Button, Text, Stack, Box, TextInput, Group, Modal, ActionIcon, Code, NumberInput, Select, MultiSelect, Avatar } from '@mantine/core';
+import React, { useContext, useEffect, useState } from 'react'
+import { Card, Button, Text, Stack, Box, TextInput, Group, Modal, ActionIcon, Code, NumberInput, Select, MultiSelect, Avatar, Overlay } from '@mantine/core';
 import { formList, useForm } from '@mantine/form';
 import { FiEdit3, FiPlus, FiTrash2 } from 'react-icons/fi';
 import { AppService } from '../../services/app.services';
+import { OverlayContext } from '../../OverlayContext';
 
 const MemberEditModal = (props: {
     member: {
@@ -22,6 +23,11 @@ const MemberEditModal = (props: {
     const [opened, setOpened] = useState(false);
     const [projects, setProjects] = useState(['Sample Project']);
     const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
+
+    const [overlay, setOverlay] = useContext(OverlayContext);
+    useEffect(() => {
+        setOverlay(opened);
+    }, [opened]);
 
     const form = useForm({
         initialValues: {
@@ -76,7 +82,6 @@ const MemberEditModal = (props: {
         console.log(`Edit ${props.member.firstName} ${props.member.memberId}`)
         console.log(form.values);
         console.log(form.values.avatarColor);
-
         await AppService.editMember(form.values, props.member.memberId);
     }
 
@@ -85,7 +90,7 @@ const MemberEditModal = (props: {
         <div>
             <Modal
                 opened={opened}
-                onClose={() => { setOpened(false) }}
+                onClose={() => { setOpened(false); }}
                 size={650}
                 title="Edit Team Member"
             >
