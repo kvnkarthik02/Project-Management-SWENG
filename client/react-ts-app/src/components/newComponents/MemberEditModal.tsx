@@ -79,9 +79,9 @@ const MemberEditModal = (props: {
     ));
 
     const handleEditMember = async () => {
-        console.log(`Edit ${props.member.firstName} ${props.member.memberId}`)
-        console.log(form.values);
-        console.log(form.values.avatarColor);
+        // console.log(`Edit ${props.member.firstName} ${props.member.memberId}`)
+        // console.log(form.values);
+        // console.log(form.values.avatarColor);
         await AppService.editMember(form.values, props.member.memberId);
     }
 

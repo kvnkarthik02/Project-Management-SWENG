@@ -65,11 +65,10 @@ const MemberAddModal = () => {
     ));
 
     const handleMakeMember = async () => {
-        console.log(`Form Submitted`);
-        console.log(`Members`);
-        console.log(form.values);
-        // await AppService.makeMember(form.values);
-        // console.log(data);
+        // console.log(`Form Submitted`);
+        // console.log(`Members`);
+        // console.log(form.values);
+        await AppService.makeMember(form.values);
     }
 
     return (
@@ -209,7 +208,7 @@ const MemberAddModal = () => {
                                             size="lg"
                                             style={{ backgroundColor: "#64E8B7" }}
                                             type="submit">
-                                            Add Project
+                                            Add Member
                                         </Button>
                                     </Group>
                                 </form>

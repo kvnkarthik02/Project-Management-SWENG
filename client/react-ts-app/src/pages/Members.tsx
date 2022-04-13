@@ -16,7 +16,7 @@ const Members = (props: { isAdmin: boolean, team: any[] }) => {
 
     useEffect(() => {
         const getMembers = async () => {
-            if (!props.team) {
+            if (props.team.length === 0) {
                 try {
                     const membersResponse = await AppService.getMembers();
                     setMembers(membersResponse);
@@ -51,10 +51,10 @@ const Members = (props: { isAdmin: boolean, team: any[] }) => {
 
     // </Card>
     return (
-        <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
+        <div style={{ maxWidth: 500, margin: 'auto', padding: "5px" }}>
             {overlay && <Overlay opacity={0.5} />}
             <Card shadow="sm" p="lg" radius="md" withBorder={true}>
-                <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
+                <div style={{ minWidth: 370, margin: 'auto', padding: "5px" }}>
                     <Group position="apart">
                         <Title order={1}>
                             <Text

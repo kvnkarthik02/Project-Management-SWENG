@@ -100,9 +100,9 @@ const ProjectEditModal = (props: {
     ));
 
     const handleEditProject = async () => {
-        console.log(`Edit ${props.project.projectName} - ${form.values.projectName}- ${props.project.projectId} `)
-        console.log(form.values);
-        // await AppService.editProject(form.values, props.project.projectId);
+        // console.log(`Edit ${props.project.projectName} - ${form.values.projectName}- ${props.project.projectId} `)
+        // console.log(form.values);
+        await AppService.editProject(form.values, props.project.projectId);
     }
 
     return (

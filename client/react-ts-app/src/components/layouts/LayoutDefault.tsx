@@ -9,6 +9,7 @@ interface Props {
 
 const layoutStyle = {
     width: '100%',
+    minHeight: '100vh',
     display: 'flex',
     justifyContent: 'center',
     minWidth: '1300px',
@@ -24,7 +25,8 @@ const backgroundStyle = {
     backgroundAttachment: 'fixed',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'bottom right',
-    backgroundSize: '100%'
+    backgroundSize: '100%',
+    width: '100vw'
 }
 
 export default function Layout({ children }:Props) {
