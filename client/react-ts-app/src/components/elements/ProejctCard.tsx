@@ -1,7 +1,8 @@
-import { Card, Text, Badge, Button, Group, Spoiler, Stack, List } from '@mantine/core';
+import { Card, Text, Badge, Button, Group, Spoiler, Stack, List, AvatarsGroup, Avatar } from '@mantine/core';
 
 import parse from 'html-react-parser';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 import ProjectDeleteModal from '../newComponents/ProjectDeleteModal';
 import ProjectEditModal from '../newComponents/ProjectEditModal';
 
@@ -25,14 +26,17 @@ const ProjectCard = (props: {
     const PH_Color = "teal";
     const PH_Deadline = "Due Date";
     const FormattedDate = (props.project.hasDeadline) ? (moment(props.project.deadline)).format('DD MMM YYYY') : "TBD"
+    const colors = ["dark", "gray", "red", "pink", "grape", "violet", "indigo", "cyan", "teal", "green", "lime", "yellow", "orange"];
 
     return (
         <div>
             <div style={{ width: 510, margin: 'auto', padding: "5px" }}>
                 <Card shadow="sm" p="lg" withBorder={true} radius="md">
                     <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }}>
-                        <Text size="xl" weight={500}>{props.project.projectName || PH_Name}</Text>
-                        {/* <Text size="xl" weight={500}>{PH_Name}</Text> */}
+                        <Link to={`/project/${props.project.projectId}`}>
+                            <Text size="xl" weight={500}>{props.project.projectName || PH_Name}</Text>
+                        </Link>
+
                         <Group>
                             <Badge size="lg" color={PH_Color} variant="light">
                                 {FormattedDate || PH_Deadline}
@@ -43,6 +47,14 @@ const ProjectCard = (props: {
                             </Group>)}
                         </Group>
                     </Group>
+
+                    {(props.project.team.length > 0) && (
+                        <Group position="apart" style={{ marginBottom: 5, marginTop: 5 }}>
+                            <AvatarsGroup limit={3} total={props.project.team.length} size={45}>
+                                {props.project.team.map((emp, index) => <Avatar color={colors[index]} radius="xl" >{emp.name[0]}</Avatar>)}
+                            </AvatarsGroup>
+                        </Group>
+                    )}
 
                     <Spoiler maxHeight={120} showLabel="Show more" hideLabel="Hide">
                         <Text size="sm" style={{ color: "dark", lineHeight: 1.5 }}>

@@ -4,9 +4,8 @@ import { Card, Title, Stack, Box, Text, Group, List, Code, Overlay } from '@mant
 import ProjectAddModal from '../components/newComponents/ProjectAddModal';
 import ProjectCard from '../components/elements/ProejctCard';
 import { OverlayContext } from '../OverlayContext';
-import { BrowserRouter, Link, Route, Router, Routes } from 'react-router-dom';
-import Project from './Project';
-import { createPath, ROUTE } from '../routing';
+import { Link } from 'react-router-dom';
+
 
 const Projects = (props: { isAdmin: boolean }) => {
     let [projects, setProjects] = useState<any[]>([]);
@@ -63,11 +62,9 @@ const Projects = (props: { isAdmin: boolean }) => {
                                                     padding: '5px',
                                                 }}
                                             >
-                                                <article key={project.projectId}>
-                                                    <Link to={`/project/${project.projectId}`}>
-                                                        <h1>{project.projectId}</h1>
-                                                    </Link>
-                                                </article>
+                                                {/* <Link to={`/project/${project.projectId}`}>
+                                                    <h1>{project.projectId}</h1>
+                                                </Link> */}
                                                 {/* <Link to={createPath({ path: ROUTE.PROJECT_PAGE, params: { projectId: project.projectId } })}>Project Link</Link> */}
                                                 {/* <Routes>
                                                     <Route path={createPath({ path: ROUTE.PROJECT_PAGE, params: { projectId: project.projectId } })} element={<Project />} />

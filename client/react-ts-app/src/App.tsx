@@ -159,9 +159,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/projects/" element={<Projects isAdmin={isAdmin} />} />
-          <Route path="/members/" element={<Members isAdmin={isAdmin} />} />
+          <Route path="/members/" element={<Members isAdmin={isAdmin} team={[]} />} />
           <Route path="/project/:projectId" element={<Project isAdmin={isAdmin} />} />
-          {/* <Route path="/post/:id" component={Post} /> */}
         </Routes>
       </Router>
 

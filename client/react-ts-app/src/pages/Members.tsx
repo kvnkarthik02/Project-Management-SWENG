@@ -9,20 +9,25 @@ import { OverlayContext } from '../OverlayContext';
 // import ListProjects from '../components/ListProjects';
 
 
-const Members = (props: { isAdmin: boolean }) => {
+const Members = (props: { isAdmin: boolean, team: any[] }) => {
     let [members, setMembers] = useState<any[]>([]);
     const [overlay, setOverlay] = useContext(OverlayContext);
     // const isAdmin = true;
 
     useEffect(() => {
         const getMembers = async () => {
-            try {
-                const membersResponse = await AppService.getMembers();
-                setMembers(membersResponse);
-                console.log(membersResponse);
-            } catch (err) {
-                console.log(err);
+            if (!props.team) {
+                try {
+                    const membersResponse = await AppService.getMembers();
+                    setMembers(membersResponse);
+                    console.log(membersResponse);
+                } catch (err) {
+                    console.log(err);
+                }
+            } else {
+                setMembers(props.team)
             }
+
         };
         getMembers();
     }, [])
@@ -46,10 +51,10 @@ const Members = (props: { isAdmin: boolean }) => {
 
     // </Card>
     return (
-        <div style={{ maxWidth: 530, margin: 'auto', padding: "5px" }}>
+        <div style={{ width: 400, margin: 'auto', padding: "5px" }}>
             {overlay && <Overlay opacity={0.5} />}
             <Card shadow="sm" p="lg" radius="md" withBorder={true}>
-                <div style={{ maxWidth: 470, margin: 'auto', padding: "5px" }}>
+                <div style={{ width: 340, margin: 'auto', padding: "5px" }}>
                     <Group position="apart">
                         <Title order={1}>
                             <Text

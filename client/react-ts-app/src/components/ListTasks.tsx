@@ -1,11 +1,9 @@
-import React, { forwardRef } from 'react'
-// import PropTypes from 'prop-types'
+import React from 'react'
 import TaskCard from './elements/TaskCard';
 import { Group, Button, Text, Title, Card, Modal, Code, ActionIcon, Box, TextInput, ScrollArea, MultiSelect, CloseButton, MultiSelectValueProps, SelectItemProps, Avatar } from '@mantine/core';
 import { useState } from 'react';
 import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import { useForm, formList } from '@mantine/form';
-// import { RichTextEditor } from '@mantine/rte';
 import { AppService } from "../services/app.services";
 
 interface Task {

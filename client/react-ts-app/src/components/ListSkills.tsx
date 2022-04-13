@@ -83,13 +83,15 @@ const ListSkills = (props: { skills: Skill[]; }) => {
                     {fields}
 
                     <Group position="center" mt="md">
-                        <Button onClick={() => {
-                            // setTeam(form.values.employees);
-                            form.addListItem('skills', {
-                                name: '',
-                                exp: 0,
-                            })
-                        }}>
+                        <Button
+                            style={{ backgroundColor: "#64E8B7" }}
+                            onClick={() => {
+                                // setTeam(form.values.employees);
+                                form.addListItem('skills', {
+                                    name: '',
+                                    exp: 0,
+                                })
+                            }}>
                             Add skills
                         </Button>
                     </Group>
