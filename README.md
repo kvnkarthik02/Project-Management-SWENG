@@ -1,4 +1,18 @@
 # Project-Management
+## To start backend server
+```
+cd server
+npm install
+npm start
+```
+## To start frontend app
+```
+cd client
+cd react-ts-app
+npm install
+npm start
+```
+
 ## Frontend Demo
 ### Project Page
 <p align="center">
